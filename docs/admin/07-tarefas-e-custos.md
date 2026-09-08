@@ -16,7 +16,7 @@ Este documento existe porque metade do que falta não se escreve em TypeScript: 
 | **Cloudflare R2** | Fotografias | Free | 0 € |
 | **Resend** | Enviar o código de acesso | Free | 0 € |
 | **GitHub** | Repositório | Free | 0 € |
-| **Domínio** `imperioautoconcept.com` | — | — | ~10–15 €/ano, já registado |
+| **Domínio** `colibriauto.pt` | — | — | ~10–15 €/ano, já registado |
 
 **Total de serviços novos: 0 €/mês.**
 
@@ -59,10 +59,10 @@ Pela razão da secção acima: não é uma questão de limites, é dos termos de
 
 ### 0.2 · Domínio e DNS
 
-O `src/lib/site.ts` já fixa `https://www.imperioautoconcept.com` como identidade do site. Falta:
+O `src/lib/site.ts` já fixa `https://www.colibriauto.pt` como identidade do site. Falta:
 
 - Confirmar que o domínio está registado e a quem — **idealmente em nome do cliente**, não da agência. Um domínio no nome de quem construiu o site é uma conversa desagradável no dia em que a relação acabar.
-- Vercel → Settings → Domains → adicionar `imperioautoconcept.com` **e** `www.imperioautoconcept.com`, deixando o `www` como primário. A Vercel trata o 308 da variante sem `www` sozinha.
+- Vercel → Settings → Domains → adicionar `colibriauto.pt` **e** `www.colibriauto.pt`, deixando o `www` como primário. A Vercel trata o 308 da variante sem `www` sozinha.
 - No registrar, apontar os registos que a Vercel indicar.
 
 O `.pt` não existe e não está registado — se algum dia for, é só apontá-lo à Vercel como redirect.
@@ -91,13 +91,13 @@ O trabalho de SEO já criou `/privacidade` e divulgou o Livro de Reclamações. 
 ### 1.2 · Cloudflare R2 — as fotografias
 
 1. Conta em [cloudflare.com](https://cloudflare.com) (a da agência).
-2. R2 → Create bucket, nome `imperio-viaturas`. Dois campos que parecem o mesmo e não são:
+2. R2 → Create bucket, nome `colibri-viaturas`. Dois campos que parecem o mesmo e não são:
 
    - **Location hint** → `Europe (EU)`. É só desempenho, uma sugestão de onde os dados ficam.
    - **Jurisdiction** → **deixar em branco**. É uma garantia legal vinculativa e **não pode ser alterada depois**; escolhê-la muda o endpoint da API para `<ACCOUNT_ID>.eu.r2.cloudflarestorage.com`, para sempre. O que vai para o bucket são fotografias de viaturas à venda — material público, sem dados pessoais e sem EXIF. A jurisdição existe para registos com dados pessoais.
 3. Settings do bucket → **Public Development URL → Enable** (escrever `allow` a confirmar). Copiar o URL `https://pub-….r2.dev` que aparece — é o `R2_PUBLIC_URL`.
 
-   **Isto serve para desenvolvimento, não para produção.** A documentação da Cloudflare é explícita: o `r2.dev` é limitado por taxa e *"should only be used for development purposes"*. Em produção é preciso um domínio próprio (ex.: `fotos.imperioautoconcept.com`) ligado ao bucket em **Custom Domains** — grátis, mas obriga a que o DNS do domínio passe a ser gerido pela Cloudflare. O site continua na Vercel; muda só quem responde às perguntas de DNS. Decidir na Fase 6.
+   **Isto serve para desenvolvimento, não para produção.** A documentação da Cloudflare é explícita: o `r2.dev` é limitado por taxa e *"should only be used for development purposes"*. Em produção é preciso um domínio próprio (ex.: `fotos.colibriauto.pt`) ligado ao bucket em **Custom Domains** — grátis, mas obriga a que o DNS do domínio passe a ser gerido pela Cloudflare. O site continua na Vercel; muda só quem responde às perguntas de DNS. Decidir na Fase 6.
 
    Não confundir com o **endpoint S3** (`https://<ACCOUNT_ID>.r2.cloudflarestorage.com`), que é por onde o servidor *escreve* e exige assinatura em cada pedido. O código constrói-o a partir do `R2_ACCOUNT_ID`; não vai para variável nenhuma.
 4. R2 → Manage API Tokens → Create token:
@@ -114,9 +114,9 @@ Não é preciso criar conta nova: usar a da agência, que já envia para o Tasku
 
 **O passo que interessa é um só:** abrir Resend → Domains e **copiar à letra o que lá está como *Verified***. No Taskuinha o domínio verificado é `send.devplus.pt` e não `devplus.pt` — para o Resend a raiz e o subdomínio são domínios diferentes, e um remetente no domínio errado é recusado com 403. Essa confusão já custou uma hora de procura numa chave de API que não tinha problema nenhum.
 
-O remetente fica então `Painel Império <noreply@[o-que-lá-estiver]>`.
+O remetente fica então `Painel Colibri <noreply@[o-que-lá-estiver]>`.
 
-O domínio verificado governa o **remetente**, não o destinatário: dá para enviar para o Gmail do cliente sem verificar `imperioautoconcept.com`. E o plano gratuito agora aceita três domínios verificados, portanto se quiseres que o email saia do domínio do cliente, também há vaga — mas obriga a mexer no DNS dele, e não traz nada que o painel precise.
+O domínio verificado governa o **remetente**, não o destinatário: dá para enviar para o Gmail do cliente sem verificar `colibriauto.pt`. E o plano gratuito agora aceita três domínios verificados, portanto se quiseres que o email saia do domínio do cliente, também há vaga — mas obriga a mexer no DNS dele, e não traz nada que o painel precise.
 
 **Vale a pena ligar um alerta de falha.** No plano gratuito, ao atingir o limite diário o envio pausa em vez de ser cobrado. Para quem está à espera do código isso é indistinguível de uma avaria, e ninguém avisa.
 

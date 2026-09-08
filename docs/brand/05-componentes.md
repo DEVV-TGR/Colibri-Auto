@@ -11,7 +11,7 @@
 O único componente com sistema de variantes. Exporta dois com a mesma aparência: `BotaoLink` (envolve `next/link`) e `Botao` (`<button>`).
 
 ```ts
-type Variante = "dourado" | "contorno" | "fantasma";
+type Variante = "laranja" | "contorno" | "fantasma";
 ```
 
 Base partilhada:
@@ -22,9 +22,9 @@ cursor-pointer select-none
 
 | Variante | Classes | Uso |
 |---|---|---|
-| `dourado` (default) | `gold-metal-fill text-background font-medium` | Ação primária |
-| `contorno` | `border border-gold/40 text-champagne hover:border-gold hover:text-gold-bright` | Ação secundária |
-| `fantasma` | `text-muted hover:text-gold-bright` | Ação terciária |
+| `laranja` (default) | `laranja-fill text-background font-medium` | Ação primária |
+| `contorno` | `border border-laranja/40 text-creme hover:border-laranja hover:text-laranja-bright` | Ação secundária |
+| `fantasma` | `text-muted hover:text-laranja-bright` | Ação terciária |
 
 A `.press` trata da transição toda — cor, brilho e escala ao premir. Por isso a base **não** leva `transition-colors`: seriam duas declarações a colidir. Ver [06 — Movimento](06-movimento.md).
 
@@ -42,14 +42,14 @@ Envolve conteúdo numa entrada em scroll. `{ children, delay?: number = 0, class
 
 ### `LogoAnel`
 
-Logótipo com anel dourado a girar; base dos ecrãs de carregamento.
+Logótipo com anel laranja a girar; base dos ecrãs de carregamento.
 
 ```ts
 { tamanho?: "grande" | "pequeno" = "grande"; prioridade?: boolean = false }
 const TAMANHOS = { grande: { caixa: 280, logo: 196 }, pequeno: { caixa: 132, logo: 92 } }
 ```
 
-SVG `viewBox="0 0 100 100"`, dois círculos `r=46` com `strokeWidth=1.25`: um completo em `var(--line)`, outro em `var(--gold)` com `strokeDasharray="72 217"` — o arco dourado é ~25% da circunferência (2πr ≈ 289).
+SVG `viewBox="0 0 100 100"`, dois círculos `r=46` com `strokeWidth=1.25`: um completo em `var(--line)`, outro em `var(--laranja)` com `strokeDasharray="72 217"` — o arco laranja é ~25% da circunferência (2πr ≈ 289).
 
 ### `Preloader`
 
@@ -68,7 +68,7 @@ Ecrã breve entre páginas. `MINIMO_MS = 600`, `LIMITE_MS = 3000`. Escuta o even
 ```
 rounded-2xl border border-line/60 bg-surface
 ```
-Interativo, acrescenta: `transition-colors duration-300 hover:border-gold/50`.
+Interativo, acrescenta: `transition-colors duration-300 hover:border-laranja/50`.
 
 10 usos de `rounded-2xl`: CarCard, StickyCard, sidebar e modal de filtros, empty state, mapa, cards de marca (estes com `bg-background`), galeria.
 
@@ -80,9 +80,9 @@ Base comum: `rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em]`.
 
 | Estado | Tratamento | Semântica |
 |---|---|---|
-| **Vendido** | `.red-metal-fill` + `text-ink` + `font-medium` + sombra | Vermelho metálico — o estado que trava a compra |
-| **Reservado** | `.gold-metal-fill` + `text-background` + `font-medium` + sombra | Ouro sólido — atenção, ainda há hipótese |
-| **IVA Dedutível** | `border border-gold/50 bg-background/70 text-champagne backdrop-blur` | Contorno — informativo, não é estado |
+| **Vendido** | `.vendido-fill` + `font-medium` + sombra | Grafite chapado — recua, ao contrário do laranja. Ver [02](02-cor-e-materia.md#porque-é-que-o-vendido-não-é-vermelho) |
+| **Reservado** | `.laranja-fill` + `text-background` + `font-medium` + sombra | Ouro sólido — atenção, ainda há hipótese |
+| **IVA Dedutível** | `border border-laranja/50 bg-background/70 text-creme backdrop-blur` | Contorno — informativo, não é estado |
 
 A sombra dos dois primeiros é `shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]` — assentam sobre a foto e precisam de a descolar.
 
@@ -100,10 +100,10 @@ O `<select>` nativo é estilizado à mão em três sítios (`HeroSearch`, `Selec
 <span className="relative block">
   <select className="w-full appearance-none rounded-xl border border-line bg-surface/80
                      px-4 py-3 pr-10 text-sm text-ink outline-none transition-colors
-                     focus:border-gold [&>option]:bg-surface">
+                     focus:border-laranja [&>option]:bg-surface">
     …
   </select>
-  <span aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gold">▾</span>
+  <span aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja">▾</span>
 </span>
 ```
 
@@ -119,12 +119,12 @@ Os formulários públicos (`/compramos`, `/importamos`) usam estas primitivas: `
 input/textarea  w-full rounded-xl border bg-background px-4 py-3 text-sm text-ink
                 outline-none transition-colors placeholder:text-muted/60
                 disabled:opacity-60
-  linha calma   border-line focus:border-gold
-  linha errada  border-red-deep focus:border-red
+  linha calma   border-line focus:border-laranja
+  linha errada  border-erro-deep focus:border-red
 label           mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted
-erro do campo   mt-1.5 block text-xs leading-relaxed text-red-bright
+erro do campo   mt-1.5 block text-xs leading-relaxed text-erro-bright
 select          o mesmo + appearance-none bg-surface/80 pr-10 [&>option]:bg-surface
-                com o `▾` dourado por cima (ver a receita acima)
+                com o `▾` laranja por cima (ver a receita acima)
 ```
 
 A cor da linha está **fora** do `inputBase` de propósito: duas utilitárias de
@@ -136,7 +136,7 @@ Tailwind as escreve na folha.
 Três regras que não se podem perder:
 
 - **Os campos são controlados.** Depois de uma server action o React 19 faz reset ao `<form>`; sem valor em estado, um erro de validação apaga o que a pessoa escreveu. Ver `FormularioPedido.tsx`. Pela mesma razão, **nada que precise de sobreviver ao envio pode viver num `<input>` escrito à mão** — foi o que aconteceu ao relógio anti-robô, que passou a viver numa referência.
-- **Cada bloco é um `<fieldset>` com `<legend>`** na assinatura da casa (última palavra em `italic text-gold`). Um grupo de campos sem `fieldset` é um grupo que um leitor de ecrã não anuncia.
+- **Cada bloco é um `<fieldset>` com `<legend>`** na assinatura da casa (última palavra em `font-extrabold text-laranja`). Um grupo de campos sem `fieldset` é um grupo que um leitor de ecrã não anuncia.
 - **Opcional escreve-se, obrigatório não.** O rótulo leva `(opcional)` quando o campo o é; o asterisco é convenção de formulário de repartição, não de sítio premium.
 
 **Quando o erro aparece.** Um campo recebe `erro` e `aoSair`; quem decide é o `FormularioPedido`, que corre o mesmo schema zod do servidor a cada tecla. A regra:
@@ -144,7 +144,7 @@ Três regras que não se podem perder:
 | Momento | O que acontece |
 |---|---|
 | A escrever pela primeira vez | Nada. Ninguém quer ler "indique o seu nome" à primeira letra. |
-| Ao sair do campo | A frase aparece, a linha fica `border-red-deep`, e a nota do campo dá o lugar ao erro. |
+| Ao sair do campo | A frase aparece, a linha fica `border-erro-deep`, e a nota do campo dá o lugar ao erro. |
 | A corrigir | Desaparece assim que o valor serve, sem esperar por sair outra vez. |
 | Ao carregar em «Enviar» | Todos os campos passam a visitados de uma vez, e o ecrã salta ao primeiro por corrigir — `focus({preventScroll:true})` + `scrollIntoView({behavior:"instant"})`. |
 
@@ -170,8 +170,8 @@ O projeto usa caracteres de texto para quase toda a iconografia:
 | `↗` | Links externos (Instagram, mapa) |
 | `✕` | Fechar overlays, remover chip de filtro |
 | `▾` | Seta dos selects |
-| `◆` | Bullet dos extras, em `text-gold-deep` |
-| `·` | Separador de metadados, em `text-gold-deep` |
+| `◆` | Bullet dos extras, em `text-laranja-deep` |
+| `·` | Separador de metadados, em `text-laranja-deep` |
 | `⤢` | Expandir galeria |
 | `✓` | Confirmação ("Ligação copiada ✓") |
 
@@ -223,8 +223,8 @@ Divergências reais entre o padrão e o código. Documentadas, não corrigidas �
 
 1. **O botão "contorno" está replicado à mão em 6 sítios** fora do `Botao.tsx`: `Header.tsx:55`, `SobreContactos.tsx:81` e `:89`, `StickyCard.tsx:61`, `CatalogoClient.tsx:158` e `:278`. A string de classes é a mesma, mas os paddings divergem (`px-5 py-2`, `px-5 py-2.5`, `px-6 py-3`, `px-6 py-3.5`). É a maior divergência entre o componente e o uso real.
 2. **`HeroSearch` duplica o `SelectField`** — tem um componente `Campo` local com a mesma receita, em vez de importar.
-3. **O badge "Reservado" tem dois tratamentos.** `BadgeEstado` usa `.gold-metal-fill`; o `StickyCard` usa `bg-gold` chapado.
-4. **O carrossel tem um `Badge` próprio** (`DestaquesCarrossel.tsx:54`) que reimplementa o `BadgeEstado` com pequenas divergências: `font-bold` e `tracking-[0.14em]` (contra `font-medium` e `tracking-[0.15em]`), `border-gold/60` (contra `/50`), sem sombra, e mostra **apenas um** badge por prioridade em vez de empilhar. A semântica de cor é a mesma.
+3. **O badge "Reservado" tem dois tratamentos.** `BadgeEstado` usa `.laranja-fill`; o `StickyCard` usa `bg-laranja` chapado.
+4. **O carrossel tem um `Badge` próprio** (`DestaquesCarrossel.tsx:54`) que reimplementa o `BadgeEstado` com pequenas divergências: `font-bold` e `tracking-[0.14em]` (contra `font-medium` e `tracking-[0.15em]`), `border-laranja/60` (contra `/50`), sem sombra, e mostra **apenas um** badge por prioridade em vez de empilhar. A semântica de cor é a mesma.
 
 ## Nunca
 

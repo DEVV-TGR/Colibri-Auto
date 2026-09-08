@@ -1,4 +1,4 @@
-# Sistema de design — StandDemo
+# Sistema de design — Colibri Auto
 
 Documentação da linguagem visual e das convenções do projeto. **Descreve o que o código faz hoje**, não intenções: cada regra foi extraída de `src/` e os valores são literais.
 
@@ -15,8 +15,8 @@ Quando o código e a documentação divergirem, **o código ganha** — e o docu
 | Documento | O que responde |
 |---|---|
 | [01 — Produto e âmbito](01-produto-e-ambito.md) | O que é a demo, o que entra e o que fica de fora |
-| [02 — Cor e matéria](02-cor-e-materia.md) | Tokens OKLCH, hierarquia do dourado, superfícies, ouro metálico |
-| [03 — Tipografia](03-tipografia.md) | As três fontes, a escala fluida, os seis papéis tipográficos |
+| [02 — Cor e matéria](02-cor-e-materia.md) | Tokens OKLCH, hierarquia do laranja, superfícies, e porque é que o "Vendido" não é vermelho |
+| [03 — Tipografia](03-tipografia.md) | As três fontes, a escala fluida, o peso base, os seis papéis tipográficos |
 | [04 — Layout e espaço](04-layout-e-espaco.md) | Container, ritmo vertical, grelhas, breakpoints, z-index |
 | [05 — Componentes](05-componentes.md) | Contratos dos componentes e padrões transversais de UI |
 | [06 — Movimento](06-movimento.md) | Easing canónico, entrada em scroll, gestos, reduced motion |
@@ -29,11 +29,11 @@ Quando o código e a documentação divergirem, **o código ganha** — e o docu
 O resumo executivo. Cada uma está desenvolvida no documento respetivo.
 
 1. **Tema escuro, sempre.** Não há light mode, não há `dark:`. `color-scheme: dark` é fixo.
-2. **O dourado é cor de ação e realce** — CTAs, bordas ativas, hover, detalhes finos. Nunca preenche áreas grandes.
+2. **O laranja é cor de ação e realce** — CTAs, bordas ativas, hover, detalhes finos. Nunca preenche áreas grandes, por muito que a lona do stand o faça.
 3. **As fotos das viaturas são o elemento dominante.** Tudo o resto é moldura.
-4. **Headings são Bodoni com a última palavra em itálico dourado.** É a assinatura tipográfica do site — 11 secções seguem-na.
+4. **Headings são Montserrat 600 com a última palavra a 800 em laranja.** É a assinatura tipográfica do site — 10 secções seguem-na, sem excepção.
 5. **Tudo é redondo.** `rounded-full` em botões, chips, badges e indicadores (31 usos); `rounded-2xl` em cards (10).
-6. **Hover: texto vai a `gold-bright`, bordas vão a `gold`.** 23 e 14 usos, sem exceções.
+6. **Hover: texto vai a `laranja-bright`, bordas vão a `laranja`.** Sem exceções.
 7. **O divisor decorativo é `.hairline`.** Nunca `<hr>`, nunca `border-t` para separar visualmente.
 8. **Glifos de texto em vez de ícones** — `‹ › → ↗ ✕ ▾ ◆ · ⤢ ✓`. Só existem 4 SVGs inline no projeto inteiro.
 9. **Conteúdo em PT-PT**, formatado por `Intl` com locale `pt-PT`. Pluralização é manual e obrigatória.
@@ -41,7 +41,7 @@ O resumo executivo. Cada uma está desenvolvida no documento respetivo.
 
 ## Painel de gestão
 
-Está planeado um painel em `/admin` para o cliente gerir os anúncios sem código, a entrar depois do lançamento. A especificação vive em [`docs/admin/`](../admin/README.md) — arquitetura, infraestrutura, autenticação, segurança e UX. O painel herda os tokens e as fontes daqui, mas não a linguagem editorial.
+Existe um painel em `/admin` para o cliente gerir os anúncios sem código. **Não está configurado** neste repositório — sem base de dados, bucket nem chave de email — e o site público não precisa dele para correr. A especificação vive em [`docs/admin/`](../admin/README.md) — arquitetura, infraestrutura, autenticação, segurança e UX. O painel herda os tokens e as fontes daqui, mas não a linguagem editorial.
 
 ## Relação com `AGENTS.md`
 

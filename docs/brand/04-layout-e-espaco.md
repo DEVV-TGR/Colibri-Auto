@@ -109,7 +109,7 @@ Altura `h-16`. Logótipo à esquerda (`h-10 w-auto`), nav ao centro-direita, CTA
 
 - Desktop: `hidden items-center gap-8 md:flex`
 - Mobile: hamburger de **duas `<span className="h-px w-6 bg-ink">`** que rodam ±45° com `translate-y-[3.5px]`; o menu aberto usa `font-display text-2xl`
-- Link ativo `text-gold`, inativo `text-muted hover:text-ink`
+- Link ativo `text-laranja`, inativo `text-muted hover:text-ink`
 - Fecha-se sozinho na mudança de `pathname`
 
 ## Footer
@@ -118,7 +118,7 @@ Altura `h-16`. Logótipo à esquerda (`h-10 w-auto`), nav ao centro-direita, CTA
 border-t border-line/60 bg-surface
 ```
 
-`grid gap-10 md:grid-cols-3` — logótipo + slogan, Navegação, Contactos. Cabeçalhos de coluna em `text-xs uppercase tracking-[0.2em] text-gold`. Fecha com `.hairline mt-12` e o copyright centrado em `text-xs text-muted`.
+`grid gap-10 md:grid-cols-3` — logótipo + slogan, Navegação, Contactos. Cabeçalhos de coluna em `text-xs uppercase tracking-[0.2em] text-laranja`. Fecha com `.hairline mt-12` e o copyright centrado em `text-xs text-muted`.
 
 Todos os dados de contacto vêm de `src/data/stand.ts`. Ver [07 — Voz e conteúdo](07-voz-e-conteudo.md).
 

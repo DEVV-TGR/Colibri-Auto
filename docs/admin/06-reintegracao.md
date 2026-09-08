@@ -88,7 +88,7 @@ A propagação automática descrita em [01](01-arquitetura.md) é o que o client
 - Criar viatura de marca nova → a marca aparece na grelha da homepage
 - Apagar a última viatura de uma marca → a marca desaparece
 - Ligar o destaque → entra em "Viaturas em Destaque"; desligar → sai
-- Marcar como reservado → badge dourado no card
+- Marcar como reservado → badge laranja no card
 - Marcar como vendido → badge vermelho, foto sem cor, preço a dizer "Vendido"
 - Alterar um preço → os limites do filtro de preço acompanham
 

@@ -28,7 +28,7 @@ interface Viatura {
   origem: string;                estado: string;        garantia: string;
   livroRevisoes: boolean;        segundaChave: boolean;
   classePortagem: string;
-  matricula: string;             vin: string;           // fictícios
+  matricula: string;             vin: string;           // "—" quando não são públicos
   fotos: string[];
   extras: ExtrasCategoria[];
   destaque: boolean;
@@ -53,24 +53,42 @@ interface ExtrasCategoria { categoria: string; itens: string[] }
 
 ## Inventário atual
 
-Seis viaturas, cinco marcas, em `src/data/viaturas.ts`.
+Sete viaturas, cinco marcas, em `src/data/viaturas.ts`.
 
-| id | Viatura | Preço | Registo | Km | Segmento | Comb. | Cv | Transm. | Destaque | Estado |
-|---|---|---|---|---|---|---|---|---|---|---|
-| `v-0001` | Porsche Macan S | 42 000 | 7/2017 | 161 860 | SUV | Diesel | 258 | Auto | ✅ | disponível |
-| `v-0002` | Mercedes-Benz CLA 250 Sport Aut. | 23 000 | 3/2018 | 224 165 | Berlina | Gasolina | 218 | Auto | ✅ | disponível |
-| `v-0003` | Jaguar XE 20d Aut. Portfolio | 15 900 | 5/2015 | 145 300 | Berlina | Diesel | 180 | Auto | ✅ | disponível |
-| `v-0004` | Mercedes-Benz CLA 220 d 4Matic OrangeArt | 18 500 | 6/2015 | 236 703 | Berlina | Diesel | 177 | Auto | ❌ | disponível |
-| `v-0005` | BMW 520d Touring Pack M | 12 900 | 1/2011 | 212 760 | Carrinha | Diesel | 184 | Manual | ❌ | disponível |
-| `v-0006` | MINI Cooper D 3 Portas | 6 000 | 11/2011 | 246 949 | Citadino | Diesel | 110 | Manual | ❌ | **vendido** |
+| id | Viatura | Preço | Registo | Km | Segmento | Comb. | Cv | Transm. | Fotos | Destaque | Estado |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| `v-0001` | Ford Focus SW 1.0 EcoBoost S&S Titanium | 4 999 | 12/2014 | 201 375 | Carrinha | Gasolina | 125 | Manual | **19** | ✅ | disponível |
+| `v-0002` | Mercedes-Benz E 350 Coupé 7G-Tronic | 16 990 | 6/2009 | 261 345 | Coupé | Diesel | 231 | Auto | 1 | ✅ | disponível |
+| `v-0003` | Renault Kangoo 1.5 dCi Confort S&S | 11 990 | 5/2019 | 127 381 | Carrinha | Diesel | 90 | Manual | 1 | ✅ | **reservado** |
+| `v-0004` | Mazda CX-3 1.5 SKYACTIV-D | 11 500 | 9/2015 | 146 751 | SUV | Diesel | 105 | Manual | 1 | ✅ | disponível |
+| `v-0005` | Volkswagen Golf 1.6 TDI Trendline BlueMotion | 9 490 | 4/2013 | 286 762 | Citadino | Diesel | 105 | Manual | 1 | ❌ | disponível |
+| `v-0006` | Renault Captur 1.5 dCi | 8 350 | 2/2015 | 200 050 | SUV | Diesel | 90 | Manual | 1 | ❌ | disponível |
+| `v-0007` | Mercedes-Benz B 150 Autotronic | 6 490 | 7/2006 | 219 975 | Berlina | Gasolina | 95 | Auto | 1 | ❌ | **vendido** |
 
-Constantes em todas: `origem: "Importado"`, `estado: "Usado"`, `classePortagem: "Classe 1"`, `ivaDedutivel: false`. `garantia` é `"12 meses"` (×4) ou `"18 meses"` (×2).
+Constantes em todas: `estado: "Usado"`, `classePortagem: "Classe 1"`, `segundaChave: true`. `origem` é `"Nacional"` em todas menos o Ford, que é importado. `garantia` é `"12 meses"` em todas menos o Ford (`"18 meses"`).
 
-**Lacunas de dados** — valores que os tipos permitem mas que nenhuma viatura tem: combustíveis `Híbrido` e `Elétrico`, segmentos `Coupé` e `Cabrio`, estado `reservado`, `ivaDedutivel: true`. Os filtros derivam das viaturas, portanto estas opções simplesmente não aparecem na UI. Ao testar esses caminhos, alterar temporariamente uma viatura.
+### De onde vieram
+
+Não são inventadas: são as viaturas que o stand tem, reconstruídas a partir das duas únicas fontes públicas que existem.
+
+- **`v-0001`, o Ford Focus SW**, vem do anúncio no Standvirtual — o único que a Colibri tem publicado. Traz ficha técnica completa (cerca de 95 atributos), descrição escrita pelo stand e 19 fotografias a 1600 px. É a viatura em melhor estado neste ficheiro e a que se abre numa demonstração.
+- **As outras seis** vêm das publicações do Instagram, cujas legendas dão versão, motor, potência, caixa, cor, quilómetros e preço. Cada publicação é uma imagem única — daí uma fotografia por viatura, e daí o item aberto em [`docs/por-confirmar.md`](../por-confirmar.md).
+
+### `SEM_DADOS`, e porque é que existe
+
+Seis das sete viaturas têm `matricula` e `vin` a `"—"`, através da constante `SEM_DADOS` no topo do ficheiro. Não são públicos.
+
+A tentação era gerar uns com aspecto credível, e é precisamente o que não se pode fazer num site que vai ser mostrado ao dono das viaturas: ele conhece as matrículas de cor, e reconhece uma que não é dele mais depressa do que lê o título da página. Um traço diz "ainda não preenchemos isto"; um `AA-00-BB` diz "isto é falso", e põe em causa tudo o resto que lá está.
+
+A ficha técnica trata este valor como qualquer outro texto e mostra-o tal e qual — não é preciso caso especial nenhum na UI.
+
+**Lacunas de dados** — valores que os tipos permitem mas que nenhuma viatura tem: combustíveis `Híbrido` e `Elétrico`, segmento `Cabrio`. Os filtros derivam das viaturas, portanto estas opções simplesmente não aparecem na UI. Ao testar esses caminhos, alterar temporariamente uma viatura.
+
+**Os três estados de venda renderizam todos** — `disponivel`, `reservado` (`v-0003`) e `vendido` (`v-0007`) —, e o `v-0003` é ainda o único com `ivaDedutivel: true`, o que faz dele o único card do site com dois badges empilhados. No sistema de origem o `reservado` e o IVA dedutível nunca chegaram a aparecer com dados reais.
 
 ### Categorias de extras
 
-`Conforto` (6), `Segurança` (6), `Multimédia` (5), `Performance` (5), mais duas específicas de uma viatura: `Edição OrangeArt` (CLA 220 d) e `Pack M / Exterior` (BMW 520d). Categorias one-off são aceitáveis quando descrevem um pacote real da viatura.
+Quatro, iguais em todas as viaturas: `Multimédia`, `Conforto`, `Segurança`, `Performance`. Não há categorias one-off — ao contrário do sistema de origem, onde uma edição especial justificava a sua própria. Se aparecer um carro que justifique uma, é aceitável; a regra é descrever um pacote real da viatura, não arrumar melhor a lista.
 
 ## Fotografias
 
@@ -81,9 +99,11 @@ const fotos = (pasta: string, quantidade: number) =>
   Array.from({ length: quantidade }, (_, i) => `/cars/${pasta}/${String(i + 1).padStart(2, "0")}.jpg`);
 ```
 
-Convenção: `public/cars/<pasta>/01.jpg … 15.jpg`. **As seis viaturas têm 15 fotos cada.** As pastas são `porsche-macan`, `mercedes-cla-250`, `jaguar-xe`, `mercedes-cla-220d`, `bmw-520d`, `mini-cooper-d`.
+Convenção: `public/cars/<pasta>/01.jpg`, `02.jpg`, … As pastas são `ford-focus-sw` (19 fotos), `mercedes-e-350-coupe`, `renault-kangoo`, `mazda-cx-3`, `vw-golf`, `renault-captur` e `mercedes-b-150` (1 cada).
 
-**Créditos:** as fotografias vêm dos anúncios públicos do stand **Imperio Auto Concept** no StandVirtual e pertencem ao stand. São usadas nesta demonstração para representar o inventário real do cliente. Detalhe em [`public/cars/CREDITS.md`](../../public/cars/CREDITS.md) — manter atualizado ao acrescentar viaturas.
+**A contagem é assimétrica de propósito e é temporária.** Ver [`docs/por-confirmar.md`](../por-confirmar.md): assim que o cliente der as fotografias originais, é largar os ficheiros na pasta e subir o número na chamada a `fotos()`. Nada mais muda — a galeria, o carrossel do card e o lightbox lidam com qualquer contagem.
+
+**Créditos:** as fotografias vêm das fontes públicas do stand — o anúncio no Standvirtual e o Instagram — e pertencem à Colibri Auto. Detalhe, e o que foi cortado de cada uma, em [`public/cars/CREDITS.md`](../../public/cars/CREDITS.md) — manter atualizado ao acrescentar viaturas.
 
 ## Helpers
 
@@ -139,7 +159,7 @@ urlViaturasPorMarca(slug)  // /viaturas?marca={slug}
 
 ### `src/lib/marcas.ts`
 
-Mapa `LOGOS` de slug → ficheiro em `/logo/marcas/`. Cinco entradas: `bmw.svg`, `mini.svg`, `porsche.svg`, `jaguar.webp`, `mercedes-benz.webp`. `logoMarca(slug)` devolve o caminho ou `null` — a UI faz fallback ao nome da marca.
+Mapa `LOGOS` de slug → ficheiro em `/logo/marcas/`. Cinco entradas, uma por marca do inventário: `ford.svg`, `mercedes-benz.webp`, `renault.svg`, `mazda.svg`, `volkswagen.svg`. `logoMarca(slug)` devolve o caminho ou `null` — a grelha faz fallback ao nome da marca, no mesmo espaço e com o mesmo peso óptico.
 
 Ao acrescentar uma marca, acrescentar o logótipo aqui, ou o fallback trata do assunto.
 

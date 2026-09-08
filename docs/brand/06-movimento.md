@@ -70,9 +70,9 @@ A utility vive em `globals.css` e trata da transição toda:
 
 **Usa a propriedade `scale` nativa, não `transform`.** Não é detalhe de estilo — é o que evita um defeito. Seis controlos com `.press` estão centrados por `-translate-y-1/2`, que o Tailwind v4 gera como `translate: …` (também nativa). Se a escala viesse de `transform: scale()`, sobreporia esse `translate` e **as setas saltariam para baixo ao serem premidas**.
 
-**Declara todas as propriedades numa só transição** pela mesma razão: um elemento só admite uma declaração de `transition`, e uma segunda — vinda do `transition-colors` do Tailwind ou do brilho do `.gold-metal-fill` — anularia silenciosamente a outra. Por isso, ao aplicar `.press`, **remove-se o `transition-colors`** do elemento.
+**Declara todas as propriedades numa só transição** pela mesma razão: um elemento só admite uma declaração de `transition`, e uma segunda — vinda do `transition-colors` do Tailwind ou do brilho do `.laranja-fill` — anularia silenciosamente a outra. Por isso, ao aplicar `.press`, **remove-se o `transition-colors`** do elemento.
 
-**Leva `.press`:** CTAs dourados, botões de contorno, setas de navegação, chips de filtro, miniaturas da galeria e do lightbox, botões de fechar, hamburger do menu.
+**Leva `.press`:** CTAs laranjas, botões de contorno, setas de navegação, chips de filtro, miniaturas da galeria e do lightbox, botões de fechar, hamburger do menu.
 
 **Não leva:** links do menu e do rodapé, títulos de cards, o `CarCard` inteiro, cards de marca. Encolher texto ao clicar lê-se como falha de renderização.
 

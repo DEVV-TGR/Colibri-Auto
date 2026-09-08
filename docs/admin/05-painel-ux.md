@@ -21,27 +21,27 @@ O modelo é o gestor de vídeos do YouTube Studio: uma linha por anúncio, com o
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
 │  Viaturas                                        [ + Adicionar ]     │
-│  6 anúncios publicados                                               │
+│  7 anúncios publicados                                               │
 ├──────────────────────────────────────────────────────────────────────┤
 │  VIATURA                    ESTADO       PREÇO      REGISTO   AÇÕES  │
 ├──────────────────────────────────────────────────────────────────────┤
-│  [foto] Porsche Macan     ● Disponível   42 000 €   Jul. 2017  ✏  🗑 │
-│   ★     S                                                            │
+│  [foto] Ford Focus SW     ● Disponível    4 999 €   Dez. 2014  ✏  🗑 │
+│   ★     1.0 EcoBoost…                                                │
 ├──────────────────────────────────────────────────────────────────────┤
-│  [foto] MINI Cooper D     ● Vendido       6 000 €   Nov. 2011  ✏  🗑 │
-│         3 Portas                                                     │
+│  [foto] Mercedes-Benz     ● Vendido       6 490 €   Jul. 2006  ✏  🗑 │
+│         B 150 Autotronic                                             │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 **Cada linha tem:** miniatura da primeira foto, marca e modelo, versão por baixo, estado de venda, preço, registo, e as ações.
 
-**Marcador de destaque:** um ponto dourado no canto da miniatura, com `title="Em destaque"`. O cliente vê de relance quais estão na homepage.
+**Marcador de destaque:** um ponto laranja no canto da miniatura, com `title="Em destaque"`. O cliente vê de relance quais estão na homepage.
 
 **Ordenação:** mais recente primeiro, por `criadoEm`. É por isso que o schema tem essa coluna.
 
 **Ações — ícones, não texto.** A implementação do #12 usava as palavras "Editar" e "Apagar"; passa a ícone de **lápis** e de **caixote do lixo**, como pedido. Requisitos: `aria-label` em cada um (a etiqueta acessível continua a ser texto), `title` para a dica ao passar o rato, e área de toque de pelo menos 44×44 px no telemóvel.
 
-**Botão "Adicionar viatura"** em evidência, no topo à direita, em dourado.
+**Botão "Adicionar viatura"** em evidência, no topo à direita, em laranja.
 
 **Sem anúncios:** estado vazio com uma frase e o botão de adicionar ao centro — não uma tabela vazia.
 
@@ -51,7 +51,7 @@ O modelo é o gestor de vídeos do YouTube Studio: uma linha por anúncio, com o
 
 Pede confirmação, com o nome da viatura na pergunta e o aviso de que as fotos também desaparecem:
 
-> Apagar "Porsche Macan S"? Esta ação remove o anúncio e as respetivas fotos e não pode ser desfeita.
+> Apagar "Ford Focus SW 1.0 EcoBoost S&S Titanium"? Esta ação remove o anúncio e as respetivas fotos e não pode ser desfeita.
 
 Não há desfazer nem lixo de recuperação — por isso a confirmação tem de nomear o que se vai perder. Enquanto apaga, o botão mostra estado de espera.
 
@@ -94,7 +94,7 @@ Estes três são o dia a dia. Cada um mostra o efeito em texto, ao lado:
 | Opção | O que acontece no site |
 |---|---|
 | Disponível | Sem badge; aparece normalmente |
-| Reservado | Badge dourado "Reservado" sobre a foto |
+| Reservado | Badge laranja "Reservado" sobre a foto |
 | Vendido | Badge vermelho "Vendido", a foto perde cor e o preço passa a "Vendido" |
 
 **Destaque** — interruptor:
@@ -111,9 +111,9 @@ Detalhe do comportamento: ver [`docs/badges-estado.md`](../badges-estado.md).
 
 **O painel é ferramenta; o site é montra.** Herda a identidade, não a encenação.
 
-**Aplica-se** — os tokens de cor de [`docs/brand/02`](../brand/02-cor-e-materia.md) (`bg-surface`, `border-line`, `text-muted`, dourado para ação); as fontes de [`03`](../brand/03-tipografia.md); o foco dourado global; o português europeu e a formatação com `Intl` de [`07`](../brand/07-voz-e-conteudo.md); e o checklist de acessibilidade de [`05`](../brand/05-componentes.md).
+**Aplica-se** — os tokens de cor de [`docs/brand/02`](../brand/02-cor-e-materia.md) (`bg-surface`, `border-line`, `text-muted`, laranja para ação); as fontes de [`03`](../brand/03-tipografia.md); o foco laranja global; o português europeu e a formatação com `Intl` de [`07`](../brand/07-voz-e-conteudo.md); e o checklist de acessibilidade de [`05`](../brand/05-componentes.md).
 
-**Não se aplica** — a assinatura editorial. Sem headings com a última palavra em itálico dourado, sem `.text-gold-metal`, sem entradas em scroll, sem carrosséis. Um painel de gestão que se anima a cada scroll é irritante ao fim de dez minutos.
+**Não se aplica** — a assinatura editorial. Sem headings com a última palavra em itálico laranja, sem `.text-laranja-metal`, sem entradas em scroll, sem carrosséis. Um painel de gestão que se anima a cada scroll é irritante ao fim de dez minutos.
 
 **Diverge de propósito** — densidade maior (linhas compactas, menos espaço em branco) e cantos menos arredondados que no site, porque a leitura aqui é tabular.
 
@@ -127,7 +127,7 @@ Detalhe do comportamento: ver [`docs/badges-estado.md`](../badges-estado.md).
 - **Alvos de toque abaixo de 44 px** nos controlos que se usam a sério.
 - **Apagar sem confirmação nomeada.**
 - **Deixar a tabela em deslize horizontal** como única resposta ao telemóvel.
-- **Trazer a linguagem editorial do site** — itálicos dourados, ouro metálico, animações de entrada.
+- **Trazer a linguagem editorial do site** — a palavra destacada a 800 em laranja, os degradês dos CTA, animações de entrada.
 - **Usar cores fora dos tokens** para os estados.
 - **Mostrar erros de validação em inglês** ou sem indicar o campo.
 - **Pôr um controlo de publicação sem explicar o efeito** ao lado.

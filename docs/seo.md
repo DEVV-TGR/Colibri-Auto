@@ -4,8 +4,10 @@
 > **Fonte de verdade** — `src/lib/site.ts`, `src/lib/seo.ts`, `src/lib/jsonld.ts`, `src/app/{robots,sitemap,opengraph-image}.ts(x)`.
 > **Ler antes de** — criar uma rota, mexer em titles/descriptions ou tocar nos dados do stand.
 
-Implementação do plano em `seo-imperio-auto-concept.md` (21/08/2026). Aqui fica o que
-está feito, o que ficou de fora e porquê, e o que não se resolve no repositório.
+Herdado do trabalho de SEO feito para o Império Auto Concept e reaproveitado
+aqui: as convenções valem tal e qual, os factos de mercado não. O que está
+marcado abaixo como **[Colibri]** foi refeito para este stand; o resto é
+convenção de código e mantém-se.
 
 ## O diagnóstico, confirmado
 
@@ -17,7 +19,7 @@ Auditoria feita contra o site em produção antes de escrever código:
 | `/sitemap.xml` | 404 |
 | `rel="canonical"` | ausente em todas as páginas |
 | JSON-LD | nenhum |
-| `og:image` das viaturas | `https://imperioautoconcept.pt/...` — domínio sem registo DNS |
+| `og:image` das viaturas | `https://colibriauto.pt/...` — domínio sem registo DNS |
 | `og:image` da homepage | ausente |
 | `noindex` / `X-Robots-Tag` | ausentes |
 | Variantes de domínio | `.com` e `http://` já redirecionavam 308 para `https://www.` |
@@ -28,7 +30,7 @@ sitemap, sem canonicals e com um único link externo a apontar para o site.
 
 ## Regras ao escrever código
 
-**O domínio vive em `src/lib/site.ts`.** `SITE_URL` é `https://www.imperioautoconcept.com`
+**O domínio vive em `src/lib/site.ts`.** `SITE_URL` é `https://www.colibriauto.pt`
 — com `www`, que é a variante para onde a Vercel já redireciona. Nunca escrever
 um domínio à mão.
 
@@ -122,10 +124,12 @@ Continua por confirmar:
 
    O número de URLs do sitemap acompanha o inventário — cresce a cada viatura
    que o cliente publica —, portanto não vale a pena fixá-lo aqui.
-3. **Colisão de marca.** Existem o Império Automóvel (Trofa) e o Império Centro
-   Auto (Braga), ambos com presença muito maior. Para "império auto porto" o
-   incumbente ganha, independentemente da qualidade técnica do site. A aposta
-   realista é o nome completo, "Império Auto Concept".
+3. **[Colibri] Colisão de marca — pouca, e é uma vantagem.** "Colibri Auto" é
+   um nome praticamente livre no sector automóvel português, ao contrário do
+   caso anterior. O que não é livre é a geografia: "stand carros Porto" tem
+   incumbentes com anos de vantagem e não se ganha por qualidade técnica. A
+   aposta realista é dupla — o nome completo, e "Perafita"/"Matosinhos", onde
+   a concorrência é uma fracção e onde estão as pessoas que entram pela porta.
 4. **Agregadores.** Standvirtual, OLX e Piscapisca dominam a pesquisa de usados
    em Portugal — são o canal de aquisição real e a fonte de backlinks mais
    acessível.

@@ -49,7 +49,7 @@ O adormecimento tem uma consequência prática: a primeira visita ao site depois
 Ordem de grandeza: 30 viaturas × 15 fotos otimizadas (~300 KB) ≈ 135 MB. Cabem centenas de stands nos 10 GB.
 
 **Setup:**
-1. Cloudflare → **R2** → *Create bucket* (ex.: `imperio-fotos`) → `R2_BUCKET`
+1. Cloudflare → **R2** → *Create bucket* (ex.: `colibri-fotos`) → `R2_BUCKET`
 2. *Manage R2 API Tokens* → criar token de leitura/escrita → `R2_ACCESS_KEY_ID` e `R2_SECRET_ACCESS_KEY`
 3. Account ID (no canto do painel R2) → `R2_ACCOUNT_ID`
 4. Tornar as fotos públicas, à escolha:
@@ -116,10 +116,10 @@ RESEND_API_KEY="re_xxxxxxxxx"
 EMAIL_REMETENTE="acesso@dominio.pt"
 
 # Quem pode aceder ao painel (ver 03 — Autenticação)
-ADMIN_EMAIL_PERMITIDO="imperioautoconcept@gmail.com"
+ADMIN_EMAIL_PERMITIDO="geral.colibrilda@gmail.com"
 
 # --- Só para o seed local (npm run db:seed); não definir na Vercel ---
-SEED_ADMIN_EMAIL="imperioautoconcept@gmail.com"
+SEED_ADMIN_EMAIL="geral.colibrilda@gmail.com"
 SEED_ADMIN_PASSWORD="troque-esta-password"
 ```
 

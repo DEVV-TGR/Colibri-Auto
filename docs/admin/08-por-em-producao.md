@@ -25,10 +25,10 @@ São nove, e **é preciso separá-las por ambiente**. A tabela abaixo diz de ond
 | `R2_ACCOUNT_ID` | igual | igual | R2 → Overview, Account Details |
 | `R2_ACCESS_KEY_ID` | igual | igual | o token que criaste |
 | `R2_SECRET_ACCESS_KEY` | igual | igual | idem — só é mostrado uma vez |
-| `R2_BUCKET` | `imperio-viaturas` | igual | — |
+| `R2_BUCKET` | `colibri-viaturas` | igual | — |
 | `R2_PUBLIC_URL` | ver o passo 4 | `https://pub-….r2.dev` | — |
 | `RESEND_API_KEY` | igual | igual | Resend → API Keys |
-| `RESEND_REMETENTE` | `Painel Império <noreply@send.devplus.pt>` | igual | — |
+| `RESEND_REMETENTE` | `Painel Colibri <noreply@send.devplus.pt>` | igual | — |
 | `PAINEL_EMAILS` | `developerplusteam@gmail.com` | igual | ver abaixo |
 
 **O `DATABASE_URL` é o único que tem de divergir, e a diferença não é cosmética.** Um preview apontado à base de produção é a diferença entre experimentar e apagar as viaturas do cliente. Nunca ponhas a string do `main` no ambiente Preview.
@@ -84,11 +84,11 @@ Se a rede da tua máquina não chegar ao Neon por IPv6 — acontece —, prefixa
 
 **O que implica:** o domínio passa a ter o DNS gerido pela Cloudflare. O site continua na Vercel; muda só quem responde às perguntas de DNS.
 
-1. Cloudflare → Add a site → `imperioautoconcept.com`, plano **Free**.
+1. Cloudflare → Add a site → `colibriauto.pt`, plano **Free**.
 2. A Cloudflare mostra dois nameservers. No registrar do domínio, substituir os actuais por esses. **Propaga em minutos a horas.**
 3. Confirmar que os registos que a Cloudflare importou apontam para a Vercel — e que o site continua a responder antes de avançar.
-4. R2 → o bucket → Settings → **Custom Domains** → Add → `fotos.imperioautoconcept.com`.
-5. Actualizar o `R2_PUBLIC_URL` em Production para `https://fotos.imperioautoconcept.com` e fazer redeploy.
+4. R2 → o bucket → Settings → **Custom Domains** → Add → `fotos.colibriauto.pt`.
+5. Actualizar o `R2_PUBLIC_URL` em Production para `https://fotos.colibriauto.pt` e fazer redeploy.
 
 **As fotos já carregadas continuam a funcionar?** Não — os URLs guardados na base apontam para o `r2.dev`. Se já houver fotos carregadas quando fizeres isto, é preciso actualizá-los. Enquanto o painel for novo e o bucket estiver vazio, faz-se sem custo. **Por isso vale a pena fazer este passo cedo.**
 

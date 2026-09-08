@@ -30,7 +30,7 @@ O segundo passo só arranca **depois** de a palavra-passe estar correta. Um atac
 
 ## Quem pode entrar
 
-Apenas `imperioautoconcept@gmail.com`. Duas barreiras, de propósito:
+Apenas `geral.colibrilda@gmail.com`. Duas barreiras, de propósito:
 
 1. A tabela `admin_users` tem uma linha só.
 2. `ADMIN_EMAIL_PERMITIDO` verifica o endereço antes de qualquer consulta à base.

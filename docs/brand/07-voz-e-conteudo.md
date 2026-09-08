@@ -100,16 +100,16 @@ Convenções internas:
 Aparece uma vez, no fecho do rodapé, a seguir ao copyright do cliente:
 
 ```
-© 2026 Imperio Auto Concept · Desenvolvido por DevPlus ↗
+© 2026 Colibri Auto · Desenvolvido por DevPlus ↗
 ```
 
-Numa linha em ecrãs largos, empilhado em telemóvel. O separador `·` é `text-gold-deep`, como nos metadados das viaturas, e some no empilhamento. O link segue o padrão dos externos: `target="_blank" rel="noreferrer"` e a seta `↗`.
+Numa linha em ecrãs largos, empilhado em telemóvel. O separador `·` é `text-laranja-deep`, como nos metadados das viaturas, e some no empilhamento. O link segue o padrão dos externos: `target="_blank" rel="noreferrer"` e a seta `↗`.
 
 O copyright é sempre do **cliente** — é ele o dono do site. O crédito é uma assinatura discreta, não uma segunda marca.
 
 ## Metadata
 
-Definida em `src/app/layout.tsx` e por página. O template de título é `"%s | Imperio Auto Concept"`. A página de detalhe gera título e descrição por viatura em `generateMetadata`, incluindo a primeira foto no Open Graph.
+Definida em `src/app/layout.tsx` e por página. O template de título é `"%s | Colibri Auto"`. A página de detalhe gera título e descrição por viatura em `generateMetadata`, incluindo a primeira foto no Open Graph.
 
 ## Nunca
 

@@ -31,7 +31,7 @@ Sintomas concretos disso, já visíveis neste projeto:
 
 ```tsx
 className={`${base} ${estilos[variante]} ${className}`}
-className={`h-1 w-4 rounded-full ${i === foto ? "bg-gold" : "bg-ink/30"}`}
+className={`h-1 w-4 rounded-full ${i === foto ? "bg-laranja" : "bg-ink/30"}`}
 ```
 
 Há `zod` — entrou com o painel e serve agora também os formulários públicos (`src/lib/viatura-schema.ts`, `src/lib/pedidos/schema.ts`). Justifica-se onde há uma fronteira a validar no servidor: as mensagens em português vivem no schema e o mesmo ficheiro alimenta os selects do formulário, o que impede a lista de opções de divergir da validação.

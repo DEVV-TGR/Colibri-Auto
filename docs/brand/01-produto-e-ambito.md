@@ -6,13 +6,13 @@
 
 ## O que é
 
-Site de demonstração de um **stand de automóveis**, para apresentar a um cliente. O cliente representado é a **Imperio Auto Concept** (Porto) — dados reais em `src/data/stand.ts`, fotografias reais dos anúncios do stand.
+Site de um **stand de automóveis**, a **Colibri Auto**, em Perafita (Matosinhos) — dados reais em `src/data/stand.ts`, viaturas e fotografias reais em `src/data/viaturas.ts` e `public/cars/`.
+
+**Ainda não foi apresentado ao cliente.** Foi construído a partir das fontes públicas deles para levar à reunião um site a funcionar em vez de uma proposta em papel. O que ficou assumido por falta de dados está em [`docs/por-confirmar.md`](../por-confirmar.md), e é curto.
 
 A tensão central do projeto: **qualidade visual de nível profissional, âmbito deliberadamente pequeno**. É uma demo destinada a impressionar numa apresentação, não um produto a escalar. Investir em acabamento; não investir em generalidade.
 
-Sem backend. Sem base de dados. Sem autenticação. Os dados são mock em TypeScript.
-
-> **Para o lançamento.** Está planeado um painel de gestão em `/admin`, para o cliente gerir os anúncios sem código — com base de dados e autenticação. Entra depois de o site estar no ar. A especificação vive em [`docs/admin/`](../admin/README.md); até lá, o que está acima é a realidade.
+O código do painel de gestão (`/admin`) vem incluído do repositório de origem, mas **não está configurado** — sem base de dados, sem bucket, sem chave de email. O site público não precisa dele para correr. A especificação vive em [`docs/admin/`](../admin/README.md).
 
 ## As três páginas
 
@@ -33,7 +33,7 @@ A página de detalhe é a **mais trabalhada das três** — é onde a demo se pr
 - **[pintoesousa.com/viaturas/usadas](https://www.pintoesousa.com/viaturas/usadas)** — referência para o registo visual premium e para a listagem/pesquisa.
 - **[niceportocar.pt](https://www.niceportocar.pt)** — referência para a estrutura da homepage.
 
-Ambos correm na mesma plataforma white-label, pelo que partilham funcionalidades. **A regra é replicar as funcionalidades, não o layout.** Aqueles sites são Bootstrap genérico; o StandDemo tem identidade própria e existe precisamente para elevar o nível.
+Ambos correm na mesma plataforma white-label, pelo que partilham funcionalidades. **A regra é replicar as funcionalidades, não o layout.** Aqueles sites são Bootstrap genérico; este tem identidade própria e existe precisamente para elevar o nível.
 
 Funcionalidades que definem a categoria e que o projeto implementa:
 
@@ -65,16 +65,18 @@ Este documento chamou-se durante meses "sem backend, sem base de dados, sem aute
 
 ## Estado atual do inventário
 
-Seis viaturas, cinco marcas. Números concretos em [08 — Dados e domínio](08-dados-e-dominio.md).
+Sete viaturas, cinco marcas. Números concretos em [08 — Dados e domínio](08-dados-e-dominio.md).
 
-Duas notas com efeito visível na UI:
+Três notas com efeito visível na UI:
 
-- **O MINI Cooper D (`v-0006`) está `vendido`.** Logo o badge vermelho metálico e o tratamento de dessaturação estão ativos e visíveis no site — não são código morto.
-- **Nenhuma viatura está `reservado` e nenhuma tem `ivaDedutivel: true`.** Esses dois badges existem, estão implementados e testados, mas não renderizam com os dados atuais. Ao mexer neles, alterar temporariamente uma viatura para os ver.
+- **O Mercedes-Benz B 150 (`v-0007`) está `vendido`** — e está mesmo: a publicação do Instagram diz "VENDIDO ✅". O badge grafite e a dessaturação da fotografia estão activos e visíveis, não são código morto.
+- **O Renault Kangoo (`v-0003`) está `reservado` e tem `ivaDedutivel: true`.** É o único card do site com dois badges empilhados. No sistema de origem nenhum destes dois estados chegou a renderizar com dados reais.
+- **Uma viatura tem 19 fotografias e as outras seis têm uma.** É o desequilíbrio mais visível do site, e é de dados, não de código — ver [`docs/por-confirmar.md`](../por-confirmar.md).
 
 ## Nunca
 
-- Acrescentar backend, base de dados ou autenticação — a demo não os tem por decisão, não por falta de tempo.
+- Configurar base de dados, bucket ou email sem o cliente pedir. O site público responde sem variáveis de ambiente, e é essa regra que o mantém de pé.
 - Construir funcionalidades da lista "fora de âmbito" sem confirmar primeiro.
 - Copiar o layout dos sites de inspiração; replicar a funcionalidade, elevar a execução.
 - Alargar o inventário sem preencher a ficha técnica **completa** da viatura nova — todos os 30 campos de `Viatura` são obrigatórios.
+- **Inventar matrículas, VIN ou qualquer outro dado que não se saiba.** O que não é público fica a `SEM_DADOS`. Este site vai ser mostrado a quem conhece as viaturas de cor.
