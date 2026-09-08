@@ -1,0 +1,284 @@
+@import "tailwindcss";
+
+:root {
+  /* fundos (tema escuro sempre) */
+  --background: oklch(0.13 0 0);
+  --surface: oklch(0.18 0 0);
+  --raised: oklch(0.21 0.012 85);
+  --line: oklch(0.27 0.016 85);
+
+  /* dourados — metálico quente (âmbar/bronze), não amarelo-limão.
+     hue baixado para ~76 (âmbar) e chroma reduzido: o amarelo-marcador
+     vem de chroma+claridade altos; um ouro real é mais quente e mais "sujo". */
+  --gold: oklch(0.70 0.093 76);
+  --gold-bright: oklch(0.83 0.086 82);
+  --gold-deep: oklch(0.5 0.082 66);
+  --champagne: oklch(0.88 0.036 84);
+
+  /* estado "vendido" — vermelho metálico (stops deep/base/bright),
+     dessaturado para não gritar no tema escuro. */
+  --red: oklch(0.55 0.19 27);
+  --red-deep: oklch(0.42 0.16 27);
+  --red-bright: oklch(0.68 0.2 27);
+
+  /* estado "disponível" — o par semântico do vermelho, para o painel.
+     Dois stops e não três: o vermelho tem um `bright` porque alimenta o
+     gradiente do `.red-metal-fill`, e o painel não leva metálicos nenhuns
+     (docs/admin/05). Aqui só fazem falta o preenchimento e a borda.
+
+     Mais claro e menos saturado que o vermelho de propósito. Disponível é o
+     estado normal de quase todas as viaturas — se gritasse tanto como o
+     vendido, a listagem ficava um semáforo e o que é excepção deixava de se
+     ver. Hue 152, o verde mais neutro; a 145 puxa a amarelo e choca com os
+     dourados. */
+  --sucesso: oklch(0.62 0.12 152);
+  --sucesso-deep: oklch(0.48 0.1 152);
+
+  /* texto */
+  --ink: oklch(0.96 0.012 95);
+  --muted: oklch(0.7 0.022 95);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-champagne: var(--champagne);
+  /* Os vermelhos existem em `:root` desde o PR #17 mas nunca foram expostos
+     aqui, e por isso `bg-red` e `text-red` não existiam como utilitários — o
+     vermelho só era alcançável pela classe `.red-metal-fill`. Foi o que levou
+     o painel do PR #12 a escrever `emerald-500` e `red-400`, cores do Tailwind
+     por omissão, fora do sistema. */
+  --color-red: var(--red);
+  --color-red-deep: var(--red-deep);
+  --color-red-bright: var(--red-bright);
+  --color-sucesso: var(--sucesso);
+  --color-sucesso-deep: var(--sucesso-deep);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bodoni);
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* escala tipográfica fluida para títulos didone (Bodoni Moda) */
+.h-hero {
+  font-size: clamp(3.25rem, 8.5vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.h-section {
+  font-size: clamp(2.25rem, 4.8vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+}
+.h-sub {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+/* dourado metálico: reflexo champanhe→ouro→bronze no próprio texto.
+   dá sensação de folha de ouro em vez de tinta chapada; usar só em texto grande. */
+.text-gold-metal {
+  /*
+    O gradiente é recortado pela forma das letras, mas pintado só dentro da
+    caixa do elemento — o que sair da caixa fica transparente, ou seja,
+    invisível. E o Bodoni itálico sai da caixa por três lados: a inclinação
+    leva a tinta para lá da largura de avanço dos glifos das pontas, e com
+    `line-height: 1` os descendentes passam por baixo da linha.
+
+    Medido no hero ("procura?", em toda a escala fluida do `.h-hero`, com as
+    métricas de tinta do canvas): 0.111em abaixo, 0.095em à esquerda, 0.060em
+    à direita, e folga em cima. Os valores abaixo dão margem sobre isso.
+
+    O `padding` alarga a área pintada e a `margin` negativa devolve o espaço,
+    para o texto ocupar exactamente o mesmo que ocupava e o alinhamento do
+    bloco não mexer. O `inline-block` é o que faz o padding valer aqui. Tudo
+    em `em`, para acompanhar a escala fluida sem depender da largura do ecrã.
+  */
+  display: inline-block;
+  padding-block: 0.18em;
+  margin-block: -0.18em;
+  padding-inline: 0.14em;
+  margin-inline: -0.14em;
+  background-image: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    var(--gold) 26%,
+    var(--champagne) 44%,
+    var(--gold-bright) 52%,
+    var(--gold) 68%,
+    var(--gold-deep) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* preenchimento metálico para superfícies douradas grandes (CTAs).
+   reflexo diagonal bronze→ouro→champanhe→ouro→bronze = folha de ouro, não chapa. */
+.gold-metal-fill {
+  background-image: linear-gradient(
+    140deg,
+    var(--gold-deep) 0%,
+    var(--gold) 28%,
+    var(--gold-bright) 50%,
+    var(--gold) 72%,
+    var(--gold-deep) 100%
+  );
+}
+.gold-metal-fill:hover {
+  filter: brightness(1.08);
+}
+
+/* badge "vendido" — vermelho metálico (mesmo reflexo diagonal do ouro) */
+.red-metal-fill {
+  background-image: linear-gradient(
+    140deg,
+    var(--red-deep) 0%,
+    var(--red) 28%,
+    var(--red-bright) 50%,
+    var(--red) 72%,
+    var(--red-deep) 100%
+  );
+}
+.red-metal-fill:hover {
+  filter: brightness(1.08);
+}
+
+/* resposta ao premir — botões e controlos.
+   usa a propriedade `scale` nativa (não `transform`) de propósito: metade dos
+   controlos estão centrados com -translate-y-1/2, e um transform sobreporia
+   esse translate, fazendo as setas saltar ao serem premidas.
+   declara todas as propriedades numa só transição para não colidir com o
+   transition-colors do Tailwind nem com o brilho do metálico. */
+.press {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease,
+    translate 0.3s ease,
+    scale 0.1s ease;
+}
+.press:active {
+  scale: 0.97;
+}
+
+/* linha fina dourada, assinatura visual do site */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-deep) 20%,
+    var(--gold) 50%,
+    var(--gold-deep) 80%,
+    transparent
+  );
+}
+
+/* grão subtil por cima de fotos grandes */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* zoom lento tipo Ken Burns para a foto do hero */
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+.kenburns {
+  animation: kenburns 22s ease-out forwards;
+}
+
+/* sliders de intervalo (dois inputs sobrepostos; só os thumbs recebem eventos) */
+.range-dual {
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+  height: 100%;
+}
+.range-dual::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--gold);
+  border: 2px solid var(--background);
+  box-shadow: 0 0 0 1px var(--gold-deep);
+  cursor: grab;
+  transition: transform 0.15s ease;
+}
+.range-dual::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.range-dual::-moz-range-thumb {
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--gold);
+  border: 2px solid var(--background);
+  box-shadow: 0 0 0 1px var(--gold-deep);
+  cursor: grab;
+}
+.range-dual::-moz-range-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* sem a anulação, o botão continuava a encolher — só que de repente */
+  .press:active {
+    scale: 1;
+  }
+}
