@@ -39,7 +39,7 @@ export function SpecsTable({ viatura }: { viatura: Viatura }) {
   return (
     <section aria-labelledby="ficha-tecnica">
       <h2 id="ficha-tecnica" className="font-display h-sub text-ink">
-        Ficha <span className="italic text-gold">técnica</span>
+        Ficha <span className="font-extrabold text-laranja">técnica</span>
       </h2>
 
       <dl className="mt-6 grid grid-cols-1 gap-x-10 sm:grid-cols-2">
@@ -55,8 +55,8 @@ export function SpecsTable({ viatura }: { viatura: Viatura }) {
       </dl>
 
       <details className="group mt-6">
-        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm text-champagne transition-colors hover:text-gold-bright [&::-webkit-details-marker]:hidden">
-          <span className="text-gold transition-transform duration-200 group-open:rotate-90">
+        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm text-creme transition-colors hover:text-laranja-bright [&::-webkit-details-marker]:hidden">
+          <span className="text-laranja transition-transform duration-200 group-open:rotate-90">
             ›
           </span>
           Informação adicional

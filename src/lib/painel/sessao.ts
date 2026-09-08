@@ -10,8 +10,8 @@ import { chave } from "./chaves";
 
   | cookie | diz | dura |
   |---|---|---|
-  | `imperio_sessao` | "esta pessoa entrou" | 8 horas |
-  | `imperio_aparelho` | "este aparelho já passou pelo código" | 30 dias |
+  | `colibri_sessao` | "esta pessoa entrou" | 8 horas |
+  | `colibri_aparelho` | "este aparelho já passou pelo código" | 30 dias |
 
   Ambos são, na prática, JWTs HS256 sem a papelada: `v.corpo.assinatura`, com o
   corpo em JSON e base64url. Não se usa o `jose`: a razão histórica para a
@@ -48,8 +48,8 @@ import { chave } from "./chaves";
   caso raro sem estragar o comum.
 */
 
-export const NOME_DO_COOKIE = "imperio_sessao";
-export const NOME_DO_APARELHO = "imperio_aparelho";
+export const NOME_DO_COOKIE = "colibri_sessao";
+export const NOME_DO_APARELHO = "colibri_aparelho";
 
 /* Oito horas — um dia de trabalho. Quem fecha o stand não fica com sessão. */
 export const VALIDADE_MS = 8 * 60 * 60 * 1000;

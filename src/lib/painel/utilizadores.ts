@@ -76,7 +76,7 @@ export function autorizado(email: string): Utilizador | null {
 }
 
 /*
-  `cliente@imperioautoconcept.pt` → `c•••••e@imperioautoconcept.pt`
+  `cliente@colibriauto.pt` → `c•••••e@colibriauto.pt`
 
   O segundo ecrã tem de dizer para onde foi o código, senão quem lá está não
   sabe onde procurar. Mas escrevê-lo por extenso seria confirmar a quem o

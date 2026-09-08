@@ -21,7 +21,7 @@ export function CompramosOSeuCarro() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <h2 className="font-display h-section text-ink">
-              Compramos o seu <span className="italic text-gold">carro</span>
+              Compramos o seu <span className="font-extrabold text-laranja">carro</span>
             </h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
               Venda directa ou retoma na compra de outra viatura. Descreva o que
@@ -41,7 +41,7 @@ export function CompramosOSeuCarro() {
           E se procura uma viatura que não temos,{" "}
           <Link
             href="/importamos"
-            className="text-champagne transition-colors hover:text-gold-bright"
+            className="text-creme transition-colors hover:text-laranja-bright"
           >
             importamos por encomenda →
           </Link>

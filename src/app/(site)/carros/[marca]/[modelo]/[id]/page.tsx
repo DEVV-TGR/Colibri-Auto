@@ -71,10 +71,10 @@ export async function generateMetadata({
   // (links partilhados no WhatsApp continuam a abrir) mas encaminha ao stock.
   const descricao = seoDescricao(
     v.estadoVenda === "vendido"
-      ? `${ficha}. Esta viatura já foi vendida — veja o stock disponível no stand Império Auto Concept, no Porto.`
+      ? `${ficha}. Esta viatura já foi vendida — veja o stock disponível na Colibri Auto, em Perafita.`
       : `${ficha}, por ${formatarPreco(v.preco)}. Garantia de ${
           v.garantia
-        }. Stand Império Auto Concept, no Porto.`,
+        }. Colibri Auto, em Perafita, Matosinhos.`,
   );
 
   const caminho = urlViatura(v);
@@ -111,27 +111,27 @@ export default async function ViaturaPage({
 
       <div className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6">
         <nav aria-label="Percurso" className="mb-6 text-xs text-muted">
-          <Link href="/viaturas" className="transition-colors hover:text-gold-bright">
+          <Link href="/viaturas" className="transition-colors hover:text-laranja-bright">
             Viaturas
           </Link>
-          <span className="mx-2 text-gold-deep">/</span>
+          <span className="mx-2 text-laranja-deep">/</span>
           <Link
             href={`/viaturas?marca=${v.marcaSlug}`}
-            className="transition-colors hover:text-gold-bright"
+            className="transition-colors hover:text-laranja-bright"
           >
             {v.marca}
           </Link>
-          <span className="mx-2 text-gold-deep">/</span>
-          <span className="text-champagne">{v.modelo}</span>
+          <span className="mx-2 text-laranja-deep">/</span>
+          <span className="text-creme">{v.modelo}</span>
         </nav>
 
         <header className="mb-8">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">
+          <p className="text-xs uppercase tracking-[0.3em] text-laranja">
             {v.marca}
           </p>
           <h1 className="mt-2 font-display h-section text-ink">
             {v.modelo}{" "}
-            <span className="italic text-gold">{v.versao}</span>
+            <span className="font-extrabold text-laranja">{v.versao}</span>
           </h1>
         </header>
 

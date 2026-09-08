@@ -13,7 +13,7 @@ export function GrelhaMarcas({ viaturas }: { viaturas: Viatura[] }) {
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <Reveal>
           <h2 className="font-display h-section text-ink">
-            Escolha pela <span className="italic text-gold">marca</span>
+            Escolha pela <span className="font-extrabold text-laranja">marca</span>
           </h2>
         </Reveal>
 
@@ -25,7 +25,7 @@ export function GrelhaMarcas({ viaturas }: { viaturas: Viatura[] }) {
               <Reveal key={m.slug} delay={i * 0.08} className="h-full">
                 <Link
                   href={urlViaturasPorMarca(m.slug)}
-                  className="group flex h-full items-center justify-between gap-4 rounded-2xl border border-line/60 bg-background px-8 py-10 transition-colors duration-300 hover:border-gold/50"
+                  className="group flex h-full items-center justify-between gap-4 rounded-2xl border border-line/60 bg-background px-8 py-10 transition-colors duration-300 hover:border-laranja/50"
                 >
                   <div className="min-w-0">
                     {/*
@@ -49,7 +49,7 @@ export function GrelhaMarcas({ viaturas }: { viaturas: Viatura[] }) {
                           pelos logótipos ao lado, para se ler como uma marca
                           desenhada e não como um card por acabar.
                         */
-                        <span className="truncate font-display text-[2rem] leading-none text-ink/85 transition-colors duration-300 group-hover:text-gold-bright">
+                        <span className="truncate font-display text-[2rem] leading-none text-ink/85 transition-colors duration-300 group-hover:text-laranja-bright">
                           {m.nome}
                         </span>
                       )}
@@ -58,7 +58,7 @@ export function GrelhaMarcas({ viaturas }: { viaturas: Viatura[] }) {
                       {total} {total === 1 ? "viatura" : "viaturas"} em stock
                     </p>
                   </div>
-                  <span className="font-display text-3xl text-gold transition-transform duration-300 group-hover:translate-x-1.5">
+                  <span className="font-display text-3xl text-laranja transition-transform duration-300 group-hover:translate-x-1.5">
                     →
                   </span>
                 </Link>

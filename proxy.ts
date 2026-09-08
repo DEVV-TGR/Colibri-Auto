@@ -29,7 +29,7 @@ import { NextResponse, type NextRequest } from "next/server";
   variáveis nenhumas — que é exactamente o do CI.
 */
 
-const NOME_DO_COOKIE = "imperio_sessao";
+const NOME_DO_COOKIE = "colibri_sessao";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

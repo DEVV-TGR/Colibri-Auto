@@ -33,8 +33,8 @@ import type { ReactNode } from "react";
 export const inputBase =
   "w-full rounded-xl border bg-background px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-muted/60 disabled:opacity-60";
 
-const LINHA_CALMA = "border-line focus:border-gold";
-const LINHA_ERRADA = "border-red-deep focus:border-red";
+const LINHA_CALMA = "border-line focus:border-laranja";
+const LINHA_ERRADA = "border-erro-deep focus:border-erro";
 
 function moldura(erro?: string, extra = "") {
   return `${inputBase} ${erro ? LINHA_ERRADA : LINHA_CALMA} ${extra}`;
@@ -87,7 +87,7 @@ function Envolvente({
         interessa naquele momento é a que diz o que está mal.
       */}
       {erro ? (
-        <span className="mt-1.5 block text-xs leading-relaxed text-red-bright">{erro}</span>
+        <span className="mt-1.5 block text-xs leading-relaxed text-erro-bright">{erro}</span>
       ) : (
         nota && <span className="mt-1.5 block text-xs leading-relaxed text-muted">{nota}</span>
       )}
@@ -208,7 +208,7 @@ export function CampoSelecao({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gold"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja"
         >
           ▾
         </span>
@@ -279,11 +279,11 @@ export function CampoEscolha({
         {opcoes.map(([v, r]) => (
           <label
             key={v}
-            className={`press cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors has-[:checked]:border-gold has-[:checked]:text-gold-bright has-[:focus-visible]:border-gold ${
+            className={`press cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors has-[:checked]:border-laranja has-[:checked]:text-laranja-bright has-[:focus-visible]:border-laranja ${
               valor === v
-                ? "border-gold text-gold-bright"
+                ? "border-laranja text-laranja-bright"
                 : erro
-                  ? "border-red-deep text-muted"
+                  ? "border-erro-deep text-muted"
                   : "border-line text-muted"
             } ${desativado ? "opacity-60" : ""}`}
           >
@@ -303,7 +303,7 @@ export function CampoEscolha({
           </label>
         ))}
       </div>
-      {erro && <p className="mt-1.5 text-xs leading-relaxed text-red-bright">{erro}</p>}
+      {erro && <p className="mt-1.5 text-xs leading-relaxed text-erro-bright">{erro}</p>}
     </fieldset>
   );
 }
@@ -334,15 +334,15 @@ export function CampoConsentimento({
           disabled={desativado}
           aria-invalid={erro ? true : undefined}
           /*
-            `accent-color` pinta a caixa nativa de dourado sem a substituir por
+            `accent-color` pinta a caixa nativa de laranja sem a substituir por
             um desenho nosso — a caixa do sistema continua a ser a que o teclado
             e os leitores de ecrã conhecem.
           */
-          className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--gold)] disabled:opacity-60"
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--laranja)] disabled:opacity-60"
         />
         <span>{children}</span>
       </label>
-      {erro && <p className="mt-1.5 text-xs leading-relaxed text-red-bright">{erro}</p>}
+      {erro && <p className="mt-1.5 text-xs leading-relaxed text-erro-bright">{erro}</p>}
     </div>
   );
 }
@@ -353,7 +353,7 @@ export function Aviso({ children, ref }: { children: ReactNode; ref?: React.Ref<
       ref={ref}
       role="alert"
       tabIndex={-1}
-      className="rounded-xl border border-red-deep bg-red/10 p-4 text-sm leading-relaxed text-red-bright outline-none"
+      className="rounded-xl border border-erro-deep bg-erro/10 p-4 text-sm leading-relaxed text-erro-bright outline-none"
     >
       {children}
     </div>

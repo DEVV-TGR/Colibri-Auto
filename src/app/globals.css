@@ -1,38 +1,69 @@
 @import "tailwindcss";
 
 :root {
-  /* fundos (tema escuro sempre) */
+  /* fundos (tema escuro sempre).
+
+     Os dois mais escuros são neutros puros; o calor entra a partir do
+     `--raised`, e entra pelo hue do laranja da marca (50) e não pelo âmbar
+     que aqui estava (85) — a diferença vê-se nas bordas de todos os cards. */
   --background: oklch(0.13 0 0);
   --surface: oklch(0.18 0 0);
-  --raised: oklch(0.21 0.012 85);
-  --line: oklch(0.27 0.016 85);
+  --raised: oklch(0.21 0.014 50);
+  --line: oklch(0.27 0.018 50);
 
-  /* dourados — metálico quente (âmbar/bronze), não amarelo-limão.
-     hue baixado para ~76 (âmbar) e chroma reduzido: o amarelo-marcador
-     vem de chroma+claridade altos; um ouro real é mais quente e mais "sujo". */
-  --gold: oklch(0.70 0.093 76);
-  --gold-bright: oklch(0.83 0.086 82);
-  --gold-deep: oklch(0.5 0.082 66);
-  --champagne: oklch(0.88 0.036 84);
+  /* laranjas — a cor da marca, tirada do próprio logótipo.
 
-  /* estado "vendido" — vermelho metálico (stops deep/base/bright),
-     dessaturado para não gritar no tema escuro. */
-  --red: oklch(0.55 0.19 27);
-  --red-deep: oklch(0.42 0.16 27);
-  --red-bright: oklch(0.68 0.2 27);
+     O `--laranja` é o `#FB7803` do selo, convertido para OKLCH sem arredondar
+     para "mais bonito": é a cor que está pintada na lona à porta do stand, nas
+     fotografias todas do inventário, e o site tem de bater com ela.
 
-  /* estado "disponível" — o par semântico do vermelho, para o painel.
-     Dois stops e não três: o vermelho tem um `bright` porque alimenta o
-     gradiente do `.red-metal-fill`, e o painel não leva metálicos nenhuns
-     (docs/admin/05). Aqui só fazem falta o preenchimento e a borda.
+     Ao contrário do metálico de que este sistema veio, aqui não se procura
+     imitar matéria. Um laranja é tinta: os três tons são o mesmo laranja mais
+     claro e mais escuro, com o hue a rodar para o vermelho à medida que
+     escurece — que é como um pigmento quente se comporta — e não uma série de
+     reflexos. Subir a croma do `--laranja` põe-no fora do sRGB e o browser
+     corta-o à bruta; descê-la dá um tijolo. */
+  --laranja: oklch(0.71 0.187 50);
+  --laranja-bright: oklch(0.81 0.15 58);
+  --laranja-deep: oklch(0.52 0.155 42);
 
-     Mais claro e menos saturado que o vermelho de propósito. Disponível é o
-     estado normal de quase todas as viaturas — se gritasse tanto como o
-     vendido, a listagem ficava um semáforo e o que é excepção deixava de se
-     ver. Hue 152, o verde mais neutro; a 145 puxa a amarelo e choca com os
-     dourados. */
+  /* o neutro claro e quente que acompanha o laranja: texto de botão de
+     contorno e notas discretas. Croma baixa de propósito — a esta claridade,
+     qualquer coisa acima de ~0.05 lê-se como um segundo laranja e a paleta
+     passa a ter duas cores de marca. */
+  --creme: oklch(0.90 0.045 62);
+
+  /* estado "vendido".
+
+     No sistema de origem isto era um vermelho metálico. Com uma marca laranja
+     deixa de dar: o vermelho estava a hue 27 e o laranja está a 50, com a
+     mesma croma — a 20px de distância num card são a mesma mancha, e o badge
+     que devia dizer "este já não está à venda" lia-se como um selo da casa.
+
+     O vendido passa a grafite: fundo de superfície, borda de linha, texto
+     esbatido. Não desaparece — continua a haver `opacity-60 saturate-50` na
+     fotografia, que é o tratamento a sério. O que desaparece é a competição
+     com a cor da marca. */
+  --vendido: oklch(0.32 0.008 50);
+  --vendido-linha: oklch(0.44 0.012 50);
+
+  /* estado "disponível" — o par semântico do vendido, para o painel, onde uma
+     tabela densa precisa de distinguir três estados de relance.
+
+     Mais claro e menos saturado que o laranja de propósito. Disponível é o
+     estado de quase todas as viaturas — se gritasse tanto como a cor da
+     marca, a listagem virava um semáforo. Hue 152, o verde mais neutro; a 145
+     puxa a amarelo e choca com o laranja. */
   --sucesso: oklch(0.62 0.12 152);
   --sucesso-deep: oklch(0.48 0.1 152);
+
+  /* vermelho, agora só para erro — validação de formulário e falha do painel.
+     Empurrado para hue 22 para se afastar o mais possível do laranja da marca
+     sem virar magenta. Três tons porque a mensagem de erro precisa dos três de
+     uma vez: borda (`deep`), fundo a 10% (`erro`) e texto (`bright`). */
+  --erro: oklch(0.58 0.19 22);
+  --erro-deep: oklch(0.44 0.16 22);
+  --erro-bright: oklch(0.72 0.17 22);
 
   /* texto */
   --ink: oklch(0.96 0.012 95);
@@ -44,25 +75,27 @@
   --color-surface: var(--surface);
   --color-raised: var(--raised);
   --color-line: var(--line);
-  --color-gold: var(--gold);
-  --color-gold-bright: var(--gold-bright);
-  --color-gold-deep: var(--gold-deep);
-  --color-champagne: var(--champagne);
-  /* Os vermelhos existem em `:root` desde o PR #17 mas nunca foram expostos
-     aqui, e por isso `bg-red` e `text-red` não existiam como utilitários — o
-     vermelho só era alcançável pela classe `.red-metal-fill`. Foi o que levou
-     o painel do PR #12 a escrever `emerald-500` e `red-400`, cores do Tailwind
-     por omissão, fora do sistema. */
-  --color-red: var(--red);
-  --color-red-deep: var(--red-deep);
-  --color-red-bright: var(--red-bright);
+  --color-laranja: var(--laranja);
+  --color-laranja-bright: var(--laranja-bright);
+  --color-laranja-deep: var(--laranja-deep);
+  --color-creme: var(--creme);
+  /* Todas as cores de estado ficam expostas ao Tailwind, sem excepção. No
+     sistema de origem os vermelhos viviam em `:root` mas nunca chegaram aqui,
+     e `bg-red`/`text-red` simplesmente não existiam — foi essa lacuna que
+     levou o painel a escrever `emerald-500` e `red-400`, cores do Tailwind por
+     omissão, fora do sistema. Um token que não está aqui não existe. */
+  --color-vendido: var(--vendido);
+  --color-vendido-linha: var(--vendido-linha);
   --color-sucesso: var(--sucesso);
   --color-sucesso-deep: var(--sucesso-deep);
+  --color-erro: var(--erro);
+  --color-erro-deep: var(--erro-deep);
+  --color-erro-bright: var(--erro-bright);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-bodoni);
+  --font-display: var(--font-display);
 }
 
 html {
@@ -78,45 +111,78 @@ body {
 }
 
 ::selection {
-  background: var(--gold);
+  background: var(--laranja);
   color: var(--background);
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--laranja);
   outline-offset: 2px;
 }
 
-/* escala tipográfica fluida para títulos didone (Bodoni Moda) */
+/* escala tipográfica fluida para os títulos em Montserrat.
+
+   Herdada de um sistema com títulos em Bodoni Moda, e reafinada. Um Didone é
+   um desenho de contraste altíssimo: aguenta 6.5rem porque metade dos traços
+   são finos como um cabelo e o peso na página fica leve. O Montserrat a 700 é
+   uma mancha sólida — ao mesmo corpo esmagava a secção inteira.
+
+   Daí três correcções: o tecto do hero desce de 6.5rem para 5rem, o
+   `letter-spacing` aperta (num grotesco pesado o espaço entre letras cresce
+   opticamente com o corpo, e sem apertar o título parece desmontado), e as
+   entrelinhas ganham um cabelo, porque as maiúsculas do Montserrat são altas
+   e a 1.0 as linhas tocavam-se. */
 .h-hero {
-  font-size: clamp(3.25rem, 8.5vw, 6.5rem);
-  line-height: 1;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
 .h-section {
-  font-size: clamp(2.25rem, 4.8vw, 3.75rem);
-  line-height: 1.04;
-  letter-spacing: -0.012em;
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
 }
 .h-sub {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
-/* dourado metálico: reflexo champanhe→ouro→bronze no próprio texto.
-   dá sensação de folha de ouro em vez de tinta chapada; usar só em texto grande. */
-.text-gold-metal {
+/*
+  O peso por omissão de tudo o que usa a fonte de títulos.
+
+  Com o Bodoni não era preciso: um Didone a 400 já tinha presença. Um grotesco
+  a 400 é texto corrido em ponto grande, e sem isto os títulos todos do site
+  ficavam moles — mais: só se carregam os pesos 600 e 800, e a 400 o browser
+  ia buscar o mais próximo por sua conta, ficando à mercê de qual.
+
+  Vai em `@layer base` de propósito. As utilities do Tailwind vivem numa camada
+  acima, portanto `font-extrabold` na palavra destacada continua a ganhar a
+  isto — que é exactamente o que se quer. Fora de camada nenhuma, esta regra
+  ganhava a todas elas e o realce dos títulos desaparecia sem dar erro.
+*/
+@layer base {
+  .font-display {
+    font-weight: 600;
+  }
+}
+
+/* laranja em texto: o degradê curto que o logótipo tem no selo.
+
+   Herdeiro de um efeito de folha de ouro, e deliberadamente reduzido. O ouro
+   levava cinco paragens e passava pelo creme a meio, porque é assim que um
+   metal reflecte. O laranja não é metal — é tinta —, e cinco paragens numa
+   palavra faziam-na parecer um logótipo de anos 90. Ficam três: escuro em
+   baixo à esquerda, cheio no meio, claro em cima à direita. Só se lê como
+   volume, que é tudo o que se quer. */
+.text-laranja-metal {
   /*
     O gradiente é recortado pela forma das letras, mas pintado só dentro da
     caixa do elemento — o que sair da caixa fica transparente, ou seja,
-    invisível. E o Bodoni itálico sai da caixa por três lados: a inclinação
-    leva a tinta para lá da largura de avanço dos glifos das pontas, e com
-    `line-height: 1` os descendentes passam por baixo da linha.
-
-    Medido no hero ("procura?", em toda a escala fluida do `.h-hero`, com as
-    métricas de tinta do canvas): 0.111em abaixo, 0.095em à esquerda, 0.060em
-    à direita, e folga em cima. Os valores abaixo dão margem sobre isso.
+    invisível. Num grotesco pesado a tinta sai por menos lados do que saía no
+    Bodoni itálico (não há inclinação a empurrá-la para fora da largura de
+    avanço), mas continua a sair: com `line-height: 1.02` os descendentes do
+    `g` e do `p` passam por baixo da linha.
 
     O `padding` alarga a área pintada e a `margin` negativa devolve o espaço,
     para o texto ocupar exactamente o mesmo que ocupava e o alinhamento do
@@ -124,18 +190,15 @@ body {
     em `em`, para acompanhar a escala fluida sem depender da largura do ecrã.
   */
   display: inline-block;
-  padding-block: 0.18em;
-  margin-block: -0.18em;
-  padding-inline: 0.14em;
-  margin-inline: -0.14em;
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
   background-image: linear-gradient(
     100deg,
-    var(--gold-deep) 0%,
-    var(--gold) 26%,
-    var(--champagne) 44%,
-    var(--gold-bright) 52%,
-    var(--gold) 68%,
-    var(--gold-deep) 100%
+    var(--laranja-deep) 0%,
+    var(--laranja) 45%,
+    var(--laranja-bright) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -143,35 +206,32 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* preenchimento metálico para superfícies douradas grandes (CTAs).
-   reflexo diagonal bronze→ouro→champanhe→ouro→bronze = folha de ouro, não chapa. */
-.gold-metal-fill {
+/* preenchimento das superfícies laranja: todos os CTA primários.
+
+   O mesmo degradê de três paragens, na diagonal. Um botão laranja chapado a
+   `#FB7803` numa página escura fica com aspecto de rectângulo de aviso; o
+   degradê curto dá-lhe a mesma profundidade que o selo tem, sem o transformar
+   num efeito. */
+.laranja-fill {
   background-image: linear-gradient(
     140deg,
-    var(--gold-deep) 0%,
-    var(--gold) 28%,
-    var(--gold-bright) 50%,
-    var(--gold) 72%,
-    var(--gold-deep) 100%
+    var(--laranja-deep) 0%,
+    var(--laranja) 45%,
+    var(--laranja-bright) 100%
   );
 }
-.gold-metal-fill:hover {
+.laranja-fill:hover {
   filter: brightness(1.08);
 }
 
-/* badge "vendido" — vermelho metálico (mesmo reflexo diagonal do ouro) */
-.red-metal-fill {
-  background-image: linear-gradient(
-    140deg,
-    var(--red-deep) 0%,
-    var(--red) 28%,
-    var(--red-bright) 50%,
-    var(--red) 72%,
-    var(--red-deep) 100%
-  );
-}
-.red-metal-fill:hover {
-  filter: brightness(1.08);
+/* badge "vendido" — grafite chapado, sem degradê nenhum.
+
+   É o oposto do CTA de propósito: o laranja avança, isto recua. Ver o
+   raciocínio completo em `:root`, no token `--vendido`. */
+.vendido-fill {
+  background: var(--vendido);
+  border: 1px solid var(--vendido-linha);
+  color: var(--muted);
 }
 
 /* resposta ao premir — botões e controlos.
@@ -194,15 +254,15 @@ body {
   scale: 0.97;
 }
 
-/* linha fina dourada, assinatura visual do site */
+/* linha fina laranja, assinatura visual do site */
 .hairline {
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent,
-    var(--gold-deep) 20%,
-    var(--gold) 50%,
-    var(--gold-deep) 80%,
+    var(--laranja-deep) 20%,
+    var(--laranja) 50%,
+    var(--laranja-deep) 80%,
     transparent
   );
 }
@@ -243,9 +303,9 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 9999px;
-  background: var(--gold);
+  background: var(--laranja);
   border: 2px solid var(--background);
-  box-shadow: 0 0 0 1px var(--gold-deep);
+  box-shadow: 0 0 0 1px var(--laranja-deep);
   cursor: grab;
   transition: transform 0.15s ease;
 }
@@ -257,9 +317,9 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 9999px;
-  background: var(--gold);
+  background: var(--laranja);
   border: 2px solid var(--background);
-  box-shadow: 0 0 0 1px var(--gold-deep);
+  box-shadow: 0 0 0 1px var(--laranja-deep);
   cursor: grab;
 }
 .range-dual::-moz-range-track {

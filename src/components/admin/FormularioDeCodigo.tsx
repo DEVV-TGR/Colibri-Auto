@@ -57,17 +57,17 @@ export function FormularioDeCodigo({ paraOnde }: { paraOnde: string }) {
             autoFocus
             disabled={aConfirmar}
             placeholder="000 000"
-            className="w-full rounded-xl border border-line bg-background px-4 py-3 text-center font-mono text-2xl tracking-[0.3em] text-ink outline-none transition-colors focus:border-gold disabled:opacity-60"
+            className="w-full rounded-xl border border-line bg-background px-4 py-3 text-center font-mono text-2xl tracking-[0.3em] text-ink outline-none transition-colors focus:border-laranja disabled:opacity-60"
           />
         </label>
 
         {estado.erro && (
-          <p role="alert" className="text-sm leading-relaxed text-red-bright">
+          <p role="alert" className="text-sm leading-relaxed text-erro-bright">
             {estado.erro}
           </p>
         )}
         {reenvio.erro && (
-          <p role="alert" className="text-sm leading-relaxed text-red-bright">
+          <p role="alert" className="text-sm leading-relaxed text-erro-bright">
             {reenvio.erro}
           </p>
         )}
@@ -80,7 +80,7 @@ export function FormularioDeCodigo({ paraOnde }: { paraOnde: string }) {
         <button
           type="submit"
           disabled={aConfirmar}
-          className="gold-metal-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60"
+          className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60"
         >
           {aConfirmar ? "A confirmar…" : "Entrar"}
         </button>
@@ -92,7 +92,7 @@ export function FormularioDeCodigo({ paraOnde }: { paraOnde: string }) {
         onClick={() =>
           iniciarReenvio(async () => setReenvio(await reenviarCodigo()))
         }
-        className="w-full text-xs text-muted underline-offset-4 transition-colors hover:text-gold-bright hover:underline disabled:opacity-60"
+        className="w-full text-xs text-muted underline-offset-4 transition-colors hover:text-laranja-bright hover:underline disabled:opacity-60"
       >
         {aReenviar ? "A enviar…" : "Não recebi o código — enviar outro"}
       </button>

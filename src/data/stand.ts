@@ -1,28 +1,45 @@
 export const stand = {
-  nome: "Império Auto Concept",
-  slogan: "Viaturas premium, escolhidas a dedo.",
-  morada: "Rua do Freixo 1680",
-  codigoPostal: "4300-214",
-  localidade: "Porto",
+  nome: "Colibri Auto",
+  /**
+   * A linha do próprio letreiro à porta do stand. Não se inventou nada: está
+   * pintada na lona laranja que aparece no fundo de metade das fotografias do
+   * inventário, e é a promessa que eles já fazem a quem passa na Avenida.
+   */
+  slogan: "Compra · Venda · Retoma",
+  morada: "Avenida Mário Brito 3343",
+  codigoPostal: "4455-495",
+  localidade: "Perafita",
   distrito: "Porto",
   pais: "PT",
-  telefone: "936 498 610",
+  /** O número de secretária, o que está no letreiro em primeiro lugar. */
+  telefone: "912 458 400",
   telefoneNota: "Chamada para a rede móvel nacional",
-  telemovel: "933 927 443",
+  /** O número que atende WhatsApp — é por aqui que chega quase tudo. */
+  telemovel: "928 492 602",
   telemovelNota: "Chamada para a rede móvel nacional",
-  email: "imperioautoconcept@gmail.com",
-  instagram: "https://www.instagram.com/imperioautoconcept/",
+  email: "geral.colibrilda@gmail.com",
+  instagram: "https://www.instagram.com/colibriauto_stand/",
   /**
-   * ⚠️ Shortlink de partilha, não o URL canónico da página. Links /share/
-   * são instáveis e não servem como `sameAs` no JSON-LD, onde o Google os usa
-   * para ligar o site à entidade. Pedir ao cliente o endereço definitivo.
+   * ⚠️ Não lhes foi encontrada página de Facebook. Fica vazio de propósito, e
+   * não com um link inventado: o `facebook` entra no `sameAs` do JSON-LD, que
+   * é onde o Google liga o site à entidade, e um `sameAs` que dá 404 estraga
+   * exactamente aquilo que devia provar. O rodapé e o JSON-LD já sabem lidar
+   * com a string vazia. Pedir ao cliente, e preencher.
    */
-  facebook: "https://www.facebook.com/share/1HGa2Uc1eW/?mibextid=wwXIfr",
-  // WhatsApp: abre direto a conversa (+351 933 927 443)
-  whatsapp: "https://wa.me/351933927443",
-  mapsUrl: "https://maps.google.com/?q=Rua+do+Freixo+1680+Porto",
+  facebook: "",
+  // WhatsApp: abre direto a conversa (+351 928 492 602)
+  whatsapp: "https://wa.me/351928492602",
+  mapsUrl: "https://maps.google.com/?q=Avenida+Mário+Brito+3343+4455-495+Perafita",
   /**
-   * Horário em forma estruturada, com os dias em inglês que o schema.org
+   * ⚠️ **Horário por confirmar.** O perfil do Standvirtual tem os sete dias
+   * marcados como fechados (ou seja, nunca foi preenchido) e o Instagram não o
+   * diz em lado nenhum. O que está aqui é o horário típico de um stand da
+   * zona, e serve para o site não ter um buraco na apresentação — mas alimenta
+   * o `openingHours` do JSON-LD, que é o que o Google mostra na ficha do
+   * Maps. Ou seja: isto está a dizer ao Google horas que ninguém confirmou.
+   * Confirmar na reunião e corrigir antes de qualquer coisa ir para o ar.
+   *
+   * A forma estruturada tem os dias em inglês porque é o que o schema.org
    * exige. O texto visível é derivado daqui por `horasTexto()` — antes eram
    * duas listas e havia o risco de o site dizer uma coisa e o JSON-LD outra.
    */
@@ -31,20 +48,20 @@ export const stand = {
       dias: "Segunda a Sexta",
       diasSchema: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       periodos: [
-        ["09:30", "13:00"],
-        ["14:30", "19:00"],
+        ["09:00", "13:00"],
+        ["14:00", "19:00"],
       ],
     },
     {
       dias: "Sábado",
       diasSchema: ["Saturday"],
-      periodos: [["09:30", "13:00"]],
+      periodos: [["09:00", "13:00"]],
     },
     { dias: "Domingo", diasSchema: ["Sunday"], periodos: [] },
   ],
   sobre: [
-    "Na Império Auto Concept, cada viatura é selecionada a dedo. Trabalhamos apenas com automóveis premium, verificados ponto a ponto, com histórico documentado e garantia incluída.",
-    "A compra de um carro é uma decisão importante — por isso acompanhamos cada cliente do primeiro contacto à entrega, com transparência total e soluções de financiamento à medida.",
+    "A Colibri Auto é um stand de bairro, em Perafita, a dez minutos do Porto. Trabalhamos com viaturas usadas de utilização real — famílias, trabalho, quilómetros — escolhidas pelo estado em que estão e não pela etiqueta que têm. Todas saem daqui com garantia incluída no preço.",
+    "Compramos, vendemos e aceitamos retoma. Se já tem carro, avaliamo-lo e abatemos o valor no próximo; se precisar de financiamento, tratamos disso consigo. Sem letra pequena e sem pressa — o carro fica cá até ser o carro certo.",
   ],
 } as const;
 
@@ -65,7 +82,7 @@ export function telHref(numero: string): string {
   return `tel:${telE164(numero)}`;
 }
 
-/** Horário de um dia em texto: "09:30 – 13:00 · 14:30 – 19:00" ou "Encerrado". */
+/** Horário de um dia em texto: "09:00 – 13:00 · 14:00 – 19:00" ou "Encerrado". */
 export function horasTexto(dia: (typeof stand.horarios)[number]): string {
   if (dia.periodos.length === 0) return "Encerrado";
   return dia.periodos.map(([abre, fecha]) => `${abre} – ${fecha}`).join(" · ");

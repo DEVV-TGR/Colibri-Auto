@@ -31,16 +31,16 @@ export function StickyCard({ viatura }: { viatura: Viatura }) {
         {formatarRegisto(viatura.registoMes, viatura.registoAno)} ·{" "}
         {formatarKm(viatura.quilometros)}
       </p>
-      <p className="mt-3 font-display text-4xl text-gold">
+      <p className="mt-3 font-display text-4xl text-laranja">
         {vendido ? "Vendido" : formatarPreco(viatura.preco)}
       </p>
       {viatura.ivaDedutivel && !vendido && (
-        <p className="mt-1 text-xs uppercase tracking-[0.15em] text-champagne">
+        <p className="mt-1 text-xs uppercase tracking-[0.15em] text-creme">
           IVA dedutível
         </p>
       )}
       {viatura.estadoVenda === "reservado" && (
-        <p className="mt-2 inline-block rounded-full bg-gold px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-background">
+        <p className="mt-2 inline-block rounded-full bg-laranja px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-background">
           Reservado
         </p>
       )}
@@ -50,7 +50,7 @@ export function StickyCard({ viatura }: { viatura: Viatura }) {
       <div className="space-y-3">
         <a
           href={telHref(stand.telemovel)}
-          className="gold-metal-fill press block w-full rounded-full px-6 py-3.5 text-center text-sm font-medium tracking-wide text-background"
+          className="laranja-fill press block w-full rounded-full px-6 py-3.5 text-center text-sm font-medium tracking-wide text-background"
         >
           Ligar {stand.telemovel}
         </a>
@@ -60,7 +60,7 @@ export function StickyCard({ viatura }: { viatura: Viatura }) {
           )}`}
           target="_blank"
           rel="noreferrer"
-          className="press block w-full rounded-full border border-gold/40 px-6 py-3.5 text-center text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright"
+          className="press block w-full rounded-full border border-laranja/40 px-6 py-3.5 text-center text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
         >
           Falar no WhatsApp
         </a>
@@ -68,7 +68,7 @@ export function StickyCard({ viatura }: { viatura: Viatura }) {
           href={`mailto:${stand.email}?subject=${encodeURIComponent(
             `Interesse: ${viatura.marca} ${viatura.modelo} (${viatura.id})`,
           )}`}
-          className="press block w-full rounded-full border border-gold/40 px-6 py-3.5 text-center text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright"
+          className="press block w-full rounded-full border border-laranja/40 px-6 py-3.5 text-center text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
         >
           Pedir contacto
         </a>
@@ -78,14 +78,14 @@ export function StickyCard({ viatura }: { viatura: Viatura }) {
         <button
           type="button"
           onClick={partilhar}
-          className="press hover:text-gold-bright"
+          className="press hover:text-laranja-bright"
         >
           {copiado ? "Ligação copiada ✓" : "Partilhar"}
         </button>
         <button
           type="button"
           onClick={() => window.print()}
-          className="press hover:text-gold-bright"
+          className="press hover:text-laranja-bright"
         >
           Imprimir
         </button>

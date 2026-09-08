@@ -16,12 +16,12 @@ import { stand } from "@/data/stand";
 export default function Error({ reset }: { reset: () => void }) {
   return (
     <div className="mx-auto flex min-h-[70svh] max-w-2xl flex-col items-center justify-center px-4 text-center sm:px-6">
-      <p className="text-xs uppercase tracking-[0.3em] text-gold">
+      <p className="text-xs uppercase tracking-[0.3em] text-laranja">
         Algo correu mal
       </p>
       <h1 className="mt-4 font-display h-section text-ink">
         Não foi possível carregar esta{" "}
-        <span className="italic text-gold">página</span>
+        <span className="font-extrabold text-laranja">página</span>
       </h1>
       <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
         Foi uma falha momentânea, não um erro seu. Tente de novo — se
@@ -36,7 +36,7 @@ export default function Error({ reset }: { reset: () => void }) {
           href={stand.whatsapp}
           target="_blank"
           rel="noreferrer"
-          className="press inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm tracking-wide text-muted hover:text-gold-bright"
+          className="press inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm tracking-wide text-muted hover:text-laranja-bright"
         >
           WhatsApp ↗
         </a>

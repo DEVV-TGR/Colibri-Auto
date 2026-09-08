@@ -9,9 +9,9 @@ import { openGraphRota, seoDescricao } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 import { getViaturas } from "@/lib/viaturas";
 
-const TITULO = `${SITE_NAME} — Stand de carros usados no Porto`;
+const TITULO = `${SITE_NAME} — Stand de carros usados em Perafita, Matosinhos`;
 const DESCRICAO = seoDescricao(
-  "Stand de automóveis premium no Porto. Viaturas usadas e seminovas selecionadas a dedo, com garantia e histórico documentado. Rua do Freixo 1680.",
+  "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Mário Brito 3343, Matosinhos.",
 );
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Logotipo } from "@/components/ui/Logotipo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -101,14 +101,7 @@ export function Header() {
           onClick={aoClicar("/")}
           className="flex items-center"
         >
-          <Image
-            src="/logo/imperio-mark-sm.png"
-            alt={stand.nome}
-            width={440}
-            height={232}
-            priority
-            className="h-10 w-auto"
-          />
+          <Logotipo altura="h-10" prioridade />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Principal">
@@ -128,7 +121,7 @@ export function Header() {
                 href={l.href}
                 onClick={aoClicar(l.href)}
                 className={`text-sm tracking-wide transition-colors ${
-                  ativo ? "text-gold" : "text-muted hover:text-ink"
+                  ativo ? "text-laranja" : "text-muted hover:text-ink"
                 }`}
               >
                 {l.rotulo}
@@ -137,7 +130,7 @@ export function Header() {
           })}
           <a
             href={telHref(stand.telemovel)}
-            className="press rounded-full border border-gold/40 px-5 py-2 text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright"
+            className="press rounded-full border border-laranja/40 px-5 py-2 text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
           >
             Fale connosco
           </a>
@@ -197,7 +190,7 @@ export function Header() {
                 <Link
                   href={l.href}
                   onClick={aoClicarNoMenu(l.href)}
-                  className="press font-display text-3xl text-ink transition-colors hover:text-gold-bright"
+                  className="press font-display text-3xl text-ink transition-colors hover:text-laranja-bright"
                 >
                   {l.rotulo}
                 </Link>
@@ -210,10 +203,10 @@ export function Header() {
           <a
             href={telHref(stand.telemovel)}
             onClick={() => setAberto(false)}
-            className="press block text-center text-xs uppercase tracking-[0.2em] text-gold"
+            className="press block text-center text-xs uppercase tracking-[0.2em] text-laranja"
           >
             Fale connosco
-            <span className="mt-2 block text-lg normal-case tracking-normal text-champagne">
+            <span className="mt-2 block text-lg normal-case tracking-normal text-creme">
               {stand.telemovel}
             </span>
           </a>

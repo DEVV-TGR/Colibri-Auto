@@ -33,14 +33,14 @@ export function RangeSlider({
         <span className="block uppercase tracking-[0.2em] text-muted">
           {rotulo}
         </span>
-        <span className="mt-1 block text-champagne">
+        <span className="mt-1 block text-creme">
           {formatar(valorMin)} — {formatar(valorMax)}
         </span>
       </legend>
       <div className="relative h-8">
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-line" />
         <div
-          className="absolute top-1/2 h-px -translate-y-1/2 bg-gold"
+          className="absolute top-1/2 h-px -translate-y-1/2 bg-laranja"
           style={{ left: `${pctMin}%`, right: `${100 - pctMax}%` }}
         />
         <input

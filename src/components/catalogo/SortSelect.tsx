@@ -16,7 +16,7 @@ export function SortSelect({
       </span>
       <span className="relative">
         <select
-          className="appearance-none rounded-full border border-line bg-surface/80 py-2 pl-4 pr-8 text-sm text-ink outline-none transition-colors focus:border-gold [&>option]:bg-surface"
+          className="appearance-none rounded-full border border-line bg-surface/80 py-2 pl-4 pr-8 text-sm text-ink outline-none transition-colors focus:border-laranja [&>option]:bg-surface"
           value={valor}
           onChange={(e) => onChange(e.target.value as Ordenacao)}
         >
@@ -28,7 +28,7 @@ export function SortSelect({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gold"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-laranja"
         >
           ▾
         </span>

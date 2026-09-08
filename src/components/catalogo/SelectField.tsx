@@ -20,7 +20,7 @@ export function SelectField({
       </span>
       <span className="relative block">
         <select
-          className="w-full appearance-none rounded-xl border border-line bg-surface/80 px-4 py-3 pr-10 text-sm text-ink outline-none transition-colors focus:border-gold [&>option]:bg-surface"
+          className="w-full appearance-none rounded-xl border border-line bg-surface/80 px-4 py-3 pr-10 text-sm text-ink outline-none transition-colors focus:border-laranja [&>option]:bg-surface"
           value={valor}
           onChange={(e) => onChange(e.target.value)}
         >
@@ -33,7 +33,7 @@ export function SelectField({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gold"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja"
         >
           ▾
         </span>

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logotipo } from "@/components/ui/Logotipo";
 import Link from "next/link";
 import { agencia } from "@/data/agencia";
 import { enderecoLinha, stand, telHref } from "@/data/stand";
@@ -9,20 +9,14 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <Image
-              src="/logo/imperio-mark-sm.png"
-              alt={stand.nome}
-              width={440}
-              height={232}
-              className="h-14 w-auto"
-            />
+            <Logotipo altura="h-14" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
               {stand.slogan}
             </p>
           </div>
 
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-gold">
+            <p className="text-xs uppercase tracking-[0.2em] text-laranja">
               Navegação
             </p>
             <ul className="mt-4 space-y-2 text-sm">
@@ -84,7 +78,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-gold">
+            <p className="text-xs uppercase tracking-[0.2em] text-laranja">
               Contactos
             </p>
             <ul className="mt-4 space-y-2 text-sm text-muted">
@@ -123,7 +117,7 @@ export function Footer() {
                 >
                   WhatsApp ↗
                 </a>
-                <span className="text-gold-deep">·</span>
+                <span className="text-laranja-deep">·</span>
                 <a
                   href={stand.instagram}
                   target="_blank"
@@ -132,15 +126,25 @@ export function Footer() {
                 >
                   Instagram ↗
                 </a>
-                <span className="text-gold-deep">·</span>
-                <a
-                  href={stand.facebook}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-colors hover:text-ink"
-                >
-                  Facebook ↗
-                </a>
+                {/*
+                  O Facebook só aparece se existir. Não lhes foi encontrada
+                  página, e `stand.facebook` está vazio — sem esta guarda o
+                  `href=""` resolvia para a própria página e o rodapé oferecia
+                  um link para lado nenhum em todas as rotas do site.
+                */}
+                {stand.facebook && (
+                  <>
+                    <span className="text-laranja-deep">·</span>
+                    <a
+                      href={stand.facebook}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="transition-colors hover:text-ink"
+                    >
+                      Facebook ↗
+                    </a>
+                  </>
+                )}
               </li>
             </ul>
           </div>
@@ -150,16 +154,16 @@ export function Footer() {
         <div className="mt-6 flex flex-col items-center justify-center gap-1 text-xs text-muted sm:flex-row sm:gap-2.5">
           <Link
             href="/termos"
-            className="transition-colors hover:text-champagne"
+            className="transition-colors hover:text-creme"
           >
             Termos e Condições
           </Link>
-          <span aria-hidden className="hidden text-gold-deep sm:inline">
+          <span aria-hidden className="hidden text-laranja-deep sm:inline">
             ·
           </span>
           <Link
             href="/privacidade"
-            className="transition-colors hover:text-champagne"
+            className="transition-colors hover:text-creme"
           >
             Política de Privacidade
           </Link>
@@ -168,7 +172,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {stand.nome}
           </p>
-          <span aria-hidden className="hidden text-gold-deep sm:inline">
+          <span aria-hidden className="hidden text-laranja-deep sm:inline">
             ·
           </span>
           <p>
@@ -177,7 +181,7 @@ export function Footer() {
               href={agencia.url}
               target="_blank"
               rel="noreferrer"
-              className="text-champagne transition-colors hover:text-gold-bright"
+              className="text-creme transition-colors hover:text-laranja-bright"
             >
               {agencia.nome} ↗
             </a>

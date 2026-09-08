@@ -6,9 +6,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { stand } from "@/data/stand";
 import { openGraphRota, seoDescricao, seoTitulo } from "@/lib/seo";
 
-const TITULO = seoTitulo("Contactos e morada no Porto");
+const TITULO = seoTitulo("Contactos e morada em Perafita");
 const DESCRICAO = seoDescricao(
-  `Stand Império Auto Concept: ${stand.morada}, ${stand.localidade}. Telefone, WhatsApp, horário de abertura e mapa. Aberto de segunda a sábado.`,
+  `Stand Colibri Auto: ${stand.morada}, ${stand.localidade}. Telefone, WhatsApp, horário de abertura e mapa. Aberto de segunda a sábado.`,
 );
 
 export const metadata: Metadata = {
@@ -35,10 +35,10 @@ export default function ContactosPage() {
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
       <header className="mb-12 max-w-2xl">
         <h1 className="font-display h-section text-ink">
-          Venha <span className="italic text-gold">conhecer-nos</span>
+          Venha <span className="font-extrabold text-laranja">conhecer-nos</span>
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted">
-          Estamos no Porto, na {stand.morada}. Apareça sem marcação ou
+          Estamos em Perafita, na {stand.morada}. Apareça sem marcação ou
           ligue-nos antes — se quiser ver uma viatura em concreto, deixamo-la
           pronta para si.
         </p>

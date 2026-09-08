@@ -19,7 +19,7 @@ import { openGraphRota, seoDescricao, seoTitulo } from "@/lib/seo";
 
 const TITULO = seoTitulo("Importamos o seu carro por encomenda");
 const DESCRICAO = seoDescricao(
-  "Não encontrou a viatura no stock? Diga-nos marca, modelo, ano, quilómetros e orçamento e o Império Auto Concept procura-a por encomenda, sem compromisso.",
+  "Não encontrou a viatura no stock? Diga-nos marca, modelo, ano, quilómetros e orçamento e a Colibri Auto procura-a por encomenda, sem compromisso.",
 );
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default function Importamos() {
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
       <header className="mb-12 max-w-2xl">
         <h1 className="font-display h-section text-ink">
-          Importamos o seu <span className="italic text-gold">carro</span>
+          Importamos o seu <span className="font-extrabold text-laranja">carro</span>
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted">
           Não encontrou no stock a viatura que procurava? Descreva-a. Vamos ao

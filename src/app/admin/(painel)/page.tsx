@@ -44,11 +44,16 @@ const ESTADO: Record<EstadoVenda, { texto: string; classe: string }> = {
   },
   reservado: {
     texto: "Reservado",
-    classe: "border-gold-deep bg-gold/10 text-gold",
+    classe: "border-laranja-deep bg-laranja/10 text-laranja",
   },
+  /*
+    Grafite, e não vermelho. O vermelho ficou reservado a erro — uma viatura
+    vendida não é uma avaria, é o objectivo do negócio, e pintá-la da cor do
+    que corre mal fazia a listagem de um bom mês parecer um alarme.
+  */
   vendido: {
     texto: "Vendido",
-    classe: "border-red-deep bg-red/10 text-red-bright",
+    classe: "border-vendido-linha bg-vendido/40 text-muted",
   },
 };
 
@@ -73,7 +78,7 @@ function Estado({ estado }: { estado: EstadoVenda }) {
 }
 
 /*
-  A miniatura, com o ponto dourado de destaque no canto.
+  A miniatura, com o ponto laranja de destaque no canto.
 
   O ponto diz de relance quais as viaturas que aparecem na homepage — a
   informação que o cliente mais procura e que, sem isto, obrigava a abrir cada
@@ -94,7 +99,7 @@ function Miniatura({ v }: { v: Viatura }) {
       {v.destaque && (
         <span
           title="Em destaque na página inicial"
-          className="absolute left-1 top-1 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-background"
+          className="absolute left-1 top-1 h-2.5 w-2.5 rounded-full bg-laranja ring-2 ring-background"
         >
           <span className="sr-only">Em destaque</span>
         </span>
@@ -155,7 +160,7 @@ export default async function Painel() {
           </p>
           <Link
             href="/admin/viaturas/nova"
-            className="gold-metal-fill press mt-8 inline-block rounded-full px-6 py-3 text-sm font-medium text-background"
+            className="laranja-fill press mt-8 inline-block rounded-full px-6 py-3 text-sm font-medium text-background"
           >
             Adicionar viatura
           </Link>
@@ -268,14 +273,14 @@ function Moldura({
         </div>
         {/*
           Os dois na mesma linha e com a mesma altura. O primário leva o
-          dourado; o secundário, contorno — a hierarquia faz-se pelo
+          laranja; o secundário, contorno — a hierarquia faz-se pelo
           preenchimento, não pelo tamanho.
         */}
         <div className="flex shrink-0 items-center gap-2">
           {total !== undefined && (
             <Link
               href="/admin/viaturas/nova"
-              className="gold-metal-fill press inline-flex h-10 items-center justify-center rounded-full px-5 text-sm font-medium text-background"
+              className="laranja-fill press inline-flex h-10 items-center justify-center rounded-full px-5 text-sm font-medium text-background"
             >
               + Adicionar
             </Link>

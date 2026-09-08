@@ -35,7 +35,7 @@ import { enderecoLinha, stand } from "@/data/stand";
 export const metadata: Metadata = {
   title: "Política de Privacidade",
   description:
-    "Como o Império Auto Concept trata os dados pessoais de quem visita o site e entra em contacto.",
+    "Como a Colibri Auto trata os dados pessoais de quem visita o site e entra em contacto.",
   alternates: { canonical: "/privacidade" },
 };
 
@@ -61,7 +61,7 @@ export default function PrivacidadePage() {
     <div className="mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6">
       <header>
         <h1 className="font-display h-section text-ink">
-          Política de <span className="italic text-gold">Privacidade</span>
+          Política de <span className="font-extrabold text-laranja">Privacidade</span>
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-muted">
           Esta política explica que dados pessoais são tratados a partir deste

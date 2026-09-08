@@ -7,7 +7,7 @@ import type { Viatura } from "@/lib/types";
  * Dados estruturados do site. Nota de expectativa: o rich result dedicado a
  * listagens de veículos foi descontinuado pelo Google em 2025 — isto não põe
  * cartões de viatura na SERP. Vale por outra razão: é como o Google liga o
- * site à entidade "Império Auto Concept" (útil para o painel de conhecimento
+ * site à entidade "Colibri Auto" (útil para o painel de conhecimento
  * e para a associação ao Perfil de Empresa), e é o que motores de resposta e
  * assistentes leem.
  *
@@ -29,10 +29,10 @@ export function dadosStand(lista: Viatura[]) {
     "@id": ID_ORGANIZACAO,
     name: SITE_NAME,
     url: SITE_URL,
-    logo: urlAbsoluto("/logo/imperio-mark-md.png"),
+    logo: urlAbsoluto("/logo/colibri-mark-md.png"),
     image: urlAbsoluto("/opengraph-image"),
     description:
-      "Stand de automóveis premium no Porto. Viaturas usadas e seminovas com garantia e histórico documentado.",
+      "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Mário Brito 3343, Matosinhos.",
     telephone: [stand.telemovel, stand.telefone].map(
       (n) => `+351${n.replaceAll(" ", "")}`,
     ),
@@ -72,9 +72,11 @@ export function dadosStand(lista: Viatura[]) {
       })),
     ),
     areaServed: { "@type": "AdministrativeArea", name: stand.distrito },
-    // O Facebook fica de fora enquanto for um shortlink /share/ — o `sameAs`
-    // é o que liga o site às redes, e um link instável não serve.
-    sameAs: [stand.instagram],
+    // O `sameAs` é o que liga o site às redes aos olhos do Google, e por isso
+    // só leva perfis confirmados. Hoje é só o Instagram: não lhes foi
+    // encontrada página de Facebook, e o `filter` está aqui para o dia em que
+    // houver — basta preencher `stand.facebook`.
+    sameAs: [stand.instagram, stand.facebook].filter(Boolean),
   };
 }
 

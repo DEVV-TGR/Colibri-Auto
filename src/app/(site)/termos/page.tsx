@@ -39,7 +39,7 @@ import { enderecoLinha, stand } from "@/data/stand";
 export const metadata: Metadata = {
   title: "Termos e Condições",
   description:
-    "Condições de utilização do site do Império Auto Concept e informação sobre preços, reservas, garantia e entrega das viaturas.",
+    "Condições de utilização do site do Colibri Auto e informação sobre preços, reservas, garantia e entrega das viaturas.",
   alternates: { canonical: "/termos" },
 };
 
@@ -65,7 +65,7 @@ export default function TermosPage() {
     <div className="mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6">
       <header>
         <h1 className="font-display h-section text-ink">
-          Termos e <span className="italic text-gold">Condições</span>
+          Termos e <span className="font-extrabold text-laranja">Condições</span>
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-muted">
           Estas condições aplicam-se à utilização deste site e à informação
@@ -172,9 +172,9 @@ export default function TermosPage() {
 
       <Seccao titulo="Entrega">
         <p>
-          A entrega no Porto não tem custo. Fora do Porto, o transporte é
-          assegurado mediante pagamento do respetivo custo, comunicado antes da
-          entrega.
+          A entrega no concelho de Matosinhos e no Porto não tem custo. Fora
+          desta área, o transporte é assegurado mediante pagamento do respetivo
+          custo, comunicado antes da entrega.
         </p>
       </Seccao>
 
@@ -230,7 +230,7 @@ export default function TermosPage() {
             href="https://www.livroreclamacoes.pt/inicio"
             target="_blank"
             rel="noreferrer"
-            className="text-champagne underline-offset-4 hover:text-gold-bright hover:underline"
+            className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline"
           >
             Livro de Reclamações eletrónico
           </a>
@@ -243,7 +243,7 @@ export default function TermosPage() {
             href="https://www.cicap.pt"
             target="_blank"
             rel="noreferrer"
-            className="text-champagne underline-offset-4 hover:text-gold-bright hover:underline"
+            className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline"
           >
             cicap.pt
           </a>
@@ -257,7 +257,7 @@ export default function TermosPage() {
           O tratamento de dados pessoais está descrito na{" "}
           <Link
             href="/privacidade"
-            className="text-champagne underline-offset-4 hover:text-gold-bright hover:underline"
+            className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline"
           >
             Política de Privacidade
           </Link>

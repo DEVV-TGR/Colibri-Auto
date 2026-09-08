@@ -26,9 +26,9 @@ export default async function NotFound() {
     <ChromeSite>
       <div className="mx-auto max-w-6xl px-4 pb-24 pt-32 sm:px-6">
         <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">Erro 404</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-laranja">Erro 404</p>
           <h1 className="mt-4 font-display h-section text-ink">
-            Esta página já não <span className="italic text-gold">existe</span>
+            Esta página já não <span className="font-extrabold text-laranja">existe</span>
           </h1>
           <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
             O mais provável é a viatura já ter sido vendida. Estas estão
@@ -40,7 +40,7 @@ export default async function NotFound() {
               href={stand.whatsapp}
               target="_blank"
               rel="noreferrer"
-              className="press inline-flex items-center justify-center gap-2 rounded-full border border-gold/40 px-6 py-3 text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright"
+              className="press inline-flex items-center justify-center gap-2 rounded-full border border-laranja/40 px-6 py-3 text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
             >
               Falar no WhatsApp ↗
             </a>
@@ -51,7 +51,7 @@ export default async function NotFound() {
           <>
             <div className="hairline mt-16" />
             <h2 className="mt-12 text-center font-display h-sub text-ink">
-              Disponíveis <span className="italic text-gold">agora</span>
+              Disponíveis <span className="font-extrabold text-laranja">agora</span>
             </h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {sugestoes.map((v) => (

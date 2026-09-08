@@ -67,10 +67,10 @@ export function Preloader() {
         transition={{ duration: 2, ease: "easeOut" }}
       >
         <Image
-          src="/logo/imperio-mark-md.png"
+          src="/logo/colibri-mark-md.png"
           alt=""
-          width={1000}
-          height={527}
+          width={420}
+          height={420}
           priority
           className="h-auto w-full"
         />

@@ -21,14 +21,14 @@ export function ComoFunciona({
 }) {
   return (
     <aside className="rounded-2xl border border-line/60 bg-surface/60 p-8">
-      <p className="text-xs uppercase tracking-[0.2em] text-gold">{titulo}</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-laranja">{titulo}</p>
 
       <ol className="mt-6 space-y-6">
         {passos.map((p, i) => (
           <li key={p.titulo} className="flex gap-4">
             <span
               aria-hidden
-              className="font-display shrink-0 text-lg leading-none text-gold/60"
+              className="font-display shrink-0 text-lg leading-none text-laranja/60"
             >
               {i + 1}
             </span>
@@ -48,7 +48,7 @@ export function ComoFunciona({
       <div className="mt-4 space-y-2 text-sm">
         <a
           href={telHref(stand.telemovel)}
-          className="block text-champagne transition-colors hover:text-gold-bright"
+          className="block text-creme transition-colors hover:text-laranja-bright"
         >
           {stand.telemovel}
         </a>
@@ -56,7 +56,7 @@ export function ComoFunciona({
           href={stand.whatsapp}
           target="_blank"
           rel="noreferrer"
-          className="block text-champagne transition-colors hover:text-gold-bright"
+          className="block text-creme transition-colors hover:text-laranja-bright"
         >
           WhatsApp ↗
         </a>

@@ -55,22 +55,22 @@ import { SCHEMAS, type TipoDePedido } from "@/lib/pedidos/schema";
 
 /*
   Um bloco de campos, com o título na assinatura da casa: última palavra em
-  itálico dourado. `<fieldset>`/`<legend>` a sério — é o que diz a um leitor
+  itálico laranja. `<fieldset>`/`<legend>` a sério — é o que diz a um leitor
   de ecrã que estes seis campos são o mesmo assunto.
 */
 export function Bloco({
   titulo,
-  gold,
+  laranja,
   children,
 }: {
   titulo: string;
-  gold: string;
+  laranja: string;
   children: ReactNode;
 }) {
   return (
     <fieldset>
       <legend className="font-display h-sub text-ink">
-        {titulo} <span className="italic text-gold">{gold}</span>
+        {titulo} <span className="font-extrabold text-laranja">{laranja}</span>
       </legend>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">{children}</div>
     </fieldset>
@@ -233,7 +233,7 @@ export function FormularioPedido({
       href={paraOWhatsApp}
       target="_blank"
       rel="noreferrer"
-      className="press inline-flex items-center justify-center rounded-full border border-gold/40 px-6 py-3 text-center text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright"
+      className="press inline-flex items-center justify-center rounded-full border border-laranja/40 px-6 py-3 text-center text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
     >
       Falar no WhatsApp
     </a>
@@ -259,7 +259,7 @@ export function FormularioPedido({
               */
               window.location.reload();
             }}
-            className="press inline-flex items-center justify-center rounded-full px-6 py-3 text-sm tracking-wide text-muted hover:text-gold-bright"
+            className="press inline-flex items-center justify-center rounded-full px-6 py-3 text-sm tracking-wide text-muted hover:text-laranja-bright"
           >
             Enviar outro pedido
           </button>
@@ -290,7 +290,7 @@ export function FormularioPedido({
         >
           Autorizo o {stand.nome} a usar estes dados para responder ao meu pedido,
           nos termos da{" "}
-          <Link href="/privacidade" className="text-champagne underline-offset-4 hover:text-gold-bright hover:underline">
+          <Link href="/privacidade" className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline">
             Política de Privacidade
           </Link>
           .
@@ -302,7 +302,7 @@ export function FormularioPedido({
           <button
             type="submit"
             disabled={aEnviar}
-            className="gold-metal-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60 sm:w-auto sm:px-8"
+            className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60 sm:w-auto sm:px-8"
           >
             {aEnviar ? "A enviar…" : "Enviar pedido"}
           </button>

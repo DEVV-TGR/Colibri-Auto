@@ -63,7 +63,7 @@ export function AcoesViatura({ id, nome }: { id: string; nome: string }) {
           href={`/admin/viaturas/${id}`}
           aria-label={`Editar ${nome}`}
           title="Editar"
-          className="press flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-gold"
+          className="press flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-laranja"
         >
           <IconeLapis />
         </Link>
@@ -73,14 +73,14 @@ export function AcoesViatura({ id, nome }: { id: string; nome: string }) {
           disabled={pendente}
           aria-label={`Apagar ${nome}`}
           title="Apagar"
-          className="press flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-red-bright disabled:opacity-50"
+          className="press flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-erro-bright disabled:opacity-50"
         >
           <IconeCaixote />
         </button>
       </div>
 
       {erro && (
-        <p role="alert" className="mt-1 text-right text-xs text-red-bright">
+        <p role="alert" className="mt-1 text-right text-xs text-erro-bright">
           {erro}
         </p>
       )}
@@ -114,7 +114,7 @@ export function AcoesViatura({ id, nome }: { id: string; nome: string }) {
                 type="button"
                 onClick={() => setAConfirmar(false)}
                 disabled={pendente}
-                className="press flex-1 rounded-full border border-line px-4 py-2.5 text-sm text-muted transition-colors hover:border-gold hover:text-ink disabled:opacity-60"
+                className="press flex-1 rounded-full border border-line px-4 py-2.5 text-sm text-muted transition-colors hover:border-laranja hover:text-ink disabled:opacity-60"
               >
                 Cancelar
               </button>
@@ -122,7 +122,7 @@ export function AcoesViatura({ id, nome }: { id: string; nome: string }) {
                 type="button"
                 onClick={apagar}
                 disabled={pendente}
-                className="press flex-1 rounded-full bg-red px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-red-bright disabled:opacity-60"
+                className="press flex-1 rounded-full bg-erro px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-erro-bright disabled:opacity-60"
               >
                 {pendente ? "A apagar…" : "Apagar"}
               </button>

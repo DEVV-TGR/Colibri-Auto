@@ -24,7 +24,7 @@ export default function ErroDoPainel({
 }) {
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6 py-16">
-      <p className="text-xs uppercase tracking-[0.3em] text-gold">Gestão</p>
+      <p className="text-xs uppercase tracking-[0.3em] text-laranja">Gestão</p>
       <h1 className="mt-3 font-display text-3xl text-ink">
         Não foi possível carregar as viaturas
       </h1>
@@ -37,13 +37,13 @@ export default function ErroDoPainel({
         <button
           type="button"
           onClick={reset}
-          className="gold-metal-fill press rounded-full px-5 py-2.5 text-sm font-medium text-background"
+          className="laranja-fill press rounded-full px-5 py-2.5 text-sm font-medium text-background"
         >
           Tentar de novo
         </button>
         <Link
           href="/"
-          className="press rounded-full border border-line px-5 py-2.5 text-sm text-muted transition-colors hover:border-gold hover:text-ink"
+          className="press rounded-full border border-line px-5 py-2.5 text-sm text-muted transition-colors hover:border-laranja hover:text-ink"
         >
           Ver site
         </Link>

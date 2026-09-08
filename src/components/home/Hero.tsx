@@ -37,24 +37,24 @@ export function Hero({ viaturas }: { viaturas: Viatura[] }) {
               acessível a leitores de ecrã e ao Google; a pergunta desce a <p>
               sem perder um grama de peso visual. */}
           <h1 className="sr-only">
-            {SITE_NAME} — stand de carros usados e seminovos premium no Porto
+            {SITE_NAME} — stand de carros usados em Perafita, Matosinhos
           </h1>
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-gold">
-              Stand de automóveis premium
+            <p className="text-xs uppercase tracking-[0.3em] text-laranja">
+              Compra · Venda · Retoma
             </p>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-4 font-display h-hero text-ink">
               Que viatura
               <br />
-              <span className="italic text-gold-metal">procura?</span>
+              <span className="font-extrabold text-laranja-metal">procura?</span>
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-5 max-w-md text-base leading-relaxed text-muted">
-              Viaturas usadas e seminovas selecionadas a dedo, com histórico
-              documentado e garantia incluída.
+              Carros usados escolhidos pelo estado em que estão, em Perafita.
+              Garantia incluída no preço, financiamento e retoma.
             </p>
           </Reveal>
           <Reveal delay={0.3} className="mt-9">

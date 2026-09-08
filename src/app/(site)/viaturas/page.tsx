@@ -24,9 +24,9 @@ async function textos() {
   const total = (await getViaturas()).length;
   const plural = total === 1 ? "viatura" : "viaturas";
   return {
-    titulo: seoTitulo(`${total} ${plural} usadas no Porto`),
+    titulo: seoTitulo(`${total} ${plural} usadas em Perafita`),
     descricao: seoDescricao(
-      `Stock completo do stand Império Auto Concept, no Porto: ${total} ${plural} usadas e seminovas com garantia. Pesquise por marca, modelo, preço, ano e quilómetros.`,
+      `Stock completo da Colibri Auto, em Perafita: ${total} ${plural} usadas com garantia incluída. Pesquise por marca, modelo, preço, ano e quilómetros.`,
     ),
   };
 }
@@ -53,7 +53,7 @@ export default async function ViaturasPage() {
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
       <header className="mb-10">
         <h1 className="font-display h-section text-ink">
-          Todas as <span className="italic text-gold">viaturas</span>
+          Todas as <span className="font-extrabold text-laranja">viaturas</span>
         </h1>
       </header>
       <CatalogoClient viaturas={viaturas} />

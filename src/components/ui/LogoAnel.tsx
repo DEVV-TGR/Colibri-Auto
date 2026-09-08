@@ -8,7 +8,7 @@ const TAMANHOS = {
   pequeno: { caixa: 132, logo: 92 },
 } as const;
 
-/** Logótipo com anel dourado a girar — base visual dos ecrãs de carregamento. */
+/** Logótipo com anel laranja a girar — base visual dos ecrãs de carregamento. */
 export function LogoAnel({
   tamanho = "grande",
   prioridade = false,
@@ -39,13 +39,13 @@ export function LogoAnel({
           stroke="var(--line)"
           strokeWidth="1.25"
         />
-        {/* arco dourado — ~25% da circunferência (2πr ≈ 289) */}
+        {/* arco laranja — ~25% da circunferência (2πr ≈ 289) */}
         <circle
           cx="50"
           cy="50"
           r="46"
           fill="none"
-          stroke="var(--gold)"
+          stroke="var(--laranja)"
           strokeWidth="1.25"
           strokeLinecap="round"
           strokeDasharray="72 217"
@@ -57,10 +57,10 @@ export function LogoAnel({
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       >
         <Image
-          src="/logo/imperio-mark-sm.png"
+          src="/logo/colibri-mark-sm.png"
           alt=""
-          width={440}
-          height={232}
+          width={220}
+          height={220}
           priority={prioridade}
           style={{ width: logo }}
           className="h-auto"

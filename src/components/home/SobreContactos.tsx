@@ -14,7 +14,7 @@ export function SobreContactos() {
         <Reveal>
           <div>
             <h2 className="font-display h-section text-ink">
-              Qualidade e <span className="italic text-gold">confiança</span>
+              Qualidade e <span className="font-extrabold text-laranja">confiança</span>
             </h2>
             {stand.sobre.map((paragrafo) => (
               <p

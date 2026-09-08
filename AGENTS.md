@@ -8,9 +8,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# StandDemo
+# Colibri Auto
 
-Site de um **stand de automóveis**, o Império Auto Concept. Qualidade visual de nível profissional, âmbito pequeno e vigiado. Conteúdo em **PT-PT**.
+Site de um **stand de automóveis**, a Colibri Auto, em Perafita (Matosinhos). Qualidade visual de nível profissional, âmbito pequeno e vigiado. Conteúdo em **PT-PT**.
+
+Fork do `DEVV-TGR/StandDemo` (o site do Império Auto Concept). O primeiro commit é a base intacta — a arquitectura, as rotas e os componentes vêm de lá e não se tocaram. O que mudou foi identidade, dados e conteúdo.
+
+**A demo ainda não foi apresentada ao cliente.** O que ficou assumido por falta de dados está em [`docs/por-confirmar.md`](docs/por-confirmar.md) — ler antes de mexer em `src/data/` ou em metadata.
 
 O site público responde **sem variáveis de ambiente** — sem base de dados serve o inventário estático de `src/data/viaturas.ts`, e sem chave do Resend os formulários de `/compramos` e `/importamos` imprimem o email no terminal (em desenvolvimento) ou encaminham para o WhatsApp (em produção). O CI compila e arranca sem nenhuma variável definida, e é essa a regra que mantém a montra de pé quando o painel avaria.
 

@@ -27,7 +27,7 @@ export function BotaoSair() {
       type="button"
       disabled={aSair}
       onClick={() => iniciar(() => void sair())}
-      className={`${ALTURA} press border border-line text-muted transition-colors hover:border-gold hover:text-gold-bright disabled:opacity-60`}
+      className={`${ALTURA} press border border-line text-muted transition-colors hover:border-laranja hover:text-laranja-bright disabled:opacity-60`}
     >
       {aSair ? "A sair…" : "Sair"}
     </button>
@@ -43,7 +43,7 @@ export function EsquecerAparelho() {
         type="button"
         disabled={aEsquecer}
         onClick={() => iniciar(() => void esquecerEsteAparelho())}
-        className="text-xs text-muted underline-offset-4 transition-colors hover:text-red-bright hover:underline disabled:opacity-60"
+        className="text-xs text-muted underline-offset-4 transition-colors hover:text-erro-bright hover:underline disabled:opacity-60"
       >
         {aEsquecer ? "A esquecer…" : "Esquecer este aparelho"}
       </button>

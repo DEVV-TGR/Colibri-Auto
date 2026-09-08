@@ -15,9 +15,9 @@ import { openGraphRota, seoDescricao, seoTitulo } from "@/lib/seo";
   é lá que se lê que um pedido enviado pelo site não vincula ninguém.
 */
 
-const TITULO = seoTitulo("Compramos o seu carro no Porto");
+const TITULO = seoTitulo("Compramos o seu carro em Matosinhos");
 const DESCRICAO = seoDescricao(
-  "Quer vender o seu carro ou dá-lo de retoma? Descreva a viatura e o Império Auto Concept, no Porto, contacta-o com uma avaliação. Por formulário ou WhatsApp.",
+  "Quer vender o seu carro ou dá-lo de retoma? Descreva a viatura e a Colibri Auto, em Perafita, contacta-o com uma avaliação. Por formulário ou WhatsApp.",
 );
 
 export const metadata: Metadata = {
@@ -54,7 +54,7 @@ export default function Compramos() {
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
       <header className="mb-12 max-w-2xl">
         <h1 className="font-display h-section text-ink">
-          Compramos o seu <span className="italic text-gold">carro</span>
+          Compramos o seu <span className="font-extrabold text-laranja">carro</span>
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted">
           Venda directa ou retoma na compra de outra viatura. Diga-nos o que

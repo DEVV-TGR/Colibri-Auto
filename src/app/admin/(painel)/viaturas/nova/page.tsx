@@ -14,7 +14,7 @@ export default async function NovaViatura() {
       <header className="mb-8">
         <Link
           href="/admin"
-          className="text-sm text-muted underline-offset-4 transition-colors hover:text-gold-bright hover:underline"
+          className="text-sm text-muted underline-offset-4 transition-colors hover:text-laranja-bright hover:underline"
         >
           ← Viaturas
         </Link>

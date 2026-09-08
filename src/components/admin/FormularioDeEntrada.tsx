@@ -23,14 +23,14 @@ export function FormularioDeEntrada() {
           autoFocus
           disabled={aPedir}
           placeholder="o.seu@email.pt"
-          className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-gold disabled:opacity-60"
+          className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-laranja disabled:opacity-60"
         />
       </label>
 
       {estado.erro && (
         <div
           role="alert"
-          className="rounded-xl border border-red-deep bg-red/10 p-4 text-sm leading-relaxed text-red-bright"
+          className="rounded-xl border border-erro-deep bg-erro/10 p-4 text-sm leading-relaxed text-erro-bright"
         >
           <p>{estado.erro}</p>
           {estado.esperar !== undefined && (
@@ -64,7 +64,7 @@ export function FormularioDeEntrada() {
       <button
         type="submit"
         disabled={aPedir}
-        className="gold-metal-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60"
+        className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60"
       >
         {aPedir ? "A enviar…" : "Receber código"}
       </button>

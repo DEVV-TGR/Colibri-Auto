@@ -54,13 +54,13 @@ function IconeKm() {
 function Badge({ viatura }: { viatura: Viatura }) {
   const t =
     viatura.estadoVenda === "vendido"
-      ? { txt: "Vendido", cls: "red-metal-fill text-ink" }
+      ? { txt: "Vendido", cls: "vendido-fill" }
       : viatura.estadoVenda === "reservado"
-        ? { txt: "Reservado", cls: "gold-metal-fill text-background" }
+        ? { txt: "Reservado", cls: "laranja-fill text-background" }
         : viatura.ivaDedutivel
           ? {
               txt: "IVA Dedutível",
-              cls: "border border-gold/60 bg-background/70 text-champagne",
+              cls: "border border-laranja/60 bg-background/70 text-creme",
             }
           : null;
   if (!t) return null;
@@ -180,7 +180,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
           type="button"
           aria-label="Anterior"
           onClick={() => setActivo((a) => a - 1)}
-          className="press absolute left-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-gold-bright sm:left-4"
+          className="press absolute left-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-laranja-bright sm:left-4"
         >
           ‹
         </button>
@@ -188,7 +188,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
           type="button"
           aria-label="Seguinte"
           onClick={() => setActivo((a) => a + 1)}
-          className="press absolute right-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-gold-bright sm:right-4"
+          className="press absolute right-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-laranja-bright sm:right-4"
         >
           ›
         </button>
@@ -282,23 +282,23 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                         }`}
                       />
                       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/90 to-transparent" />
-                      <div className="pointer-events-none absolute inset-x-0 bottom-3 flex items-center justify-center gap-4 text-[13px] font-medium text-champagne">
+                      <div className="pointer-events-none absolute inset-x-0 bottom-3 flex items-center justify-center gap-4 text-[13px] font-medium text-creme">
                         <span className="flex items-center gap-1.5">
-                          <span className="text-gold">
+                          <span className="text-laranja">
                             <IconeCalendario />
                           </span>
                           {formatarRegisto(v.registoMes, v.registoAno)}
                         </span>
                         <span className="h-4 w-px bg-line" />
                         <span className="flex items-center gap-1.5">
-                          <span className="text-gold">
+                          <span className="text-laranja">
                             <IconeCombustivel />
                           </span>
                           {v.combustivel}
                         </span>
                         <span className="h-4 w-px bg-line" />
                         <span className="flex items-center gap-1.5">
-                          <span className="text-gold">
+                          <span className="text-laranja">
                             <IconeKm />
                           </span>
                           {vendido ? "—" : formatarNumero(v.quilometros)}
@@ -308,7 +308,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
 
                     {/* painel */}
                     <div className="relative px-6 pb-6 pt-6">
-                      <h3 className="font-display text-2xl leading-tight text-ink transition-colors group-hover:text-gold-bright">
+                      <h3 className="font-display text-2xl leading-tight text-ink transition-colors group-hover:text-laranja-bright">
                         {v.marca}
                       </h3>
                       <p className="mt-1 line-clamp-1 text-base text-muted">
@@ -317,7 +317,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                       <p className="mt-5 text-[11px] uppercase tracking-[0.14em] text-muted">
                         Preço
                       </p>
-                      <p className="mt-0.5 font-display text-2xl text-gold">
+                      <p className="mt-0.5 font-display text-2xl text-laranja">
                         {vendido ? "Vendido" : formatarPreco(v.preco)}
                       </p>
                     </div>
@@ -339,7 +339,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
             aria-current={i === dotAtivo}
             onClick={() => setActivo((a) => Math.floor(a / n) * n + i)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              i === dotAtivo ? "w-6 bg-gold" : "w-2 bg-line hover:bg-muted"
+              i === dotAtivo ? "w-6 bg-laranja" : "w-2 bg-line hover:bg-muted"
             }`}
           />
         ))}

@@ -22,7 +22,7 @@ export default async function Entrar() {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-sm flex-col justify-center px-6 py-16">
       <header className="mb-8 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-gold">Gestão</p>
+        <p className="text-xs uppercase tracking-[0.3em] text-laranja">Gestão</p>
         <h1 className="mt-3 font-display text-3xl text-ink">Entrar no painel</h1>
         <p className="mt-3 text-sm leading-relaxed text-muted">
           Escreva o seu email e receberá um código.

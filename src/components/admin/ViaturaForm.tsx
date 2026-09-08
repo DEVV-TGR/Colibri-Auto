@@ -94,7 +94,7 @@ function estadoInicial(v?: Viatura): FormState {
 }
 
 const inputBase =
-  "w-full border border-line bg-background px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold";
+  "w-full border border-line bg-background px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-laranja";
 const labelBase = "mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted";
 
 export function ViaturaForm({
@@ -371,7 +371,7 @@ export function ViaturaForm({
             rotulo="Marca *"
             valor={f.marca}
             onChange={(v) => set("marca", v)}
-            placeholder="Ex.: BMW"
+            placeholder="Ex.: Renault"
             sugestoes={marcas}
           />
           <Texto
@@ -563,7 +563,7 @@ export function ViaturaForm({
                 <button
                   type="button"
                   onClick={() => removerCategoria(ci)}
-                  className="shrink-0 px-2 py-2 text-xs text-muted transition-colors hover:text-red-bright"
+                  className="shrink-0 px-2 py-2 text-xs text-muted transition-colors hover:text-erro-bright"
                 >
                   Remover
                 </button>
@@ -571,7 +571,7 @@ export function ViaturaForm({
               <div className="mt-3 space-y-2">
                 {cat.itens.map((item, ii) => (
                   <div key={ii} className="flex items-center gap-2">
-                    <span className="text-gold-deep">•</span>
+                    <span className="text-laranja-deep">•</span>
                     <input
                       value={item}
                       onChange={(e) => updItem(ci, ii, e.target.value)}
@@ -581,7 +581,7 @@ export function ViaturaForm({
                     <button
                       type="button"
                       onClick={() => removerItem(ci, ii)}
-                      className="shrink-0 px-2 py-2 text-xs text-muted transition-colors hover:text-red-bright"
+                      className="shrink-0 px-2 py-2 text-xs text-muted transition-colors hover:text-erro-bright"
                       aria-label="Remover item"
                     >
                       ✕
@@ -591,7 +591,7 @@ export function ViaturaForm({
                 <button
                   type="button"
                   onClick={() => addItem(ci)}
-                  className="text-xs tracking-wide text-gold transition-colors hover:text-gold-bright"
+                  className="text-xs tracking-wide text-laranja transition-colors hover:text-laranja-bright"
                 >
                   + Adicionar item
                 </button>
@@ -601,7 +601,7 @@ export function ViaturaForm({
           <button
             type="button"
             onClick={addCategoria}
-            className="border border-gold/40 px-4 py-2.5 text-sm text-champagne transition-colors hover:border-gold hover:text-gold-bright"
+            className="border border-laranja/40 px-4 py-2.5 text-sm text-creme transition-colors hover:border-laranja hover:text-laranja-bright"
           >
             + Adicionar categoria
           </button>
@@ -651,8 +651,8 @@ export function ViaturaForm({
                       aria-hidden
                       className={`absolute left-1.5 top-1.5 flex h-6 items-center px-1.5 text-[10px] font-medium uppercase tracking-wider tabular-nums ${
                         i === 0
-                          ? "bg-gold text-background"
-                          : "bg-background/70 text-champagne backdrop-blur"
+                          ? "bg-laranja text-background"
+                          : "bg-background/70 text-creme backdrop-blur"
                       }`}
                     >
                       {i === 0 ? "Capa" : i + 1}
@@ -668,7 +668,7 @@ export function ViaturaForm({
                       onClick={() => removerFoto(i)}
                       aria-label={`Remover foto ${i + 1}`}
                       title="Remover"
-                      className="press absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-champagne hover:text-red-bright"
+                      className="press absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-creme hover:text-erro-bright"
                     >
                       <span
                         aria-hidden
@@ -699,7 +699,7 @@ export function ViaturaForm({
                       aria-disabled={i === 0}
                       aria-label={`Mover a foto ${i + 1} para trás`}
                       title="Mover para trás"
-                      className="press flex h-11 items-center justify-center text-champagne hover:text-gold-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
+                      className="press flex h-11 items-center justify-center text-creme hover:text-laranja-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
                     >
                       <span aria-hidden>←</span>
                     </button>
@@ -709,7 +709,7 @@ export function ViaturaForm({
                       aria-disabled={i === 0}
                       aria-label={`Tornar a foto ${i + 1} a capa`}
                       title="Tornar capa"
-                      className="press flex h-11 items-center justify-center text-[11px] uppercase tracking-[0.12em] text-muted hover:text-gold-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
+                      className="press flex h-11 items-center justify-center text-[11px] uppercase tracking-[0.12em] text-muted hover:text-laranja-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
                     >
                       Capa
                     </button>
@@ -719,7 +719,7 @@ export function ViaturaForm({
                       aria-disabled={i === f.fotos.length - 1}
                       aria-label={`Mover a foto ${i + 1} para a frente`}
                       title="Mover para a frente"
-                      className="press flex h-11 items-center justify-center text-champagne hover:text-gold-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
+                      className="press flex h-11 items-center justify-center text-creme hover:text-laranja-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
                     >
                       <span aria-hidden>→</span>
                     </button>
@@ -742,7 +742,7 @@ export function ViaturaForm({
               <button
                 type="button"
                 onClick={anularRemocao}
-                className="press underline underline-offset-4 hover:text-gold-bright"
+                className="press underline underline-offset-4 hover:text-laranja-bright"
               >
                 Anular
               </button>
@@ -750,7 +750,7 @@ export function ViaturaForm({
           </div>
         )}
 
-        <label className="press inline-flex cursor-pointer items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-sm text-champagne transition-colors hover:border-gold hover:text-gold-bright">
+        <label className="press inline-flex cursor-pointer items-center gap-2 rounded-full border border-laranja/40 px-5 py-2.5 text-sm text-creme transition-colors hover:border-laranja hover:text-laranja-bright">
           {aEnviar
             ? `A carregar ${aEnviar.feitas + 1} de ${aEnviar.total}…`
             : "+ Carregar fotos"}
@@ -782,7 +782,7 @@ export function ViaturaForm({
       {/* Barra de ações */}
       {erro && (
         <p
-          className="rounded-xl border border-red-deep bg-red/10 px-4 py-3 text-sm text-red-bright"
+          className="rounded-xl border border-erro-deep bg-erro/10 px-4 py-3 text-sm text-erro-bright"
           role="alert"
         >
           {erro}
@@ -792,14 +792,14 @@ export function ViaturaForm({
         <button
           type="button"
           onClick={() => router.push("/admin")}
-          className="px-5 py-2.5 text-sm tracking-wide text-muted transition-colors hover:text-champagne"
+          className="px-5 py-2.5 text-sm tracking-wide text-muted transition-colors hover:text-creme"
         >
           Cancelar
         </button>
         <button
           type="submit"
           disabled={aGuardar}
-          className="gold-metal-fill px-6 py-2.5 text-sm font-medium tracking-wide text-background disabled:opacity-60"
+          className="laranja-fill px-6 py-2.5 text-sm font-medium tracking-wide text-background disabled:opacity-60"
         >
           {aGuardar
             ? "A guardar…"
@@ -841,7 +841,7 @@ function Grelha({ children }: { children: React.ReactNode }) {
 
   As sugestões são um `datalist`, e a escolha é deliberada: sugere sem fechar.
   Escrever livremente continua possível — é assim que entra uma marca nova —
-  mas ver "BMW" na lista evita que ela e "Bmw" se tornem duas marcas distintas
+  mas ver "Renault" na lista evita que ela e "renault" se tornem duas marcas distintas
   na grelha da homepage, que é derivada do inventário e não tem forma de
   adivinhar que são a mesma.
 
@@ -964,7 +964,7 @@ function Interruptor({
         type="checkbox"
         checked={ativo}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+        className="mt-0.5 h-4 w-4 shrink-0 accent-laranja"
       />
       <span>
         <span className="block text-sm text-ink">{rotulo}</span>

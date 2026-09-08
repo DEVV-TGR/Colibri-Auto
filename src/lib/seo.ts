@@ -52,7 +52,7 @@ export const OG_IMAGEM_PADRAO = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: `${SITE_NAME} — stand de carros usados premium no Porto`,
+  alt: `${SITE_NAME} — stand de carros usados em Perafita, Matosinhos`,
 } as const;
 
 /**

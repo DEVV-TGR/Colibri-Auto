@@ -1,7 +1,7 @@
 import { enderecoLinha, horasTexto, stand, telHref } from "@/data/stand";
 
 const ligacaoExterna =
-  "press inline-flex rounded-full border border-gold/40 px-5 py-2.5 text-sm text-champagne hover:border-gold hover:text-gold-bright";
+  "press inline-flex rounded-full border border-laranja/40 px-5 py-2.5 text-sm text-creme hover:border-laranja hover:text-laranja-bright";
 
 /**
  * Morada, telefones, horário e redes. Vive num componente próprio porque
@@ -11,7 +11,7 @@ const ligacaoExterna =
 export function DadosContacto() {
   return (
     <div>
-      <p className="text-xs uppercase tracking-[0.3em] text-gold">
+      <p className="text-xs uppercase tracking-[0.3em] text-laranja">
         Onde estamos
       </p>
       <p className="mt-4 font-display text-2xl text-ink">{stand.nome}</p>
@@ -21,7 +21,7 @@ export function DadosContacto() {
         <p>
           <a
             href={telHref(stand.telefone)}
-            className="text-champagne transition-colors hover:text-gold-bright"
+            className="text-creme transition-colors hover:text-laranja-bright"
           >
             {stand.telefone}
           </a>{" "}
@@ -30,7 +30,7 @@ export function DadosContacto() {
         <p>
           <a
             href={telHref(stand.telemovel)}
-            className="text-champagne transition-colors hover:text-gold-bright"
+            className="text-creme transition-colors hover:text-laranja-bright"
           >
             {stand.telemovel}
           </a>{" "}
@@ -39,7 +39,7 @@ export function DadosContacto() {
         <p>
           <a
             href={`mailto:${stand.email}`}
-            className="text-champagne transition-colors hover:text-gold-bright"
+            className="text-creme transition-colors hover:text-laranja-bright"
           >
             {stand.email}
           </a>
@@ -47,7 +47,7 @@ export function DadosContacto() {
       </div>
 
       <div className="mt-6">
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">Horário</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-laranja">Horário</p>
         <ul className="mt-3 max-w-sm space-y-1.5 text-sm text-muted">
           {stand.horarios.map((h) => (
             <li key={h.dias} className="flex justify-between gap-4">
@@ -68,9 +68,12 @@ export function DadosContacto() {
         <a href={stand.instagram} target="_blank" rel="noreferrer" className={ligacaoExterna}>
           Instagram ↗
         </a>
-        <a href={stand.facebook} target="_blank" rel="noreferrer" className={ligacaoExterna}>
-          Facebook ↗
-        </a>
+        {/* Ver a nota no rodapé: sem página de Facebook, o botão não existe. */}
+        {stand.facebook && (
+          <a href={stand.facebook} target="_blank" rel="noreferrer" className={ligacaoExterna}>
+            Facebook ↗
+          </a>
+        )}
       </div>
     </div>
   );

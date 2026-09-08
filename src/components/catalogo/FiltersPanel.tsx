@@ -147,7 +147,7 @@ export function FiltersPanel({
 
       <div className="space-y-3">
         <p className="text-sm text-muted">
-          <span className="font-display text-2xl text-gold">
+          <span className="font-display text-2xl text-laranja">
             <Contador valor={resultados} />
           </span>{" "}
           {resultados === 1 ? "resultado" : "resultados"}
@@ -156,7 +156,7 @@ export function FiltersPanel({
           <button
             type="button"
             onClick={onLimpar}
-            className="text-sm text-muted underline-offset-4 transition-colors hover:text-gold-bright hover:underline"
+            className="text-sm text-muted underline-offset-4 transition-colors hover:text-laranja-bright hover:underline"
           >
             Limpar parâmetros
           </button>

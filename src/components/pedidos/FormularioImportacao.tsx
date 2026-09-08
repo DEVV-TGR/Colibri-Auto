@@ -29,7 +29,7 @@ export function FormularioImportacao() {
       sucesso={{
         titulo: (
           <>
-            Pedido <span className="italic text-gold">enviado</span>
+            Pedido <span className="font-extrabold text-laranja">enviado</span>
           </>
         ),
         texto:
@@ -38,14 +38,14 @@ export function FormularioImportacao() {
     >
       {({ campo, desativado, aoMudarFotos }) => (
         <>
-          <Bloco titulo="O que" gold="procura">
+          <Bloco titulo="O que" laranja="procura">
             <Campo
               nome="marca"
               rotulo="Marca"
               {...campo("marca")}
               obrigatorio
               desativado={desativado}
-              exemplo="Porsche"
+              exemplo="Volkswagen"
               maximo={60}
             />
             <Campo
@@ -54,7 +54,7 @@ export function FormularioImportacao() {
               {...campo("modelo")}
               obrigatorio
               desativado={desativado}
-              exemplo="Macan S"
+              exemplo="Golf 2.0 TDI Highline"
               maximo={120}
             />
             <CampoNumero
@@ -119,7 +119,7 @@ export function FormularioImportacao() {
             />
           </Bloco>
 
-          <Bloco titulo="Orçamento e" gold="prazo">
+          <Bloco titulo="Orçamento e" laranja="prazo">
             <CampoNumero
               nome="orcamento"
               rotulo="Orçamento"
@@ -142,7 +142,7 @@ export function FormularioImportacao() {
             />
           </Bloco>
 
-          <Bloco titulo="Como o" gold="contactamos">
+          <Bloco titulo="Como o" laranja="contactamos">
             <Campo
               nome="nome"
               rotulo="Nome"

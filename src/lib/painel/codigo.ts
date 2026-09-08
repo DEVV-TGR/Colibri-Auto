@@ -26,7 +26,7 @@ import { chave } from "./chaves";
   lido mais tarde por outra pessoa.
 */
 
-export const NOME_DO_DESAFIO = "imperio_desafio";
+export const NOME_DO_DESAFIO = "colibri_desafio";
 
 export const VALIDADE_MS = 10 * 60 * 1000;
 

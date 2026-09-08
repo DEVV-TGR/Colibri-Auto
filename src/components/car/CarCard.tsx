@@ -78,7 +78,7 @@ export function CarCard({
   };
 
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-line/60 bg-surface transition-colors duration-300 hover:border-gold/50">
+    <article className="group relative overflow-hidden rounded-2xl border border-line/60 bg-surface transition-colors duration-300 hover:border-laranja/50">
       <div
         className={`relative aspect-[4/3] overflow-hidden ${
           total > 1 ? "cursor-grab touch-pan-y select-none active:cursor-grabbing" : ""
@@ -137,7 +137,7 @@ export function CarCard({
                 <span
                   key={i}
                   className={`h-1 w-4 rounded-full transition-colors duration-200 ${
-                    i === foto ? "bg-gold" : "bg-ink/30"
+                    i === foto ? "bg-laranja" : "bg-ink/30"
                   }`}
                 />
               ))}
@@ -149,16 +149,16 @@ export function CarCard({
       <Link href={urlViatura(viatura)} className="block p-5">
         <p className="flex flex-wrap items-center gap-x-2 text-xs uppercase tracking-[0.15em] text-muted">
           <span>{formatarRegisto(viatura.registoMes, viatura.registoAno)}</span>
-          <span className="text-gold-deep">·</span>
+          <span className="text-laranja-deep">·</span>
           <span>{viatura.combustivel}</span>
-          <span className="text-gold-deep">·</span>
+          <span className="text-laranja-deep">·</span>
           <span>{formatarKm(viatura.quilometros)}</span>
         </p>
-        <h3 className="mt-2 font-display text-xl text-ink transition-colors group-hover:text-gold-bright">
+        <h3 className="mt-2 font-display text-xl text-ink transition-colors group-hover:text-laranja-bright">
           {viatura.marca} {viatura.modelo}
         </h3>
         <p className="text-sm text-muted">{viatura.versao}</p>
-        <p className="mt-3 font-display text-2xl text-gold">
+        <p className="mt-3 font-display text-2xl text-laranja">
           {vendido ? "Vendido" : formatarPreco(viatura.preco)}
         </p>
       </Link>

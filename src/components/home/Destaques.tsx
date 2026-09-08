@@ -11,7 +11,7 @@ export function Destaques({ destaques }: { destaques: Viatura[] }) {
         <div className="flex items-end justify-between gap-6">
           <div>
             <h2 className="font-display h-section text-ink">
-              Viaturas em <span className="italic text-gold">destaque</span>
+              Viaturas em <span className="font-extrabold text-laranja">destaque</span>
             </h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
               Uma seleção da casa, verificada ponto a ponto e pronta a entregar.

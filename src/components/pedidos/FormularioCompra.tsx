@@ -30,7 +30,7 @@ export function FormularioCompra() {
       sucesso={{
         titulo: (
           <>
-            Pedido <span className="italic text-gold">enviado</span>
+            Pedido <span className="font-extrabold text-laranja">enviado</span>
           </>
         ),
         texto:
@@ -39,7 +39,7 @@ export function FormularioCompra() {
     >
       {({ campo, desativado, aoMudarFotos }) => (
         <>
-          <Bloco titulo="A sua" gold="viatura">
+          <Bloco titulo="A sua" laranja="viatura">
             <Campo
               nome="matricula"
               rotulo="Matrícula"
@@ -55,7 +55,7 @@ export function FormularioCompra() {
               {...campo("marca")}
               obrigatorio
               desativado={desativado}
-              exemplo="BMW"
+              exemplo="Renault"
               maximo={60}
             />
             <Campo
@@ -64,7 +64,7 @@ export function FormularioCompra() {
               {...campo("modelo")}
               obrigatorio
               desativado={desativado}
-              exemplo="Série 3 320d Pack M"
+              exemplo="Clio 1.5 dCi Dynamique"
               maximo={120}
               largo
             />
@@ -150,7 +150,7 @@ export function FormularioCompra() {
             />
           </Bloco>
 
-          <Bloco titulo="O que" gold="pretende">
+          <Bloco titulo="O que" laranja="pretende">
             <CampoEscolha
               nome="intencao"
               rotulo="Venda directa ou retoma"
@@ -161,7 +161,7 @@ export function FormularioCompra() {
             />
           </Bloco>
 
-          <Bloco titulo="Como o" gold="contactamos">
+          <Bloco titulo="Como o" laranja="contactamos">
             <Campo
               nome="nome"
               rotulo="Nome"

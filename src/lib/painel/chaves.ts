@@ -77,7 +77,7 @@ export type Uso = "sessao" | "desafio" | "aparelho";
 
 export async function chave(uso: Uso, bytes = 32): Promise<Buffer> {
   return Buffer.from(
-    hkdfSync("sha256", await segredo(), "", `imperio:${uso}:v1`, bytes),
+    hkdfSync("sha256", await segredo(), "", `colibri:${uso}:v1`, bytes),
   );
 }
 

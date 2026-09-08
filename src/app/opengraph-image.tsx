@@ -21,12 +21,12 @@ export const contentType = "image/png";
  * Sem fonte externa de propósito: o Bodoni só existe via next/font e um fetch
  * a servidores de fontes no build é um ponto de falha desnecessário. A marca
  * aqui é o wordmark, e o resto segue a assinatura do site (maiúsculas com
- * tracking largo). Os dourados são os tokens OKLCH de globals.css convertidos
+ * tracking largo). Os laranjas são os tokens OKLCH de globals.css convertidos
  * para sRGB — satori não interpreta oklch().
  */
 export default async function Image() {
   const logo = await readFile(
-    join(process.cwd(), "public/logo/imperio-mark-md.png"),
+    join(process.cwd(), "public/logo/colibri-mark-md.png"),
     "base64",
   );
 
@@ -67,7 +67,7 @@ export default async function Image() {
               color: "#c0965a",
             }}
           >
-            Stand de automóveis premium · Porto
+            Compra · Venda · Retoma
           </div>
           <div
             style={{
@@ -79,7 +79,7 @@ export default async function Image() {
               lineHeight: 1.1,
             }}
           >
-            Viaturas usadas e seminovas, escolhidas a dedo
+            Carros usados com garantia incluída · Perafita, Matosinhos
           </div>
         </div>
 
@@ -105,7 +105,7 @@ export default async function Image() {
               {enderecoLinha}
             </div>
             <div style={{ display: "flex", color: "#e3d6bd" }}>
-              imperioautoconcept.com
+              colibriauto.pt
             </div>
           </div>
         </div>

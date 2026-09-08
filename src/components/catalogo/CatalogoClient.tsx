@@ -208,12 +208,12 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
           <button
             type="button"
             onClick={() => setPainelAberto(true)}
-            className="press inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright"
+            className="press inline-flex items-center gap-2 rounded-full border border-laranja/40 px-5 py-2.5 text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
           >
             <IconeFiltros />
             Filtros
             {chips.length > 0 && (
-              <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-gold px-1.5 text-xs font-medium text-background">
+              <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-laranja px-1.5 text-xs font-medium text-background">
                 {chips.length}
               </span>
             )}
@@ -232,11 +232,11 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
                 key={c.id}
                 type="button"
                 onClick={() => removerChip(c.patch)}
-                className="press inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-xs text-champagne hover:border-gold hover:text-gold-bright"
+                className="press inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-laranja/40 bg-laranja/10 px-3 py-1.5 text-xs text-creme hover:border-laranja hover:text-laranja-bright"
                 aria-label={`Remover filtro ${c.rotulo}`}
               >
                 {c.rotulo}
-                <span aria-hidden className="text-gold">
+                <span aria-hidden className="text-laranja">
                   ✕
                 </span>
               </button>
@@ -244,7 +244,7 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
             <button
               type="button"
               onClick={limpar}
-              className="shrink-0 whitespace-nowrap px-2 py-1.5 text-xs text-muted underline-offset-4 transition-colors hover:text-gold-bright hover:underline"
+              className="shrink-0 whitespace-nowrap px-2 py-1.5 text-xs text-muted underline-offset-4 transition-colors hover:text-laranja-bright hover:underline"
             >
               Limpar tudo
             </button>
@@ -272,7 +272,7 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
                   type="button"
                   onClick={() => setPainelAberto(false)}
                   aria-label="Fechar"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-gold hover:text-gold"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-laranja hover:text-laranja"
                 >
                   ✕
                 </button>
@@ -290,7 +290,7 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
                 <button
                   type="button"
                   onClick={() => setPainelAberto(false)}
-                  className="gold-metal-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background"
+                  className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background"
                 >
                   Ver resultados
                 </button>
@@ -320,7 +320,7 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
         {resultados.length === 0 ? (
           <div className="rounded-2xl border border-line/60 bg-surface px-8 py-20 text-center">
             <p className="font-display h-sub text-ink">
-              Sem resultados <span className="italic text-gold">para já</span>
+              Sem resultados <span className="font-extrabold text-laranja">para já</span>
             </p>
             <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
               Nenhuma viatura corresponde aos parâmetros escolhidos. Ajuste os
@@ -335,7 +335,7 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
               <button
                 type="button"
                 onClick={limpar}
-                className="press rounded-full border border-gold/40 px-6 py-3 text-sm text-champagne hover:border-gold hover:text-gold-bright"
+                className="press rounded-full border border-laranja/40 px-6 py-3 text-sm text-creme hover:border-laranja hover:text-laranja-bright"
               >
                 Limpar parâmetros
               </button>

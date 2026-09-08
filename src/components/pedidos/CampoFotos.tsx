@@ -178,7 +178,7 @@ export function CampoFotos({
                 onClick={() => tirar(i)}
                 disabled={desativado}
                 aria-label={`Tirar a fotografia ${i + 1}`}
-                className="press absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-sm text-muted hover:border-gold hover:text-gold-bright"
+                className="press absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-sm text-muted hover:border-laranja hover:text-laranja-bright"
               >
                 ×
               </button>
@@ -192,7 +192,7 @@ export function CampoFotos({
           type="button"
           onClick={() => seletor.current?.click()}
           disabled={desativado || cheio || aPreparar}
-          className="press inline-flex items-center justify-center gap-2 rounded-full border border-gold/40 px-6 py-3 text-sm tracking-wide text-champagne hover:border-gold hover:text-gold-bright disabled:opacity-60"
+          className="press inline-flex items-center justify-center gap-2 rounded-full border border-laranja/40 px-6 py-3 text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright disabled:opacity-60"
         >
           {aPreparar
             ? "A preparar…"

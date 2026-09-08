@@ -1,13 +1,13 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-type Variante = "dourado" | "contorno" | "fantasma";
+type Variante = "laranja" | "contorno" | "fantasma";
 
 const estilos: Record<Variante, string> = {
-  dourado: "gold-metal-fill text-background font-medium",
+  laranja: "laranja-fill text-background font-medium",
   contorno:
-    "border border-gold/40 text-champagne hover:border-gold hover:text-gold-bright",
-  fantasma: "text-muted hover:text-gold-bright",
+    "border border-laranja/40 text-creme hover:border-laranja hover:text-laranja-bright",
+  fantasma: "text-muted hover:text-laranja-bright",
 };
 
 // `press` trata da transição (cor, brilho e escala) — ver globals.css
@@ -15,7 +15,7 @@ const base =
   "press inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm tracking-wide cursor-pointer select-none";
 
 export function BotaoLink({
-  variante = "dourado",
+  variante = "laranja",
   className = "",
   children,
   ...props
@@ -28,7 +28,7 @@ export function BotaoLink({
 }
 
 export function Botao({
-  variante = "dourado",
+  variante = "laranja",
   className = "",
   children,
   ...props
