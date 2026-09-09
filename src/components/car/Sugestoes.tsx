@@ -9,8 +9,10 @@ export function Sugestoes({ sugestoes }: { sugestoes: Viatura[] }) {
     <section className="border-t border-line/60 bg-surface">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
-          <h2 className="font-display h-sub text-ink">
-            Também vai gostar <span className="font-extrabold text-laranja">destas</span>
+          <div className="hairline w-16" />
+          <h2 className="mt-5 font-display h-sub text-ink">
+            Também temos{" "}
+            <span className="font-extrabold text-laranja">estas</span>.
           </h2>
         </Reveal>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

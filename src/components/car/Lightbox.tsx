@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ENTRADA } from "@/components/ui/Reveal";
 
 export function Lightbox({
   fotos,
@@ -19,6 +20,15 @@ export function Lightbox({
   onFechar: () => void;
   onNavegar: (novo: number) => void;
 }) {
+  /*
+    O `globals.css` anula transições e animações **de CSS** em
+    `prefers-reduced-motion`, e não toca em nada que o motion faça. O lightbox
+    era o único componente animado do projecto sem esta guarda — abria com um
+    fade e trocava de foto com um deslize horizontal, a quem tinha pedido ao
+    sistema para não haver movimento nenhum.
+  */
+  const reduzido = useReducedMotion();
+
   useEffect(() => {
     if (!aberto) return;
     const aoTeclar = (e: KeyboardEvent) => {
@@ -40,7 +50,7 @@ export function Lightbox({
       {aberto && (
         <motion.div
           className="fixed inset-0 z-[60] flex flex-col bg-background/95 backdrop-blur-xl"
-          initial={{ opacity: 0 }}
+          initial={reduzido ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
@@ -66,9 +76,9 @@ export function Lightbox({
             <motion.div
               key={indice}
               className="absolute inset-0 m-4 sm:m-8"
-              initial={{ opacity: 0, x: 24 }}
+              initial={reduzido ? false : { opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.3, ease: ENTRADA }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.15}

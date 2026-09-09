@@ -41,12 +41,12 @@ Não há bibliotecas de componentes (Radix e afins). Tudo o que é UI é escrito
 ## Nomenclatura — mista, de propósito
 
 **Ficheiros e nomes de componentes de domínio genérico ficam em inglês:**
-`CarCard`, `Gallery`, `Lightbox`, `SpecsTable`, `StickyCard`, `FiltersPanel`, `RangeSlider`, `SelectField`, `SortSelect`, `Header`, `Footer`.
+`CarCard`, `Lightbox`, `SpecsTable`, `StickyCard`, `FiltersPanel`, `RangeSlider`, `SelectField`, `SortSelect`, `Header`, `Footer`.
 
 **Todo o vocabulário de negócio, props, variáveis, estado e comentários ficam em PT-PT:**
-`Viatura`, `Botao`, `Reveal`, `Contador`, `LogoAnel`, `Preloader`, `TransicaoRota`, `CtaFlutuante`, `Sugestoes`, `Destaques`, `GrelhaMarcas`, `SobreContactos`, `BadgeEstado`, e props como `rotulo`, `valor`, `opcoes`, `aberto`, `visivel`, `filtros`, `resultados`, `onLimpar`, `onFechar`, `onNavegar`, `variante`, `prioridade`, `tamanho`.
+`Viatura`, `Botao`, `Reveal`, `Contador`, `NumeroEmScroll`, `TituloSeccao`, `Logotipo`, `LogoAnel`, `Preloader`, `TransicaoRota`, `CtaFlutuante`, `Sugestoes`, `Destaques`, `Abertura`, `RailStock`, `BarraPesquisa`, `TresAcoes`, `Incluido`, `OndeEstamos`, `ChamadaFinal`, `FiltrosBarra`, `AberturaViatura`, `BadgeEstado`, e props como `rotulo`, `valor`, `opcoes`, `aberto`, `visivel`, `filtros`, `resultados`, `onLimpar`, `onFechar`, `onNavegar`, `variante`, `prioridade`, `tamanho`.
 
-Constantes de gesto e tempo em maiúsculas portuguesas: `LIMIAR_MOVE`, `LIMIAR_SWIPE`, `MINIMO_MS`, `LIMITE_MS`, `COPIAS`, `TAMANHOS`.
+Constantes de gesto e tempo em maiúsculas portuguesas: `LIMIAR_MOVE`, `LIMIAR_SWIPE`, `MINIMO_MS`, `LIMITE_MS`, `COPIAS`, `TAMANHOS`, `DURACAO_S`, `ENTRADA`, `SEM_DADOS`.
 
 **Todos os comentários estão em português**, e a maioria justifica uma decisão em vez de descrever o código. Manter esse hábito — são a memória do projeto:
 
@@ -67,7 +67,9 @@ Não se exportam interfaces de props. A única exceção é o `Botao`, que esten
 
 ## Server-first
 
-18 ficheiros têm `"use client"`. Tudo o resto é server component: `Botao`, `BadgeEstado`, `SpecsTable`, `ExtrasList`, `Sugestoes`, `Footer`, `Hero`, `Destaques`, `GrelhaMarcas`, `SobreContactos` e todas as `page.tsx`.
+Tudo o que não tem estado, efeito, evento de DOM ou hook de browser fica no servidor: `Botao`, `Logotipo`, `BadgeEstado`, `SpecsTable`, `ExtrasList`, `Sugestoes`, `Footer`, `Destaques`, `TresAcoes`, `Incluido`, `OndeEstamos`, `ChamadaFinal` e todas as `page.tsx`.
+
+As secções novas da home são quase todas de servidor — `TresAcoes`, `Incluido`, `OndeEstamos` e `ChamadaFinal` só recebem props e renderizam, e o movimento delas vem do `Reveal`, `TituloSeccao` e `NumeroEmScroll`, que são de cliente e ficam contidos. As de cliente são as que têm mesmo estado: `Abertura` (animação de entrada), `RailStock` (`useReducedMotion`) e `BarraPesquisa` (os selects e a navegação).
 
 A regra: `"use client"` só quando há estado, efeito, evento de DOM ou hook de browser. Um componente que só recebe props e renderiza fica no servidor.
 
@@ -114,7 +116,7 @@ Três decisões embutidas aqui:
 - **`window.history` direto, não `router.replace`** — o router do Next revalidaria a rota no servidor a cada tecla.
 - **A guarda `primeiraRender`** evita reescrever o URL com o que dele acabou de sair.
 
-**Exceção:** o `HeroSearch` da homepage usa `router.push()` com `serializeFiltros()` — é uma navegação real entre páginas, e essa deve ficar no histórico.
+**Exceção:** a `BarraPesquisa` da homepage usa `router.push()` com `serializeFiltros()` — é uma navegação real entre páginas, e essa deve ficar no histórico.
 
 Ao mexer em filtros: manter o padrão. `router.push` a cada alteração destrói a fluidez; `pushState` destrói o botão "voltar".
 

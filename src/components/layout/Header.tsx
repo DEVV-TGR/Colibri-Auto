@@ -8,9 +8,9 @@ import { stand, telHref } from "@/data/stand";
 
 const ligacoes = [
   { href: "/", rotulo: "Início" },
-  { href: "/viaturas", rotulo: "Viaturas" },
-  { href: "/compramos", rotulo: "Compramos" },
-  { href: "/importamos", rotulo: "Importamos" },
+  { href: "/viaturas", rotulo: "Stock" },
+  { href: "/compramos", rotulo: "Vender o meu" },
+  { href: "/importamos", rotulo: "Encomendar" },
   { href: "/contactos", rotulo: "Contactos" },
 ];
 

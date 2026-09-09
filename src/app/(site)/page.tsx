@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { CompramosOSeuCarro } from "@/components/home/CompramosOSeuCarro";
+import { Abertura } from "@/components/home/Abertura";
+import { BarraPesquisa } from "@/components/home/BarraPesquisa";
+import { ChamadaFinal } from "@/components/home/ChamadaFinal";
 import { Destaques } from "@/components/home/Destaques";
-import { GrelhaMarcas } from "@/components/home/GrelhaMarcas";
-import { Hero } from "@/components/home/Hero";
-import { SobreContactos } from "@/components/home/SobreContactos";
+import { Incluido } from "@/components/home/Incluido";
+import { OndeEstamos } from "@/components/home/OndeEstamos";
+import { RailStock } from "@/components/home/RailStock";
+import { TresAcoes } from "@/components/home/TresAcoes";
 import { getDestaques } from "@/lib/derivados";
 import { openGraphRota, seoDescricao } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
@@ -29,13 +32,30 @@ export const metadata: Metadata = {
 export default async function Home() {
   const viaturas = await getViaturas();
 
+  /*
+    A ordem da página, e a razão de ser dela.
+
+    Abertura → montra → pesquisa é uma sequência deliberada: diz-se a frase,
+    mostra-se o que há, e só depois se oferece uma forma de filtrar. O sistema
+    de origem punha a pesquisa dentro do hero, antes de a pessoa ter visto uma
+    única viatura — pedia-lhe para escolher marca e combustível sem lhe ter
+    mostrado nada.
+
+    Depois disso a página é uma lista numerada, do concreto para o abstracto:
+    os carros (01), o que o stand faz (02), as condições (03), a morada (04). A
+    chamada final fica fora da numeração de propósito — não é uma secção da
+    montra, é a saída para quem não encontrou nada.
+  */
   return (
     <>
-      <Hero viaturas={viaturas} />
+      <Abertura />
+      <RailStock viaturas={viaturas} />
+      <BarraPesquisa viaturas={viaturas} />
       <Destaques destaques={getDestaques(viaturas)} />
-      <GrelhaMarcas viaturas={viaturas} />
-      <CompramosOSeuCarro />
-      <SobreContactos />
+      <TresAcoes />
+      <Incluido viaturas={viaturas} />
+      <OndeEstamos />
+      <ChamadaFinal />
     </>
   );
 }

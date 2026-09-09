@@ -9,6 +9,7 @@ import {
 } from "react";
 import { CarCard } from "@/components/car/CarCard";
 import { FiltersPanel } from "@/components/catalogo/FiltersPanel";
+import { FiltrosBarra } from "@/components/catalogo/FiltrosBarra";
 import { SortSelect } from "@/components/catalogo/SortSelect";
 import {
   filtrarViaturas,
@@ -188,20 +189,25 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
   const removerChip = (patch: Partial<Filtros>) =>
     setFiltros({ ...filtros, ...patch });
 
+  const temFiltros = chips.length > 0;
+
   return (
-    <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
-      {/* filtros — sidebar em desktop, drawer em mobile */}
-      <aside className="hidden lg:block">
-        <div className="sticky top-24 rounded-2xl border border-line/60 bg-surface p-6">
-          <FiltersPanel
-            viaturas={viaturas}
-            filtros={filtros}
-            onChange={setFiltros}
-            resultados={resultados.length}
-            onLimpar={limpar}
-          />
-        </div>
-      </aside>
+    /*
+      Sem grelha de duas colunas: a barra de filtros ocupa a largura toda e a
+      listagem vem por baixo. Ver `FiltrosBarra` para a razão de a coluna
+      lateral ter saído.
+    */
+    <div className="space-y-10">
+      {/* filtros — barra em desktop, modal em mobile */}
+      <div className="hidden lg:block">
+        <FiltrosBarra
+          viaturas={viaturas}
+          filtros={filtros}
+          onChange={setFiltros}
+          onLimpar={limpar}
+          temFiltros={temFiltros}
+        />
+      </div>
 
       <div className="lg:hidden">
         <div className="flex items-center gap-3">
@@ -345,9 +351,9 @@ export function CatalogoClient({ viaturas }: { viaturas: Viatura[] }) {
             </div>
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {resultados.map((v, i) => (
-              <CarCard key={v.id} viatura={v} prioridade={i < 2} />
+              <CarCard key={v.id} viatura={v} prioridade={i < 3} />
             ))}
           </div>
         )}

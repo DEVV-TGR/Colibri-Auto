@@ -37,7 +37,15 @@ transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
 - **`once: true`** — obrigatório. Reanimar ao voltar a passar é irritante e faz o site parecer instável.
 - **`margin: "-80px"`** — dispara 80px antes de entrar em viewport, para o movimento acabar quando o olho chega.
 
-**Stagger de listas: `delay={i * 0.08}`** — em `GrelhaMarcas` e `Sugestoes`. O hero usa um stagger editorial escrito à mão: `0 → 0.1 → 0.2 → 0.3`.
+**Stagger de listas: `delay={i * 0.08}`** — em `TresAcoes`, `Incluido` e `Sugestoes`. A abertura da home usa um stagger editorial escrito à mão: `0 → 0.15 → 0.27 → 0.5 → 0.62`.
+
+O easing canónico é **exportado** de `Reveal.tsx` como `ENTRADA`, e importa-se de lá:
+
+```tsx
+import { ENTRADA } from "@/components/ui/Reveal";
+```
+
+Estava escrito à mão em cada sítio. Com a home nova passaram a ser seis, e seis cópias de `[0.22, 1, 0.36, 1]` são seis oportunidades de uma delas divergir sem ninguém dar por isso. O `as const` da constante também resolve um erro de tipos real: sem ele o TypeScript vê `number[]` e o motion exige a tupla de quatro.
 
 ## Durações
 

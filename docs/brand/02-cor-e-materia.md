@@ -123,9 +123,10 @@ Duas utilities, o mesmo degradê de **três paragens**:
 `laranja-deep → laranja → laranja-bright`.
 
 **`.laranja-fill`** — diagonal a 140°, mais `filter: brightness(1.08)` no
-hover. É o preenchimento de **todos os CTA laranja** — o botão do hero, o
-"Fale agora", o "Ligar" do detalhe, o "Ver resultados" dos filtros, a variante
-`laranja` do `Botao` — e do badge "Reservado".
+hover. É o preenchimento de **todos os CTA laranja** — o "Ver o stock" da
+abertura, o "Fale agora", o "Ligar" da ficha, o "Ver resultados" dos filtros, a
+variante `laranja` do `Botao` — do badge "Reservado", e das **etiquetas de
+preço** sobre as fotografias.
 
 Um botão laranja usa este degradê, não cor chapada: `#FB7803` chapado numa
 página escura fica com aspecto de rectângulo de aviso. O `bg-laranja` fica
@@ -134,8 +135,8 @@ pontos de paginação, contadores, o trilho dos sliders.
 
 **`.text-laranja-metal`** — o mesmo degradê a 100°, recortado pela forma das
 letras com `background-clip: text`. **Um uso em todo o projecto**: a palavra
-"procura?" no heading do hero (`Hero.tsx`). Manter assim — a escassez é o que
-lhe dá peso.
+"sem letra pequena." na abertura da home (`home/Abertura.tsx`). Manter assim —
+a escassez é o que lhe dá peso.
 
 > **Três paragens, e não cinco.** O sistema de origem tinha cinco, e passava
 > pelo creme a meio, porque estava a imitar **folha de ouro** — é assim que um
@@ -154,15 +155,21 @@ background: linear-gradient(90deg, transparent, laranja-deep 20%, laranja 50%, l
 ```
 
 Uma linha fina laranja que desvanece nas pontas. É o **único divisor
-decorativo do projecto** — fecho do hero, o `my-6` no cartão sticky, o `my-8`
-na secção sobre, o `mt-12` no rodapé, duas vezes no painel de filtros.
+decorativo do projecto**, e tem dois comprimentos:
 
-### `.grain`
+- **A régua da secção**, dentro do `TituloSeccao`, que se desenha da esquerda
+  para a direita ao entrar no ecrã. Não usa esta classe — usa o mesmo gradiente
+  com `origin-left` e `scaleX`, porque tem de animar.
+- **O traço curto** (`w-10`, `w-16`, `w-20`), a marcar o início de um cartão ou
+  de uma subsecção da ficha.
+- **O divisor a toda a largura** (`my-6`, `my-7`, `mt-12`), no cartão sticky, no
+  cartão de contactos e no rodapé.
 
-Ruído SVG (`feTurbulence`, `baseFrequency 0.8`) a `opacity: 0.5` sobre fotos
-grandes. Aplica-se como classe no contentor — usa `::after` com
-`position: absolute`, portanto o pai tem de ser `relative`. Um único uso, no
-hero.
+> **`.grain` e `.kenburns` saíram do sistema.** Existiam as duas para a
+> fotografia em ecrã inteiro do hero antigo — ruído por cima e zoom lento. A
+> abertura da home passou a ser tipográfica e ficaram sem um único uso; CSS
+> morto num ficheiro de tokens é pior do que noutro sítio qualquer, porque é
+> onde alguém vai procurar o que o sistema oferece.
 
 ## Superfícies
 
@@ -206,15 +213,20 @@ Sempre a partir de `from-background`, **nunca preto puro** — preto puro sobre
 `oklch(0.13 0 0)` cria uma banda visível. Sempre `pointer-events-none`.
 
 ```
-Hero, véu lateral:   bg-gradient-to-r from-background via-background/70 to-background/20
-Hero, véu inferior:  bg-gradient-to-t from-background via-transparent to-background/60
-Carrossel, base:     bg-gradient-to-t from-background/90 to-transparent
+Ficha, véu inferior:  bg-gradient-to-t from-background via-background/40 to-transparent
+Ficha, véu superior:  bg-gradient-to-b from-background via-background/60 to-transparent
+Carrossel, base:      bg-gradient-to-t from-background/90 to-transparent
+Rail, pontas:         bg-gradient-to-r|l from-background to-transparent
 ```
 
-O hero sobrepõe dois véus em direcções diferentes: um assenta o texto à
-esquerda, o outro funde a foto no fundo da secção. Faz mais falta aqui do que
-fazia no sistema de origem — as fotografias deste stand têm uma lona laranja
-enorme atrás do carro, e sem os véus ela competia com o próprio texto do hero.
+A abertura da home não leva véu nenhum — não tem fotografia por baixo. Onde os
+véus fazem falta é na **abertura da ficha de viatura**, que é de largura total
+e leva o percurso em cima e o título em baixo, os dois por cima da fotografia.
+
+O véu de cima é mais forte do que a intuição pede (`via-background/60`), e a
+razão tem nome: a Mazda CX-3 é branca e ocupa o topo do enquadramento. Estas
+fotografias não têm enquadramento combinado — são as que o stand tirou — e o
+véu tem de aguentar a mais clara delas.
 
 ## Foco
 

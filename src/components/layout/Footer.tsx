@@ -30,7 +30,7 @@ export function Footer() {
                   href="/viaturas"
                   className="text-muted transition-colors hover:text-ink"
                 >
-                  Viaturas
+                  Stock
                 </Link>
               </li>
               <li>
@@ -38,7 +38,7 @@ export function Footer() {
                   href="/compramos"
                   className="text-muted transition-colors hover:text-ink"
                 >
-                  Compramos o seu carro
+                  Vender o meu carro
                 </Link>
               </li>
               <li>
@@ -46,7 +46,7 @@ export function Footer() {
                   href="/importamos"
                   className="text-muted transition-colors hover:text-ink"
                 >
-                  Importamos o seu carro
+                  Encomendar uma viatura
                 </Link>
               </li>
               <li>

@@ -38,7 +38,8 @@ export function SpecsTable({ viatura }: { viatura: Viatura }) {
 
   return (
     <section aria-labelledby="ficha-tecnica">
-      <h2 id="ficha-tecnica" className="font-display h-sub text-ink">
+      <div className="hairline w-16" />
+      <h2 id="ficha-tecnica" className="mt-5 font-display h-sub text-ink">
         Ficha <span className="font-extrabold text-laranja">técnica</span>
       </h2>
 

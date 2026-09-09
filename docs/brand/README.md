@@ -18,7 +18,7 @@ Quando o código e a documentação divergirem, **o código ganha** — e o docu
 | [02 — Cor e matéria](02-cor-e-materia.md) | Tokens OKLCH, hierarquia do laranja, superfícies, e porque é que o "Vendido" não é vermelho |
 | [03 — Tipografia](03-tipografia.md) | As três fontes, a escala fluida, o peso base, os seis papéis tipográficos |
 | [04 — Layout e espaço](04-layout-e-espaco.md) | Container, ritmo vertical, grelhas, breakpoints, z-index |
-| [05 — Componentes](05-componentes.md) | Contratos dos componentes e padrões transversais de UI |
+| [05 — Componentes](05-componentes.md) | Contratos dos componentes, os quatro componentes de estrutura, e padrões transversais de UI |
 | [06 — Movimento](06-movimento.md) | Easing canónico, entrada em scroll, gestos, reduced motion |
 | [07 — Voz e conteúdo](07-voz-e-conteudo.md) | PT-PT, formatação com `Intl`, pluralização, vocabulário |
 | [08 — Dados e domínio](08-dados-e-dominio.md) | O tipo `Viatura`, o inventário, os helpers de filtro |
@@ -31,7 +31,7 @@ O resumo executivo. Cada uma está desenvolvida no documento respetivo.
 1. **Tema escuro, sempre.** Não há light mode, não há `dark:`. `color-scheme: dark` é fixo.
 2. **O laranja é cor de ação e realce** — CTAs, bordas ativas, hover, detalhes finos. Nunca preenche áreas grandes, por muito que a lona do stand o faça.
 3. **As fotos das viaturas são o elemento dominante.** Tudo o resto é moldura.
-4. **Headings são Montserrat 600 com a última palavra a 800 em laranja.** É a assinatura tipográfica do site — 10 secções seguem-na, sem excepção.
+4. **As secções têm duas assinaturas, e usam-se sempre as duas.** A estrutural — `01 ───── O STOCK`, numerada, com a régua a desenhar-se ao entrar no ecrã (`TituloSeccao`). E a tipográfica — o heading em Montserrat 600 com a última palavra a 800 em laranja. Uma secção sem as duas destoa imediatamente.
 5. **Tudo é redondo.** `rounded-full` em botões, chips, badges e indicadores (31 usos); `rounded-2xl` em cards (10).
 6. **Hover: texto vai a `laranja-bright`, bordas vão a `laranja`.** Sem exceções.
 7. **O divisor decorativo é `.hairline`.** Nunca `<hr>`, nunca `border-t` para separar visualmente.

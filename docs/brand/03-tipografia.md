@@ -53,7 +53,7 @@ viewport sem breakpoints.
 Estes números são mais pequenos e mais apertados do que os do sistema de
 origem, e a razão é o desenho da letra:
 
-- **O tecto do hero desceu de 6.5rem para 5rem.** Um Didone aguenta 6.5rem
+- **O tecto do `.h-hero` desceu de 6.5rem para 5rem.** Um Didone aguenta 6.5rem
   porque metade dos traços são finos como um cabelo e o peso na página fica
   leve. Montserrat a 700 é uma mancha sólida — ao mesmo corpo esmagava a
   secção inteira.
@@ -65,7 +65,7 @@ origem, e a razão é o desenho da letra:
 
 Usar sempre estas classes para headings; nunca `text-5xl` e afins.
 
-Uso: `.h-hero` só no hero; `.h-section` nos `<h1>`/`<h2>` de página e secção;
+Uso: `.h-hero` só na abertura da home; `.h-section` nos `<h1>`/`<h2>` de página e secção;
 `.h-sub` em subsecções dentro do detalhe (Ficha técnica, Extras).
 
 ## O peso base
@@ -107,22 +107,25 @@ Sem excepção, em todas as secções:
 
 | Heading | Onde |
 |---|---|
-| Viaturas em *destaque* | `home/Destaques.tsx` |
-| Escolha pela *marca* | `home/GrelhaMarcas.tsx` |
-| Compramos o seu *carro* | `home/CompramosOSeuCarro.tsx` |
-| Qualidade e *confiança* | `home/SobreContactos.tsx` |
-| Todas as *viaturas* | `app/(site)/viaturas/page.tsx` |
+| Carros usados *sem letra pequena.* | `home/Abertura.tsx` |
+| Quatro para *começar* | `home/Destaques.tsx` |
+| Compra, venda e *retoma* | `home/TresAcoes.tsx` |
+| O que vai no *preço* | `home/Incluido.tsx` |
+| Estamos na Avenida Mário *Brito* | `home/OndeEstamos.tsx` |
+| Não está aqui o que *procura*? | `home/ChamadaFinal.tsx` |
+| Está tudo *aqui* | `app/(site)/viaturas/page.tsx` |
 | Ficha *técnica* | `car/SpecsTable.tsx` |
 | Extras e *equipamento* | `car/ExtrasList.tsx` |
-| Também vai gostar *destas* | `car/Sugestoes.tsx` |
+| Também temos *estas* | `car/Sugestoes.tsx` |
 | Venha *conhecer-nos* | `app/(site)/contactos/page.tsx` |
 | Esta página já não *existe* | `app/not-found.tsx` |
 
 Duas variações deliberadas:
 
-- **Hero** — usa `font-extrabold text-laranja-metal` em vez de `text-laranja`.
-  É o único sítio com o degradê aplicado ao texto, e é o que faz do hero o
-  momento tipográfico mais forte da página.
+- **Abertura da home** — usa `text-laranja-metal` em vez de `text-laranja`, e
+  o realce é a **linha inteira** e não a última palavra. É o único sítio com o
+  degradê aplicado ao texto, e é o que faz da abertura o momento tipográfico
+  mais forte do site.
 - **Página de detalhe** — o realce cai sobre a **versão** da viatura
   (`<span className="font-extrabold text-laranja">{v.versao}</span>`), não
   sobre a última palavra. Faz sentido: separa marca+modelo da versão,
@@ -171,9 +174,13 @@ com os separadores em elemento próprio:
 ```
 font-display text-laranja
 ```
-`text-2xl` no card, `text-4xl` no cartão sticky do detalhe. O preço é sempre
-Montserrat e sempre laranja — é o segundo elemento mais importante da página, a
-seguir à foto.
+`text-4xl` no cartão sticky da ficha. Nos cards e na abertura da ficha o preço
+não é texto laranja sobre fundo escuro, mas o inverso — uma **etiqueta**
+`.laranja-fill` com texto `text-background`, sobre a fotografia. Ver
+[05 — Componentes](05-componentes.md).
+
+Em qualquer dos casos é sempre Montserrat: é o segundo elemento mais importante
+da página, a seguir à fotografia.
 
 ## O logótipo em texto
 

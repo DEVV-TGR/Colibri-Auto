@@ -94,7 +94,7 @@ Foto a `opacity-60 saturate-50` (`opacity-70 saturate-50` no carrossel), e o pre
 
 ### Select estilizado
 
-O `<select>` nativo é estilizado à mão em três sítios (`HeroSearch`, `SelectField`, `SortSelect`). A receita:
+O `<select>` nativo é estilizado à mão em três sítios (`BarraPesquisa`, `SelectField`, `SortSelect`). A receita:
 
 ```tsx
 <span className="relative block">
@@ -199,9 +199,9 @@ priority={prioridade && foto === inicial}
 
 `priority` é seletivo — só as primeiras da grelha (`i < 2`) e as cópias visíveis do carrossel. Zoom no hover: `group-hover:scale-[1.03]` no card, `scale-[1.02]` na galeria, sempre com `duration-500`.
 
-Exceção documentada: os logótipos de marca usam `<img>` com `eslint-disable-next-line` e justificação inline em `GrelhaMarcas.tsx`.
+Exceção documentada: os logótipos de marca usam `<img>` com `eslint-disable-next-line` e justificação inline em `BarraPesquisa.tsx`.
 
-Detalhe de UX no `CarCard`: a miniatura abre na **segunda** foto (`índice 1`) — a página de detalhe é que mostra a primeira. Evita ver duas vezes a mesma imagem ao entrar.
+Detalhe de composição no `CarCard`: o **preço não é texto por baixo da foto, é uma etiqueta `.laranja-fill` sobre ela**, no canto superior direito. Não é escolha de layout — é o idioma que a Colibri já usa em todas as publicações do Instagram, e reconhecê-lo é metade do que faz o site parecer deles. A abertura da ficha repete-a à sua escala, para quem clicou num card a encontrar onde a deixou. Uma viatura vendida não leva etiqueta nenhuma: o preço deixou de ser uma proposta.
 
 ### Acessibilidade
 
@@ -217,12 +217,91 @@ O checklist que o projeto cumpre, e que código novo deve cumprir:
 - `aria-hidden` em todos os glifos decorativos
 - Lightbox: `Escape`, `ArrowLeft`, `ArrowRight`; bloqueia scroll do body
 
+## Os componentes de estrutura
+
+Quatro peças que não existiam no sistema de origem e que são o que dá ao site a
+sua própria gramática.
+
+### `TituloSeccao` — a assinatura
+
+```
+01 ─────────────────────────  O STOCK
+Está tudo aqui.
+Sete viaturas. Não há catálogo escondido.
+```
+
+Substitui o *eyebrow* em maiúsculas espaçadas que marcava as secções. O número
+em `font-mono` laranja, a régua a desenhar-se da esquerda para a direita ao
+entrar no ecrã, o rótulo ao fundo, e por baixo o heading com a assinatura
+tipográfica de sempre.
+
+Os números são **escritos à mão** e não derivados da ordem no ficheiro. As
+secções mudam de sítio; o número tem de continuar a ser o mesmo sítio na
+conversa entre quem trabalha no site.
+
+A régua anima `scaleX` com `origin-left`, e não a largura. Transformar não
+obriga o browser a recalcular a disposição da página a cada fotograma; uma
+largura obriga.
+
+### `RailStock` — a montra a passar
+
+Tira de margem a margem com a capa de cada viatura, a correr da direita para a
+esquerda em 44s. Pára quando o rato entra. Cada tira liga à viatura e o nome
+aparece em hover.
+
+**É cenário, não é o carrossel dos destaques**, e a distinção é o que os
+impede de se lerem como o mesmo elemento feito duas vezes:
+
+| | `RailStock` | `DestaquesCarrossel` |
+|---|---|---|
+| O que é | Cenário. A montra a passar | Componente de produto |
+| Conteúdo | Só fotografia. Nome em hover | Foto, preço, meta, versão, ligação |
+| Escala | Tiras baixas, cortadas nas margens | Cards grandes, dentro do container |
+| Controlo | Nenhum | Setas, pontos, arrasto |
+
+Se alguma vez o rail ganhar um preço ou uma seta, passa a ser um segundo
+carrossel — e aí um dos dois está a mais.
+
+A emenda: a fila é a lista **duplicada** e o deslocamento é de exactamente uma
+cópia, com a correcção de meia goteira (`calc(-50% - 0.5rem)` em `globals.css`).
+Sem ela o rail dá um solavanco de 8px a cada volta. A segunda cópia leva
+`aria-hidden` — para um leitor de ecrã são as mesmas viaturas.
+
+### `FiltrosBarra` — os filtros no topo
+
+A coluna lateral de 280px saiu. Faz sentido com centenas de anúncios, onde
+filtrar é o trabalho da página; com sete viaturas comia um quarto da largura
+para oferecer escolhas que quase não reduzem nada, e prendia a grelha a duas
+colunas quando cabiam três.
+
+Cinco selects numa linha, e os intervalos — preço, ano, quilómetros — numa
+gaveta que só abre a pedido. **A gaveta abre sozinha se o endereço já trouxer um
+intervalo**: sem isso, quem chegasse por um link com `?precoMax=9000` via a
+listagem filtrada e o controlo que a filtrou escondido.
+
+Só desktop. Em telemóvel continua a valer o painel em modal do
+`CatalogoClient`, que uma barra horizontal não substitui.
+
+### `AberturaViatura` — a ficha começa pela fotografia
+
+Fotografia de largura total com parallax, percurso a flutuar no topo, título e
+etiqueta de preço por cima. A tira de miniaturas encosta-se por baixo e abre o
+`Lightbox`, que se aproveitou sem alterações.
+
+O tecto de altura é `clamp(320px, 56svh, 560px)`, e é uma medida e não um
+gosto: seis das sete viaturas têm uma fotografia só, e três dessas foram
+recortadas do Instagram a 630px de largura. A `100svh` o upscale via-se. **Quando
+o cliente der as originais, este tecto pode subir; até lá, não.**
+
+Com uma fotografia só não há tira de miniaturas — uma miniatura sozinha do que
+já está em cima é ruído a fingir de galeria.
+
 ## Dívida conhecida
 
 Divergências reais entre o padrão e o código. Documentadas, não corrigidas — corrigir só com pedido explícito.
 
-1. **O botão "contorno" está replicado à mão em 6 sítios** fora do `Botao.tsx`: `Header.tsx:55`, `SobreContactos.tsx:81` e `:89`, `StickyCard.tsx:61`, `CatalogoClient.tsx:158` e `:278`. A string de classes é a mesma, mas os paddings divergem (`px-5 py-2`, `px-5 py-2.5`, `px-6 py-3`, `px-6 py-3.5`). É a maior divergência entre o componente e o uso real.
-2. **`HeroSearch` duplica o `SelectField`** — tem um componente `Campo` local com a mesma receita, em vez de importar.
+1. **O botão "contorno" está replicado à mão** fora do `Botao.tsx`: no `Header`, no `StickyCard`, no `CatalogoClient` e no `DadosContacto`. A string de classes é a mesma, mas os paddings divergem (`px-5 py-2`, `px-5 py-2.5`, `px-6 py-3`, `px-6 py-3.5`). É a maior divergência entre o componente e o uso real.
+2. **`BarraPesquisa` duplica o `SelectField`** — tem um componente `Campo` local com a mesma receita, em vez de importar. Herdado do `HeroSearch`, que substituiu.
 3. **O badge "Reservado" tem dois tratamentos.** `BadgeEstado` usa `.laranja-fill`; o `StickyCard` usa `bg-laranja` chapado.
 4. **O carrossel tem um `Badge` próprio** (`DestaquesCarrossel.tsx:54`) que reimplementa o `BadgeEstado` com pequenas divergências: `font-bold` e `tracking-[0.14em]` (contra `font-medium` e `tracking-[0.15em]`), `border-laranja/60` (contra `/50`), sem sombra, e mostra **apenas um** badge por prioridade em vez de empilhar. A semântica de cor é a mesma.
 

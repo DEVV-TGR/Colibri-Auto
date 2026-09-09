@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExtrasList } from "@/components/car/ExtrasList";
-import { Gallery } from "@/components/car/Gallery";
+import { AberturaViatura } from "@/components/car/AberturaViatura";
 import { SpecsTable } from "@/components/car/SpecsTable";
 import { StickyCard } from "@/components/car/StickyCard";
 import { Sugestoes } from "@/components/car/Sugestoes";
@@ -109,35 +108,18 @@ export default async function ViaturaPage({
       <JsonLd dados={dadosViatura(v)} />
       <JsonLd dados={dadosPercurso(v)} />
 
-      <div className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6">
-        <nav aria-label="Percurso" className="mb-6 text-xs text-muted">
-          <Link href="/viaturas" className="transition-colors hover:text-laranja-bright">
-            Viaturas
-          </Link>
-          <span className="mx-2 text-laranja-deep">/</span>
-          <Link
-            href={`/viaturas?marca=${v.marcaSlug}`}
-            className="transition-colors hover:text-laranja-bright"
-          >
-            {v.marca}
-          </Link>
-          <span className="mx-2 text-laranja-deep">/</span>
-          <span className="text-creme">{v.modelo}</span>
-        </nav>
+      {/*
+        A fotografia abre a página, de margem a margem, e leva o percurso, o
+        nome e o preço por cima. O corpo a duas colunas vem depois — é o
+        inverso da ordem anterior (percurso → cabeçalho → galeria dentro da
+        coluna), onde a fotografia era a terceira coisa a aparecer e a mais
+        pequena das três.
+      */}
+      <AberturaViatura viatura={v} />
 
-        <header className="mb-8">
-          <p className="text-xs uppercase tracking-[0.3em] text-laranja">
-            {v.marca}
-          </p>
-          <h1 className="mt-2 font-display h-section text-ink">
-            {v.modelo}{" "}
-            <span className="font-extrabold text-laranja">{v.versao}</span>
-          </h1>
-        </header>
-
+      <div className="mx-auto max-w-6xl px-4 pb-20 pt-14 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
           <div className="min-w-0 space-y-14">
-            <Gallery fotos={v.fotos} alt={`${v.marca} ${v.modelo}`} />
             <p className="max-w-2xl text-base leading-relaxed text-muted">
               {v.descricao}
             </p>

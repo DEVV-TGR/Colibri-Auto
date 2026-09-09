@@ -268,6 +268,14 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                     {/* foto */}
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Badge viatura={v} />
+                      {/* A etiqueta de preço, igual à do card da listagem —
+                          ver `CarCard.tsx` para a razão de ela viver sobre a
+                          fotografia. Aqui é maior, porque o card também é. */}
+                      {!vendido && (
+                        <p className="laranja-fill absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-display text-base font-medium text-background shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
+                          {formatarPreco(v.preco)}
+                        </p>
+                      )}
                       {/* A capa é a primeira foto, escolhida no painel — ver
                           o comentário em `CarCard.tsx`. */}
                       <Image
@@ -306,19 +314,29 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                       </div>
                     </div>
 
-                    {/* painel */}
+                    {/*
+                      O painel, alinhado com o `CarCard`: marca e modelo juntos
+                      no título, versão por baixo, e nada de preço — já está na
+                      fotografia. Antes o `<h3>` levava só a marca e o modelo
+                      caía na linha de baixo com a versão, o que dava cards a
+                      anunciar "Ford" e "Mercedes-Benz" em vez de anunciarem
+                      carros.
+                    */}
                     <div className="relative px-6 pb-6 pt-6">
                       <h3 className="font-display text-2xl leading-tight text-ink transition-colors group-hover:text-laranja-bright">
-                        {v.marca}
+                        {v.marca} {v.modelo}
                       </h3>
                       <p className="mt-1 line-clamp-1 text-base text-muted">
-                        {v.modelo} {v.versao}
+                        {v.versao}
                       </p>
-                      <p className="mt-5 text-[11px] uppercase tracking-[0.14em] text-muted">
-                        Preço
-                      </p>
-                      <p className="mt-0.5 font-display text-2xl text-laranja">
-                        {vendido ? "Vendido" : formatarPreco(v.preco)}
+                      <p className="mt-5 flex items-center gap-2 text-sm text-creme">
+                        {vendido ? "Vendida" : "Ver ficha"}
+                        <span
+                          aria-hidden
+                          className="text-laranja transition-transform duration-300 group-hover:translate-x-1"
+                        >
+                          →
+                        </span>
                       </p>
                     </div>
                   </Link>

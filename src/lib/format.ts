@@ -90,3 +90,34 @@ export function formatarPotencia(cv: number): string {
 export function formatarCilindrada(cc: number): string {
   return `${numero.format(cc)} cc`;
 }
+
+/*
+  Números pequenos por extenso: `4` → "Quatro".
+
+  Existe por causa dos títulos de secção, onde a contagem vem dos dados mas o
+  texto é uma frase — e numa frase, em português, um algarismo até dez lê-se
+  como um erro de composição ("4 para começar"). Acima de dez inverte-se, e é
+  por isso que a lista pára aí: "Dezassete viaturas em stock" custa mais a ler
+  do que "17".
+
+  Só a forma capitalizada, porque o único sítio onde entra é o princípio de uma
+  frase. Se algum dia fizer falta a meio, acrescenta-se um parâmetro — não se
+  duplica a lista.
+*/
+const EXTENSO = [
+  "Zero",
+  "Uma",
+  "Duas",
+  "Três",
+  "Quatro",
+  "Cinco",
+  "Seis",
+  "Sete",
+  "Oito",
+  "Nove",
+  "Dez",
+] as const;
+
+export function porExtenso(n: number): string {
+  return EXTENSO[n] ?? String(n);
+}
