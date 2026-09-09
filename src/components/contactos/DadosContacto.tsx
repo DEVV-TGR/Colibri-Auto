@@ -1,7 +1,7 @@
 import { enderecoLinha, horasTexto, stand, telHref } from "@/data/stand";
 
 const ligacaoExterna =
-  "press inline-flex rounded-full border border-laranja/40 px-5 py-2.5 text-sm text-creme hover:border-laranja hover:text-laranja-bright";
+  "press inline-flex rounded-full border border-laranja px-5 py-2.5 text-sm text-ink hover:border-laranja hover:text-laranja-deep";
 
 /**
  * Morada, telefones, horário e redes. Vive num componente próprio porque
@@ -11,7 +11,7 @@ const ligacaoExterna =
 export function DadosContacto() {
   return (
     <div>
-      <p className="text-xs uppercase tracking-[0.3em] text-laranja">
+      <p className="text-xs uppercase tracking-[0.3em] text-laranja-deep">
         Onde estamos
       </p>
       <p className="mt-4 font-display text-2xl text-ink">{stand.nome}</p>
@@ -21,7 +21,7 @@ export function DadosContacto() {
         <p>
           <a
             href={telHref(stand.telefone)}
-            className="text-creme transition-colors hover:text-laranja-bright"
+            className="text-ink transition-colors hover:text-laranja-deep"
           >
             {stand.telefone}
           </a>{" "}
@@ -30,7 +30,7 @@ export function DadosContacto() {
         <p>
           <a
             href={telHref(stand.telemovel)}
-            className="text-creme transition-colors hover:text-laranja-bright"
+            className="text-ink transition-colors hover:text-laranja-deep"
           >
             {stand.telemovel}
           </a>{" "}
@@ -39,7 +39,7 @@ export function DadosContacto() {
         <p>
           <a
             href={`mailto:${stand.email}`}
-            className="text-creme transition-colors hover:text-laranja-bright"
+            className="text-ink transition-colors hover:text-laranja-deep"
           >
             {stand.email}
           </a>
@@ -47,7 +47,7 @@ export function DadosContacto() {
       </div>
 
       <div className="mt-6">
-        <p className="text-xs uppercase tracking-[0.2em] text-laranja">Horário</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-laranja-deep">Horário</p>
         <ul className="mt-3 max-w-sm space-y-1.5 text-sm text-muted">
           {stand.horarios.map((h) => (
             <li key={h.dias} className="flex justify-between gap-4">

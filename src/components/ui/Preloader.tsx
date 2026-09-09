@@ -10,8 +10,8 @@ const LARGURA_PX = 200; // tamanho do logo em repouso
 const ZOOM = 1.5; // zoom discreto, sempre sobre o preto
 
 /**
- * Ecrã de abertura: fundo preto opaco com o logótipo a crescer devagar.
- * Sai de uma vez (corte seco) — o preto nunca se desvanece, para a homepage
+ * Ecrã de abertura: papel opaco com o logótipo a crescer devagar.
+ * Sai de uma vez (corte seco) — o fundo nunca se desvanece, para a homepage
  * não chegar a aparecer por baixo do logo.
  */
 export function Preloader() {

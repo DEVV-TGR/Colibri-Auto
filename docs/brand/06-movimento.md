@@ -8,6 +8,19 @@
 
 **CSS por defeito; `motion/react` só onde o CSS não chega.**
 
+Os dois marquees da home — `MontraFundo` e `FaixaLona` — são o exemplo do lado
+certo desta regra: são `@keyframes` em `globals.css`, e por isso os dois
+componentes ficam **de servidor**. Uma versão em `motion` custaria JavaScript
+no cliente para fazer o que o compositor faz sozinho.
+
+Mas obrigam a uma anulação explícita em `prefers-reduced-motion`. A regra
+global do projecto acelera as animações para `0.01ms`, o que as faz **saltar
+para o fim** — e o fim destas é a fila deslocada de uma cópia inteira. Quem
+pede movimento reduzido via a montra encostada à esquerda e a faixa a começar a
+meio de uma palavra. Daí o `animation: none !important` para as três classes,
+mais `overflow-x: auto` na montra, que sem animação passa a ser uma fila que se
+percorre à mão.
+
 O projeto tem `motion` v12 instalado, mas usa-o em apenas **5 ficheiros**: `Reveal`, `Contador`, `LogoAnel`, `Preloader` e `Lightbox`. Todo o resto — 45 usos de `transition-colors` — é CSS.
 
 Recorrer a `motion` só quando há: entrada baseada em viewport, orquestração de sequência, gesto de arrasto, ou valor a interpolar fora do DOM. Um hover não é nenhum destes.

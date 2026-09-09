@@ -1,6 +1,6 @@
 # Colibri Auto
 
-Site do stand de automóveis **Colibri Auto**, na Avenida Mário Brito 3343, Perafita (Matosinhos) — catálogo de viaturas, fichas detalhadas, contactos, e os pedidos de avaliação e de viatura por encomenda. Conteúdo em português europeu.
+Site do stand de automóveis **Colibri Auto**, na Avenida Maria Brito 3343, Perafita (Matosinhos) — catálogo de viaturas, fichas detalhadas, contactos, e os pedidos de avaliação e de viatura por encomenda. Conteúdo em português europeu.
 
 > **Estado: proposta.** Isto ainda não foi apresentado ao cliente. O que está aqui foi construído a partir das fontes públicas deles — o [Instagram](https://www.instagram.com/colibriauto_stand/) e o [perfil no Standvirtual](https://colibriauto.standvirtual.com/inventory) — para levar à reunião um site a funcionar em vez de uma proposta em papel. O que falta confirmar com eles está em [`docs/por-confirmar.md`](docs/por-confirmar.md), e é curto.
 
@@ -21,6 +21,7 @@ Não é preciso configurar nada: as viaturas vivem em `src/data/viaturas.ts` e o
 | `npm run build` | Build de produção |
 | `npm run lint` | ESLint sobre `src/` |
 | `npm run check:seo` | Valida a metadata de todas as rotas |
+| `npm run check:contraste` | Verifica o contraste WCAG dos pares de cor do sistema |
 | `npx tsc --noEmit` | Verificação de tipos |
 
 ## Stack

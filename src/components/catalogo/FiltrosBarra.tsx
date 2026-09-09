@@ -38,7 +38,7 @@ function Seta({ aberta }: { aberta: boolean }) {
   return (
     <span
       aria-hidden
-      className={`text-laranja transition-transform duration-200 ${aberta ? "rotate-180" : ""}`}
+      className={`text-laranja-deep transition-transform duration-200 ${aberta ? "rotate-180" : ""}`}
     >
       ▾
     </span>
@@ -76,7 +76,7 @@ export function FiltrosBarra({
   );
 
   return (
-    <div className="rounded-2xl border border-line/60 bg-surface">
+    <div className="rounded-2xl border border-line/60 bg-surface shadow-card">
       <div className="grid grid-cols-2 gap-4 p-5 xl:grid-cols-6">
         <SelectField
           rotulo="Marca"
@@ -139,7 +139,7 @@ export function FiltrosBarra({
           type="button"
           onClick={() => setAberta((a) => !a)}
           aria-expanded={aberta}
-          className="press flex h-[46px] items-center justify-center gap-2 self-end rounded-xl border border-line px-4 text-sm text-creme transition-colors hover:border-laranja hover:text-laranja-bright"
+          className="press flex h-[46px] items-center justify-center gap-2 self-end rounded-xl border border-line px-4 text-sm text-ink transition-colors hover:border-laranja hover:text-laranja-deep"
         >
           Preço, ano e km
           <Seta aberta={aberta} />
@@ -203,7 +203,7 @@ export function FiltrosBarra({
           <button
             type="button"
             onClick={onLimpar}
-            className="text-xs text-muted underline-offset-4 transition-colors hover:text-laranja-bright hover:underline"
+            className="text-xs text-muted underline-offset-4 transition-colors hover:text-laranja-deep hover:underline"
           >
             Limpar parâmetros
           </button>

@@ -32,7 +32,7 @@ export function dadosStand(lista: Viatura[]) {
     logo: urlAbsoluto("/logo/colibri-mark-md.png"),
     image: urlAbsoluto("/opengraph-image"),
     description:
-      "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Mário Brito 3343, Matosinhos.",
+      "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Maria Brito 3343, Matosinhos.",
     telephone: [stand.telemovel, stand.telefone].map(
       (n) => `+351${n.replaceAll(" ", "")}`,
     ),

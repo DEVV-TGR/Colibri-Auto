@@ -64,7 +64,7 @@ export function FormularioDeEntrada() {
       <button
         type="submit"
         disabled={aPedir}
-        className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60"
+        className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-ink disabled:opacity-60"
       >
         {aPedir ? "A enviar…" : "Receber código"}
       </button>

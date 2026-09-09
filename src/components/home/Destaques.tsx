@@ -15,7 +15,7 @@ export function Destaques({ destaques }: { destaques: Viatura[] }) {
           titulo={
             <>
               {porExtenso(destaques.length)} para{" "}
-              <span className="font-extrabold text-laranja">começar</span>.
+              <span className="font-extrabold text-laranja-deep">começar</span>.
             </>
           }
           accao={

@@ -6,14 +6,22 @@
 
 ## De onde vem a cor
 
-Do logótipo, e de mais lado nenhum. O selo da Colibri é laranja `#FB7803`
-sobre antracite `#1D1D1D` — é a cor que está pintada na lona à porta do stand,
-a mesma que aparece no fundo de todas as fotografias do inventário. O site tem
-de bater com ela, e é por isso que o `--laranja` é o valor medido do ficheiro e
-não uma versão "melhorada".
+Do logótipo, e de mais lado nenhum. O selo da Colibri é laranja `#FB7803` e
+antracite `#1D1D1D`, **sobre branco** — a mesma cor que está pintada na lona à
+porta do stand e que aparece no fundo de todas as fotografias do inventário. O
+site tem de bater com ela, e é por isso que o `--laranja` é o valor medido do
+ficheiro e não uma versão "melhorada".
 
-Tema escuro fixo. Todas as cores em **OKLCH**, definidas em `:root` e expostas
-ao Tailwind por `@theme inline`.
+**Tema claro fixo.** O site nasceu escuro, herdado do Império Auto Concept, que
+vendia Porsches e Jaguars — num stand assim o preto é o argumento. Aqui
+trabalhava contra o único material bom que há: o logótipo está sobre branco, a
+lona está ao sol, e as fotografias todas são de dia, com relva verde e carros
+brancos. Num fundo preto ficavam baças, e o site parecia — palavras do
+cliente — «escuro e morto».
+
+Todas as cores em **OKLCH**, definidas em `:root` e expostas ao Tailwind por
+`@theme inline`. Os pares que interessam são verificados por
+`npm run check:contraste`, que lê os valores deste ficheiro.
 
 ## Tokens
 
@@ -21,48 +29,74 @@ ao Tailwind por `@theme inline`.
 
 | Token | Valor | Papel | Utility |
 |---|---|---|---|
-| `--background` | `oklch(0.13 0 0)` | Fundo base. Neutro puro, croma 0 | `bg-background` |
-| `--surface` | `oklch(0.18 0 0)` | Cards, painéis, footer. Neutro puro | `bg-surface` |
-| `--raised` | `oklch(0.21 0.014 50)` | Superfície elevada, ligeiramente quente | `bg-raised` |
-| `--line` | `oklch(0.27 0.018 50)` | Bordas e divisores | `border-line` |
+| `--background` | `oklch(0.97 0.006 65)` | Papel. Off-white morno, **não branco puro** | `bg-background` |
+| `--surface` | `oklch(1 0 0)` | Cards e painéis — brancos, para levantarem do papel | `bg-surface` |
+| `--raised` | `oklch(0.945 0.010 62)` | Bandas alternadas, dão ritmo à página | `bg-raised` |
+| `--areia` | `oklch(0.955 0.035 68)` | Lavagem laranja pálida | `bg-areia` |
+| `--line` | `oklch(0.89 0.012 60)` | Bordas e divisores | `border-line` |
+| `--escuro` | `oklch(0.235 0.006 60)` | O antracite do logótipo, agora **fundo**: rodapé | `.faixa-escura` |
+| `--escuro-muted` | `oklch(0.72 0.012 60)` | Texto secundário **dentro** de uma faixa escura | `text-escuro-muted` |
 
-Repare na progressão de temperatura: os dois fundos mais escuros são **neutros
-puros**; o calor entra só a partir do `--raised`, e entra pelo **hue do laranja
-da marca (50)**. Isto é herança corrigida — o sistema de origem punha aqui o
-hue do âmbar (85), e a diferença vê-se nas bordas de todos os cards da
-listagem.
+A inversão de papéis é o ponto. No tema escuro os cards eram mais claros que o
+fundo e separavam-se por borda; aqui são brancos sobre papel e separam-se por
+**luz**, com `shadow-card`.
+
+É por isso que o `--background` não é branco puro. Sem o papel morno por baixo,
+um card branco sobre branco não existe e a página fica uma folha em branco com
+texto lá dentro. Os 0.006 de croma a hue 65 não se leem como cor — leem-se como
+a diferença entre o card e o chão.
+
+O `--escuro-muted` existe porque o `--muted` foi calibrado para o papel: dentro
+do rodapé dá 2,8:1 e não passa. Usar o token errado ali é o engano mais fácil
+de cometer neste sistema, e `npm run check:contraste` apanha-o.
 
 ### Laranjas
 
 | Token | Valor | Papel | Utility |
 |---|---|---|---|
-| `--laranja` | `oklch(0.71 0.187 50)` | Laranja primário: CTA, bordas activas, ícones, indicadores | `text-laranja` `bg-laranja` |
-| `--laranja-bright` | `oklch(0.81 0.15 58)` | Hover e realce | `hover:text-laranja-bright` |
-| `--laranja-deep` | `oklch(0.52 0.155 42)` | Separadores, glifos, extremos dos gradientes | `text-laranja-deep` |
-| `--creme` | `oklch(0.90 0.045 62)` | Texto laranja suave, botões de contorno | `text-creme` |
+| `--laranja` | `oklch(0.71 0.187 50)` | O `#FB7803` do logótipo. **Superfície**, nunca texto | `bg-laranja` `.laranja-fill` |
+| `--laranja-bright` | `oklch(0.78 0.16 55)` | Fim do degradê e hover de superfície | — |
+| `--laranja-deep` | `oklch(0.55 0.17 45)` | **Texto**, links, ícones, o `01` das secções | `text-laranja-deep` |
 
-Os três laranjas são **o mesmo pigmento mais claro e mais escuro**, com o hue a
-rodar para o vermelho à medida que escurece (58 → 50 → 42), que é como uma
-tinta quente se comporta. Não são reflexos de um metal — ver "Materiais".
+### A inversão que governa o tema claro
+
+Sobre branco, o `--laranja` a `L 0.71` dá **2,6:1** para texto e não passa.
+Como fundo, com antracite por cima, dá **6,1:1** e passa com folga.
+
+Ou seja: **o laranja é cor de mancha e não cor de letra**, e o texto por cima
+dele é `--ink` — declarado na própria `.laranja-fill`, para não depender de
+cada sítio se lembrar. Não é um compromisso de acessibilidade: é exactamente o
+que o logótipo faz, com «Colibri Auto» escrito a antracite dentro do selo
+laranja. O sistema passou a fazer o que a marca já fazia.
+
+Para laranja em texto existe o `--laranja-deep`, a `L 0.55`, que dá 4,8:1 sobre
+o papel. **Não existe `text-laranja`** — se aparecer, é código copiado do tema
+escuro.
 
 Dois limites, os dois estreitos:
 
 - **Subir a croma do `--laranja`** põe-no fora do sRGB. O browser corta-o à
   bruta e a cor deixa de bater com o logótipo, que era o ponto todo.
-- **Subir a croma do `--creme`** acima de ~0.05 transforma-o num segundo
-  laranja, e a paleta passa a ter duas cores de marca em vez de uma.
+- **Subir a claridade do `--laranja-deep`** acima de ~0.57 fá-lo cair abaixo de
+  4,5:1 sobre o papel, e o `check:contraste` falha.
 
 ### Cores de estado
 
 | Token | Valor | Papel | Utility |
 |---|---|---|---|
-| `--vendido` | `oklch(0.32 0.008 50)` | Fundo do badge "Vendido" | `bg-vendido` |
-| `--vendido-linha` | `oklch(0.44 0.012 50)` | Borda do mesmo | `border-vendido-linha` |
-| `--sucesso` | `oklch(0.62 0.12 152)` | Disponível, no painel | `bg-sucesso` `text-sucesso` |
-| `--sucesso-deep` | `oklch(0.48 0.1 152)` | Bordas e fundos esbatidos | `border-sucesso-deep` |
-| `--erro` | `oklch(0.58 0.19 22)` | Erro: fundo a 10% | `bg-erro/10` |
-| `--erro-deep` | `oklch(0.44 0.16 22)` | Erro: borda | `border-erro-deep` |
-| `--erro-bright` | `oklch(0.72 0.17 22)` | Erro: texto | `text-erro-bright` |
+| `--vendido` | `oklch(0.925 0.006 60)` | Fundo do badge "Vendido" | `bg-vendido` |
+| `--vendido-linha` | `oklch(0.80 0.008 60)` | Borda do mesmo | `border-vendido-linha` |
+| `--sucesso` | `oklch(0.45 0.13 152)` | Disponível, no painel | `bg-sucesso` `text-sucesso` |
+| `--sucesso-deep` | `oklch(0.38 0.11 152)` | Bordas e fundos esbatidos | `border-sucesso-deep` |
+| `--erro` | `oklch(0.50 0.20 25)` | Erro: texto e fundo a 10% | `bg-erro/10` |
+| `--erro-deep` | `oklch(0.42 0.17 25)` | Erro: borda | `border-erro-deep` |
+| `--erro-bright` | `oklch(0.50 0.20 25)` | Erro: texto | `text-erro-bright` |
+
+Os estados foram **escurecidos** na passagem a claro. Os valores do tema escuro
+eram claros de propósito, para brilharem sobre preto; sobre papel ficavam
+ilegíveis. O `--vendido` foi ao contrário — subiu de `L 0.90` para `L 0.925`
+porque o `check:contraste` o apanhou a 4,46:1 contra o texto esbatido, quatro
+centésimas abaixo do mínimo. Foi a primeira coisa que o script encontrou.
 
 #### Porque é que o "Vendido" não é vermelho
 
@@ -92,8 +126,12 @@ a listagem virava um semáforo.
 
 | Token | Valor | Papel | Utility |
 |---|---|---|---|
-| `--ink` | `oklch(0.96 0.012 95)` | Texto principal, branco quente | `text-ink` |
-| `--muted` | `oklch(0.7 0.022 95)` | Texto secundário, rótulos, meta | `text-muted` |
+| `--ink` | `oklch(0.235 0.006 60)` | Texto principal. É o antracite do logótipo | `text-ink` |
+| `--muted` | `oklch(0.50 0.014 60)` | Texto secundário, rótulos, meta | `text-muted` |
+
+O `--muted` a `L 0.50` não é um valor bonito, é o **limite**: a 0.52 cai para
+4,3:1 sobre o papel e deixa de passar. Não subir sem correr o
+`check:contraste`.
 
 ## A hierarquia do laranja
 
@@ -102,18 +140,21 @@ outro:
 
 | Tom | Onde entra |
 |---|---|
-| `laranja` | Fundo de CTA primário, borda activa/focada, link de nav activo, ponto activo do carrossel, `▾` dos selects, `:focus-visible` |
-| `laranja-bright` | **Hover de texto**, e só isso |
-| `laranja-deep` | Separador `·` entre metadados, bullet `◆` dos extras, extremos dos gradientes, anel do thumb dos sliders |
-| `creme` | Texto de botão de contorno, notas informativas discretas |
+| `laranja` | **Superfícies**: CTA, etiquetas de preço, `FaixaLona`, badge "Reservado", ponto activo do carrossel, borda activa/focada, `:focus-visible`. Nunca texto |
+| `laranja-bright` | Fim do degradê da `.laranja-fill` e o seu hover |
+| `laranja-deep` | **Tudo o que é laranja em texto**: links, o `01` das secções, eyebrows, separador `·`, bullet `◆`, `▾` dos selects |
 
-Corolário prático — os dois estados de hover do projecto:
+Corolário prático — os três estados de hover do projecto:
 
 ```
-texto  →  hover:text-laranja-bright
+texto  →  hover:text-laranja-deep
 borda  →  hover:border-laranja
-card   →  hover:border-laranja/50
+área   →  hover:bg-laranja/10        (botão de contorno)
 ```
+
+O terceiro é novo do tema claro. Sobre preto, mudar a cor da letra no hover
+lia-se de imediato; sobre papel, acender a área lê-se melhor do que mudar o tom
+de uma palavra.
 
 ## Materiais
 
@@ -181,8 +222,12 @@ de ser tocável.
 **Card canónico:**
 
 ```
-rounded-2xl border border-line/60 bg-surface
+rounded-2xl border border-line/60 bg-surface shadow-card
 ```
+
+O `shadow-card` é o que mudou com o tema. Num fundo escuro, um card mais claro
+que o chão separa-se sozinho e a borda chegava; num fundo claro, um card branco
+sobre papel precisa de luz por baixo para existir.
 
 Com hover, quando o card é interactivo:
 
@@ -201,32 +246,39 @@ translúcidas com blur:
 | Scrim do drawer de filtros | `bg-background/50 backdrop-blur-sm` |
 | Lightbox | `bg-background/95 backdrop-blur-xl` |
 
-**Sombras — só para o que flutua.** Badges sobre fotos
-(`shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]`), CTA flutuante
-(`shadow-lg shadow-black/40`), drawer de filtros (`shadow-2xl shadow-black/60`).
-**Cards estáticos não levam sombra** — a separação vem da borda, não da
-elevação.
+**Sombras — dois níveis, e ambos são tokens.**
+
+| Token | Utility | Onde |
+|---|---|---|
+| `--sombra-card` | `shadow-card` | Cards, a barra de filtros, o cartão sticky, os CTA laranja |
+| `--sombra-alta` | `shadow-alta` | O que flutua sobre outro conteúdo: cartão de contactos sobre o mapa, drawer de filtros |
+
+A regra do tema escuro era «cards estáticos não levam sombra». Deixou de valer:
+aqui a sombra baixa **é** o que separa o card do chão. O que se mantém é a
+proporção — quem flutua leva mais sombra do que quem assenta.
 
 ## Gradientes sobre fotos
 
-Sempre a partir de `from-background`, **nunca preto puro** — preto puro sobre
-`oklch(0.13 0 0)` cria uma banda visível. Sempre `pointer-events-none`.
+Sempre a partir de `from-background`, **nunca branco puro** — branco puro sobre
+o papel morno cria uma banda visível. Sempre `pointer-events-none`.
 
 ```
-Ficha, véu inferior:  bg-gradient-to-t from-background via-background/40 to-transparent
-Ficha, véu superior:  bg-gradient-to-b from-background via-background/60 to-transparent
-Carrossel, base:      bg-gradient-to-t from-background/90 to-transparent
-Rail, pontas:         bg-gradient-to-r|l from-background to-transparent
+Ficha, véu inferior:  h-2/3  bg-gradient-to-t from-background via-background/70 to-transparent
+Ficha, véu superior:  h-32   bg-gradient-to-b from-background via-background/45 to-transparent
+Carrossel, base:             bg-gradient-to-t from-background/90 to-transparent
+Montra, nome da tira:        bg-gradient-to-t from-surface via-surface/85 to-transparent
 ```
 
-A abertura da home não leva véu nenhum — não tem fotografia por baixo. Onde os
-véus fazem falta é na **abertura da ficha de viatura**, que é de largura total
-e leva o percurso em cima e o título em baixo, os dois por cima da fotografia.
+**Os véus da ficha cobrem troços, não a imagem toda.** É a correcção que o tema
+claro obrigou a fazer: no escuro, um véu a atravessar a fotografia inteira
+escurecia-a e passava despercebido; a claro **lava-a** de ponta a ponta, e o
+que se ganha em leitura perde-se todo no carro. O de baixo cobre dois terços, o
+de cima 128px, e o meio da fotografia fica com a cor que tem.
 
-O véu de cima é mais forte do que a intuição pede (`via-background/60`), e a
-razão tem nome: a Mazda CX-3 é branca e ocupa o topo do enquadramento. Estas
-fotografias não têm enquadramento combinado — são as que o stand tirou — e o
-véu tem de aguentar a mais clara delas.
+A abertura da home não leva véu nenhum, e é por isso que o texto dela **não**
+assenta sobre fotografia: antracite sobre relva verde e lona laranja não se lê,
+e a alternativa era escurecer a imagem — ou seja, voltar ao tema escuro por
+outra porta.
 
 ## Foco
 
@@ -239,7 +291,7 @@ Definido globalmente, uma vez:
 Não sobrepor por componente. Se um controlo precisar de foco diferente, o
 problema é o controlo.
 
-E a selecção de texto: `::selection` é `background: laranja; color: background`.
+E a selecção de texto: `::selection` é `background: laranja; color: ink` — pela mesma razão que tudo o resto sobre laranja.
 
 ## Nunca
 
@@ -251,15 +303,21 @@ E a selecção de texto: `::selection` é `background: laranja; color: backgroun
   existe; se faltar, acrescenta-se lá.
 - **Voltar a pôr o "Vendido" a vermelho.** Ver a secção acima — colide com a
   cor da marca, e o vermelho está reservado a erro.
-- **Usar laranja em áreas grandes.** É cor de acção e realce. Um painel laranja
-  inteiro quebra o registo imediatamente — e este é o risco maior aqui, porque
-  a lona do stand é exactamente isso e a tentação de a imitar é real.
+- **Usar `text-laranja`.** Não passa contraste sobre papel. Para laranja em
+  texto existe o `--laranja-deep`, sempre.
+- **Usar laranja em áreas grandes, com uma excepção.** A excepção é a
+  `FaixaLona`, e está justificada no próprio componente: ali a área laranja
+  **é** a identidade, está à porta do stand em seis metros de lona. Uma
+  segunda banda deixa de ser identidade e passa a ser um tema laranja.
+- **Usar o `--muted` dentro de uma faixa escura.** É `--escuro-muted`; o outro
+  dá 2,8:1 ali.
 - **Aumentar a croma dos laranjas.** Sai do sRGB, o browser corta, e a cor
   deixa de bater com o logótipo.
 - **Alargar os degradês para cinco paragens.** É o sistema antigo a voltar.
-- **Pôr sombra em cards estáticos.**
-- **Usar preto puro** em gradientes ou fundos; usar `from-background`.
-- **Introduzir light mode, classes `dark:` ou media queries de tema.** O tema é
-  escuro e fixo.
+- **Usar branco puro** em gradientes; usar `from-background`.
+- **Introduzir dark mode, classes `dark:` ou media queries de tema.** O tema é
+  claro e fixo.
+- **Mexer num token sem correr `npm run check:contraste`.** Vários estão no
+  limite por serem o valor mais forte que ainda passa.
 - **Espalhar `.text-laranja-metal`.** Um uso, em texto grande.
 - **Sobrepor `:focus-visible`** por componente.

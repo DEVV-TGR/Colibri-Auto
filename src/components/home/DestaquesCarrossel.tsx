@@ -56,11 +56,11 @@ function Badge({ viatura }: { viatura: Viatura }) {
     viatura.estadoVenda === "vendido"
       ? { txt: "Vendido", cls: "vendido-fill" }
       : viatura.estadoVenda === "reservado"
-        ? { txt: "Reservado", cls: "laranja-fill text-background" }
+        ? { txt: "Reservado", cls: "laranja-fill text-ink" }
         : viatura.ivaDedutivel
           ? {
               txt: "IVA Dedutível",
-              cls: "border border-laranja/60 bg-background/70 text-creme",
+              cls: "border border-laranja/60 bg-background/70 text-ink",
             }
           : null;
   if (!t) return null;
@@ -180,7 +180,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
           type="button"
           aria-label="Anterior"
           onClick={() => setActivo((a) => a - 1)}
-          className="press absolute left-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-laranja-bright sm:left-4"
+          className="press absolute left-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-laranja-deep sm:left-4"
         >
           ‹
         </button>
@@ -188,7 +188,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
           type="button"
           aria-label="Seguinte"
           onClick={() => setActivo((a) => a + 1)}
-          className="press absolute right-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-laranja-bright sm:right-4"
+          className="press absolute right-1 top-[38%] z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-thin text-ink/70 hover:text-laranja-deep sm:right-4"
         >
           ›
         </button>
@@ -272,7 +272,7 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                           ver `CarCard.tsx` para a razão de ela viver sobre a
                           fotografia. Aqui é maior, porque o card também é. */}
                       {!vendido && (
-                        <p className="laranja-fill absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-display text-base font-medium text-background shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
+                        <p className="laranja-fill absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-display text-base font-medium text-ink shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
                           {formatarPreco(v.preco)}
                         </p>
                       )}
@@ -290,23 +290,23 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                         }`}
                       />
                       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/90 to-transparent" />
-                      <div className="pointer-events-none absolute inset-x-0 bottom-3 flex items-center justify-center gap-4 text-[13px] font-medium text-creme">
+                      <div className="pointer-events-none absolute inset-x-0 bottom-3 flex items-center justify-center gap-4 text-[13px] font-medium text-ink">
                         <span className="flex items-center gap-1.5">
-                          <span className="text-laranja">
+                          <span className="text-laranja-deep">
                             <IconeCalendario />
                           </span>
                           {formatarRegisto(v.registoMes, v.registoAno)}
                         </span>
                         <span className="h-4 w-px bg-line" />
                         <span className="flex items-center gap-1.5">
-                          <span className="text-laranja">
+                          <span className="text-laranja-deep">
                             <IconeCombustivel />
                           </span>
                           {v.combustivel}
                         </span>
                         <span className="h-4 w-px bg-line" />
                         <span className="flex items-center gap-1.5">
-                          <span className="text-laranja">
+                          <span className="text-laranja-deep">
                             <IconeKm />
                           </span>
                           {vendido ? "—" : formatarNumero(v.quilometros)}
@@ -323,17 +323,17 @@ export function DestaquesCarrossel({ destaques }: { destaques: Viatura[] }) {
                       carros.
                     */}
                     <div className="relative px-6 pb-6 pt-6">
-                      <h3 className="font-display text-2xl leading-tight text-ink transition-colors group-hover:text-laranja-bright">
+                      <h3 className="font-display text-2xl leading-tight text-ink transition-colors group-hover:text-laranja-deep">
                         {v.marca} {v.modelo}
                       </h3>
                       <p className="mt-1 line-clamp-1 text-base text-muted">
                         {v.versao}
                       </p>
-                      <p className="mt-5 flex items-center gap-2 text-sm text-creme">
+                      <p className="mt-5 flex items-center gap-2 text-sm text-ink">
                         {vendido ? "Vendida" : "Ver ficha"}
                         <span
                           aria-hidden
-                          className="text-laranja transition-transform duration-300 group-hover:translate-x-1"
+                          className="text-laranja-deep transition-transform duration-300 group-hover:translate-x-1"
                         >
                           →
                         </span>

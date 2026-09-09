@@ -47,7 +47,7 @@ function Campo({
         {children}
         <span
           aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja-deep"
         >
           ▾
         </span>
@@ -149,7 +149,7 @@ export function BarraPesquisa({ viaturas }: { viaturas: Viatura[] }) {
           <button
             type="button"
             onClick={pesquisar}
-            className="laranja-fill press h-[46px] rounded-xl px-7 text-sm font-medium text-background"
+            className="laranja-fill press h-[46px] rounded-xl px-7 text-sm font-medium text-ink"
           >
             Ver <Contador valor={resultados} />{" "}
             {resultados === 1 ? "viatura" : "viaturas"}
@@ -176,12 +176,24 @@ export function BarraPesquisa({ viaturas }: { viaturas: Viatura[] }) {
               <Link
                 key={m.slug}
                 href={urlViaturasPorMarca(m.slug)}
-                className="press flex items-center opacity-60 transition-opacity duration-300 hover:opacity-100"
+                className="press flex items-center opacity-70 transition-opacity duration-300 hover:opacity-100"
                 aria-label={`Ver ${m.nome}`}
               >
                 {logo ? (
+                  /*
+                    Os logótipos são monocromáticos **brancos** — foram
+                    escolhidos assim para o tema escuro, e sobre papel ficavam
+                    invisíveis. O `invert` resolve os dois formatos de uma vez:
+                    o `fill="#ffffff"` dos SVG e o branco dos WEBP tornam-se
+                    pretos, e o canal alfa não é tocado, portanto o recorte
+                    mantém-se.
+                    
+                    É preferível a trocar os ficheiros: o dia em que o site
+                    tiver uma faixa escura com marcas lá dentro, tira-se o
+                    `invert` nesse sítio e os mesmos ficheiros servem.
+                  */
                   // eslint-disable-next-line @next/next/no-img-element -- logótipo estático em /public (mistura de svg/webp)
-                  <img src={logo} alt={m.nome} className="h-6 w-auto max-w-[110px] object-contain" />
+                  <img src={logo} alt={m.nome} className="h-6 w-auto max-w-[110px] object-contain invert" />
                 ) : (
                   <span className="text-sm text-ink">{m.nome}</span>
                 )}

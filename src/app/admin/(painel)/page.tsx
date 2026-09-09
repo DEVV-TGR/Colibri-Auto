@@ -44,7 +44,7 @@ const ESTADO: Record<EstadoVenda, { texto: string; classe: string }> = {
   },
   reservado: {
     texto: "Reservado",
-    classe: "border-laranja-deep bg-laranja/10 text-laranja",
+    classe: "border-laranja-deep bg-laranja/10 text-laranja-deep",
   },
   /*
     Grafite, e não vermelho. O vermelho ficou reservado a erro — uma viatura
@@ -160,7 +160,7 @@ export default async function Painel() {
           </p>
           <Link
             href="/admin/viaturas/nova"
-            className="laranja-fill press mt-8 inline-block rounded-full px-6 py-3 text-sm font-medium text-background"
+            className="laranja-fill press mt-8 inline-block rounded-full px-6 py-3 text-sm font-medium text-ink"
           >
             Adicionar viatura
           </Link>
@@ -280,7 +280,7 @@ function Moldura({
           {total !== undefined && (
             <Link
               href="/admin/viaturas/nova"
-              className="laranja-fill press inline-flex h-10 items-center justify-center rounded-full px-5 text-sm font-medium text-background"
+              className="laranja-fill press inline-flex h-10 items-center justify-center rounded-full px-5 text-sm font-medium text-ink"
             >
               + Adicionar
             </Link>

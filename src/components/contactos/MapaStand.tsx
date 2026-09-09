@@ -17,7 +17,10 @@ export function MapaStand({ className = "" }: { className?: string }) {
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         allowFullScreen
-        className="h-full w-full grayscale-[0.3] contrast-[1.05]"
+        /* Sem filtro. O `grayscale-[0.3] contrast-[1.05]` que aqui estava
+           servia para o mapa do Google não gritar contra um fundo preto; sobre
+           papel, dessaturar um mapa já claro só o deixa lavado. */
+        className="h-full w-full"
       />
     </div>
   );

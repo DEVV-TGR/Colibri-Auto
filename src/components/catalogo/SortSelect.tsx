@@ -28,7 +28,7 @@ export function SortSelect({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-laranja"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-laranja-deep"
         >
           ▾
         </span>

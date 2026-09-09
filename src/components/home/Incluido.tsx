@@ -70,7 +70,7 @@ export function Incluido({ viaturas }: { viaturas: Viatura[] }) {
             titulo={
               <>
                 O que vai no{" "}
-                <span className="font-extrabold text-laranja">preço</span>.
+                <span className="font-extrabold text-laranja-deep">preço</span>.
               </>
             }
           >
@@ -83,7 +83,7 @@ export function Incluido({ viaturas }: { viaturas: Viatura[] }) {
           <div className="mt-12 grid gap-6 border-y border-line/50 py-8 sm:grid-cols-3">
             {numeros.map((n) => (
               <div key={n.unidade}>
-                <p className="font-display text-5xl text-laranja">
+                <p className="font-display text-5xl text-laranja-deep">
                   <NumeroEmScroll valor={n.valor} />
                 </p>
                 <p className="mt-2 text-sm text-muted">{n.unidade}</p>
@@ -95,7 +95,7 @@ export function Incluido({ viaturas }: { viaturas: Viatura[] }) {
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CARTOES.map((c, i) => (
             <Reveal key={c.titulo} delay={i * 0.08} className="h-full">
-              <div className="h-full rounded-2xl border border-line/60 bg-background p-6">
+              <div className="h-full rounded-2xl border border-line/60 bg-surface p-6 shadow-card">
                 <div className="hairline w-10" />
                 <h3 className="mt-4 font-display text-xl text-ink">{c.titulo}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{c.texto}</p>

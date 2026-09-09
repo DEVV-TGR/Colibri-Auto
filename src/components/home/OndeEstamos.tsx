@@ -14,7 +14,7 @@ import { stand } from "@/data/stand";
   esquerda.
 
   Faz diferença para este stand em particular. A Colibri não está numa rua com
-  nome conhecido — está na Avenida Mário Brito, em Perafita, ao lado da A28.
+  nome conhecido — está na Avenida Maria Brito, em Perafita, ao lado da A28.
   Quem chega ao site pelo telemóvel quer perceber se lhe fica a caminho, e isso
   lê-se num mapa grande, não num postal.
 
@@ -45,8 +45,8 @@ export function OndeEstamos() {
             rotulo="Visitar"
             titulo={
               <>
-                Estamos na Avenida Mário{" "}
-                <span className="font-extrabold text-laranja">Brito</span>.
+                Estamos na Avenida Maria{" "}
+                <span className="font-extrabold text-laranja-deep">Brito</span>.
               </>
             }
           >

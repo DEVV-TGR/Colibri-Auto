@@ -23,7 +23,7 @@ export function ChamadaFinal() {
             <div className="max-w-xl">
               <p className="font-display h-sub text-ink">
                 Não está aqui o que{" "}
-                <span className="font-extrabold text-laranja">procura</span>?
+                <span className="font-extrabold text-laranja-deep">procura</span>?
               </p>
               <p className="mt-4 text-sm leading-relaxed text-muted">
                 Diga-nos a marca, o modelo e quanto quer gastar. Procuramos, e

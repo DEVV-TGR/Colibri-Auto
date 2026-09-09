@@ -72,43 +72,51 @@ export function AberturaViatura({ viatura }: { viatura: Viatura }) {
           />
         </motion.div>
 
-        {/* Dois véus: um assenta o texto em baixo, o outro dá contraste ao percurso no topo. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"
-        />
         {/*
-          O véu de cima é mais forte do que parece preciso, e a razão é a
-          Mazda: é branca, ocupa o topo do enquadramento, e a `/80` que aqui
-          estava deixava o percurso ilegível por cima dela. Estas fotografias
-          não têm enquadramento combinado — são o que o stand tirou — e o véu
-          tem de aguentar a mais clara delas.
+          Dois véus: um assenta o texto em baixo, o outro dá contraste ao
+          percurso no topo.
+
+          O de baixo cobre dois terços e não a altura toda (`inset-0`). Com o
+          tema escuro, um véu a atravessar a imagem inteira escurecia-a e
+          passava despercebido; a claro **lava** a fotografia de ponta a ponta,
+          e o que se ganha em leitura perde-se todo no carro. Cobrir só o troço
+          onde o texto assenta deixa o resto da imagem com a cor que tem.
         */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background via-background/60 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/70 to-transparent"
+        />
+        {/*
+          O véu de cima existe para o percurso — «Stock / Ford / Focus SW» —
+          se ler sobre o que quer que esteja no topo do enquadramento. Estas
+          fotografias não têm enquadramento combinado, são as que o stand
+          tirou, e há céu claro no topo de metade delas.
+        */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background via-background/45 to-transparent"
         />
 
         {!vendido && (
-          <p className="laranja-fill absolute right-4 top-20 z-10 rounded-full px-5 py-2.5 font-display text-xl font-medium text-background shadow-[0_2px_14px_-2px_rgba(0,0,0,0.6)] sm:right-8 sm:text-2xl">
+          <p className="laranja-fill absolute right-4 top-20 z-10 rounded-full px-5 py-2.5 font-display text-xl font-medium text-ink shadow-[0_2px_14px_-2px_rgba(0,0,0,0.6)] sm:right-8 sm:text-2xl">
             {formatarPreco(viatura.preco)}
           </p>
         )}
 
         <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-between px-4 pb-8 pt-24 sm:px-6">
           <nav aria-label="Percurso" className="text-xs text-muted">
-            <Link href="/viaturas" className="transition-colors hover:text-laranja-bright">
+            <Link href="/viaturas" className="transition-colors hover:text-laranja-deep">
               Stock
             </Link>
             <span className="mx-2 text-laranja-deep">/</span>
             <Link
               href={`/viaturas?marca=${viatura.marcaSlug}`}
-              className="transition-colors hover:text-laranja-bright"
+              className="transition-colors hover:text-laranja-deep"
             >
               {viatura.marca}
             </Link>
             <span className="mx-2 text-laranja-deep">/</span>
-            <span className="text-creme">{viatura.modelo}</span>
+            <span className="text-ink">{viatura.modelo}</span>
           </nav>
 
           {/*
@@ -131,7 +139,7 @@ export function AberturaViatura({ viatura }: { viatura: Viatura }) {
             </p>
             <h1 className="mt-2 font-display h-section text-ink">
               {nome}{" "}
-              <span className="font-extrabold text-laranja">{viatura.versao}</span>
+              <span className="font-extrabold text-laranja-deep">{viatura.versao}</span>
             </h1>
           </div>
         </div>
@@ -179,7 +187,7 @@ export function AberturaViatura({ viatura }: { viatura: Viatura }) {
         <button
           type="button"
           onClick={() => setLightbox(true)}
-          className={`press text-xs uppercase tracking-[0.15em] text-muted transition-colors hover:text-laranja-bright ${
+          className={`press text-xs uppercase tracking-[0.15em] text-muted transition-colors hover:text-laranja-deep ${
             viatura.fotos.length > 1 ? "mt-3" : "mt-5"
           }`}
         >

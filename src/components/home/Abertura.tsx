@@ -3,77 +3,87 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ENTRADA } from "@/components/ui/Reveal";
 import { BotaoLink } from "@/components/ui/Botao";
+import { NumeroEmScroll } from "@/components/ui/NumeroEmScroll";
 import { stand } from "@/data/stand";
+import { formatarPreco } from "@/lib/format";
 import { SITE_NAME } from "@/lib/site";
+import type { Viatura } from "@/lib/types";
 
 /*
   A abertura da home.
 
-  **Sem fotografia de fundo, e é essa a decisão.** O sistema de onde este site
-  veio abria com o showroom em ecrã inteiro por baixo de dois véus escuros —
-  funciona quando o espaço é o argumento de venda. O da Colibri é um terreno de
-  relva sintética com uma lona laranja atrás: é honesto, aparece em todas as
-  fotografias do inventário, e não aguenta ser ampliado a 92vh por trás de
-  texto.
+  **O texto não vai por cima das fotografias, e é uma decisão do tema claro.**
+  Antracite sobre uma fotografia atarefada — relva verde, lona laranja, um
+  carro — não se lê, e a alternativa seria escurecer a fotografia com um véu,
+  ou seja, voltar ao tema escuro por outra porta.
 
-  O que a Colibri tem para pôr em grande não é um espaço, é uma frase. Por
-  isso a abertura é tipográfica, sobre o antracite da marca, e a montra entra
-  logo a seguir no `RailStock` — em movimento e ao tamanho certo.
+  Fica em três andares, e cada um faz uma coisa:
+
+      papel   ·  a frase, os factos e os botões
+      montra  ·  as viaturas a atravessar o ecrã
+      lona    ·  a faixa laranja
+
+  Quem abre o site apanha os três de uma vez: tipografia grande sobre papel,
+  carros reais em movimento, e uma parede laranja. Nenhum é um efeito
+  inventado — são a frase do stand, o stock do stand e a lona do stand.
 
   O statement entra linha a linha por baixo de uma máscara. É o único sítio do
-  site com este gesto; passar a segunda linha a seguir à primeira é o que faz a
-  frase ler-se como fala e não como um bloco que apareceu.
+  site com este gesto; passar a segunda linha a seguir à primeira faz a frase
+  ler-se como fala e não como um bloco que apareceu.
 */
 
 const LINHAS = ["Carros usados", "sem letra pequena."] as const;
 
-const PROMESSAS = [
-  "Garantia incluída no preço",
-  "Financiamento",
-  "Aceitamos retoma",
-] as const;
-
-export function Abertura() {
+export function Abertura({ viaturas }: { viaturas: Viatura[] }) {
   const reduzido = useReducedMotion();
+
+  const disponiveis = viaturas.filter((v) => v.estadoVenda !== "vendido");
+  const emStock = disponiveis.length;
+
+  /*
+    O preço mais baixo é o mínimo real e **não** o `getIntervalos().preco[0]`.
+
+    O `getIntervalos` arredonda para fora, ao milhar, para dar limites redondos
+    aos sliders dos filtros — o que ali é certo e aqui era uma mentira: com a
+    viatura mais barata a 4 999 €, a abertura anunciava "desde 4 000 €" e não
+    havia nenhum carro por esse preço. Num sítio onde se diz um número a quem
+    acabou de chegar, o número tem de ser um carro que existe.
+  */
+  const maisBarato = Math.min(...disponiveis.map((v) => v.preco));
 
   /*
     Cada linha é uma caixa com `overflow-hidden` e o texto sobe de baixo. Com
-    movimento reduzido não há máscara nem deslocamento nenhum — devolve-se
-    `false` ao `initial`, que é o que diz ao motion para desenhar já no estado
-    final em vez de animar até lá.
+    movimento reduzido não há máscara nem deslocamento — devolve-se `false` ao
+    `initial`, que é o que diz ao motion para desenhar já no estado final.
 
     **`whileInView` e não `animate`, apesar de isto estar sempre à vista.** É o
-    padrão único de entrada do projecto (`docs/brand/06`), e não vale a pena
-    abrir uma excepção para a única coisa que aparece sem se fazer scroll:
-    estando a abertura no topo, o `IntersectionObserver` resolve no primeiro
-    fotograma e o resultado é indistinguível de uma animação de montagem.
-
-    Tem uma vantagem concreta sobre o `animate`: com `once: true`, se o
-    JavaScript demorar ou falhar, o texto fica no estado final em vez de ficar
-    preso fora da máscara. Um hero que não aparece é pior do que um hero que
-    não anima.
+    padrão único de entrada do projecto (`docs/brand/06`), e estando a abertura
+    no topo o `IntersectionObserver` resolve no primeiro fotograma. Tem ainda a
+    vantagem de, se o JavaScript demorar ou falhar, o texto ficar no estado
+    final em vez de preso fora da máscara: um hero que não aparece é pior do
+    que um hero que não anima.
   */
   const linha = (i: number) => ({
     initial: reduzido ? false : { y: "110%" },
     whileInView: { y: "0%" },
     viewport: { once: true },
-    transition: { duration: 0.9, delay: 0.15 + i * 0.12, ease: ENTRADA },
+    transition: { duration: 0.9, delay: 0.1 + i * 0.12, ease: ENTRADA },
   });
 
   return (
-    <section className="relative overflow-hidden border-b border-line/60 bg-background">
+    <section className="relative overflow-hidden bg-background">
       {/*
-        Um halo laranja muito esbatido atrás do texto, à esquerda. Faz o fundo
-        deixar de ser uma chapa de cor e dá profundidade sem introduzir imagem
-        nenhuma. `blur-[120px]` e opacidade baixa: se se vir como um círculo,
-        está errado.
+        Uma lavagem laranja muito esbatida em cima à direita, a apanhar o canto
+        que o texto deixa vazio. Sobre papel funciona ao contrário do halo que
+        aqui estava para o fundo escuro: em vez de dar profundidade a um vazio,
+        aquece a folha. Se se vir como um círculo, está errado.
       */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-0 h-[420px] w-[620px] rounded-full bg-laranja/10 blur-[120px]"
+        className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[720px] rounded-full bg-laranja/15 blur-[130px]"
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-40">
+      <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-32 sm:px-6 sm:pb-16 sm:pt-40">
         {/*
           O H1 real, para leitores de ecrã e para o Google: diz o negócio, a
           categoria e a localidade. O statement visível é uma frase de marca e
@@ -88,7 +98,7 @@ export function Abertura() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: ENTRADA }}
-          className="text-xs uppercase tracking-[0.3em] text-laranja"
+          className="text-xs uppercase tracking-[0.3em] text-laranja-deep"
         >
           Perafita · Matosinhos
         </motion.p>
@@ -106,34 +116,58 @@ export function Abertura() {
           ))}
         </p>
 
+        {/*
+          A linha de factos, no lugar da linha de promessas que aqui estava.
+
+          «Garantia incluída · Financiamento · Retoma» mudou-se para a faixa
+          laranja logo a seguir, onde tem seis vezes o tamanho. O que fica aqui
+          são números — quantos carros há e por quanto começam —, que é o que
+          alguém quer saber no segundo em que aterra e o que uma promessa não
+          responde. Saem os dois do inventário: mudam sozinhos quando o stock
+          mudar.
+        */}
         <motion.div
           initial={reduzido ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.5, ease: ENTRADA }}
-          className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted"
+          transition={{ duration: 0.7, delay: 0.45, ease: ENTRADA }}
+          className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-base text-muted"
         >
-          {PROMESSAS.map((p, i) => (
-            <span key={p} className="flex items-center gap-3">
-              {i > 0 && (
-                <span aria-hidden className="text-laranja-deep">
-                  ·
-                </span>
-              )}
-              {p}
-            </span>
-          ))}
+          <span>
+            <strong className="font-display text-xl font-extrabold text-ink">
+              <NumeroEmScroll valor={emStock} />
+            </strong>{" "}
+            viaturas em stock
+          </span>
+          <span aria-hidden className="text-laranja">
+            ◆
+          </span>
+          <span>
+            desde{" "}
+            <strong className="font-display text-xl font-extrabold text-ink">
+              {formatarPreco(maisBarato)}
+            </strong>
+          </span>
+          <span aria-hidden className="text-laranja">
+            ◆
+          </span>
+          <span>garantia incluída</span>
         </motion.div>
 
         <motion.div
           initial={reduzido ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.62, ease: ENTRADA }}
+          transition={{ duration: 0.7, delay: 0.58, ease: ENTRADA }}
           className="mt-10 flex flex-wrap gap-3"
         >
           <BotaoLink href="/viaturas">Ver o stock</BotaoLink>
-          <BotaoLink href={stand.whatsapp} variante="contorno" target="_blank" rel="noreferrer">
+          <BotaoLink
+            href={stand.whatsapp}
+            variante="contorno"
+            target="_blank"
+            rel="noreferrer"
+          >
             Falar no WhatsApp ↗
           </BotaoLink>
         </motion.div>

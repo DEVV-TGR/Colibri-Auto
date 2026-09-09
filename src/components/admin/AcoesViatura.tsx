@@ -63,7 +63,7 @@ export function AcoesViatura({ id, nome }: { id: string; nome: string }) {
           href={`/admin/viaturas/${id}`}
           aria-label={`Editar ${nome}`}
           title="Editar"
-          className="press flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-laranja"
+          className="press flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-raised hover:text-laranja-deep"
         >
           <IconeLapis />
         </Link>

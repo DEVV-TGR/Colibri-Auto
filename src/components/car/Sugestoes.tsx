@@ -12,7 +12,7 @@ export function Sugestoes({ sugestoes }: { sugestoes: Viatura[] }) {
           <div className="hairline w-16" />
           <h2 className="mt-5 font-display h-sub text-ink">
             Também temos{" "}
-            <span className="font-extrabold text-laranja">estas</span>.
+            <span className="font-extrabold text-laranja-deep">estas</span>.
           </h2>
         </Reveal>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

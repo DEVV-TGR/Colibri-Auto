@@ -1,73 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  /* fundos (tema escuro sempre).
+  /* fundos — tema claro fixo.
 
-     Os dois mais escuros são neutros puros; o calor entra a partir do
-     `--raised`, e entra pelo hue do laranja da marca (50) e não pelo âmbar
-     que aqui estava (85) — a diferença vê-se nas bordas de todos os cards. */
-  --background: oklch(0.13 0 0);
-  --surface: oklch(0.18 0 0);
-  --raised: oklch(0.21 0.014 50);
-  --line: oklch(0.27 0.018 50);
+     O site nasceu escuro, herdado de um stand que vendia Porsches; aí o preto
+     é o argumento. Aqui trabalha contra o único material bom que há: o
+     logótipo é laranja e antracite **sobre branco**, a lona está ao sol, e as
+     fotografias todas são de dia, com relva verde e carros brancos. Num fundo
+     preto ficavam baças.
 
-  /* laranjas — a cor da marca, tirada do próprio logótipo.
+     `--background` não é branco puro de propósito. Os cards são brancos e
+     separam-se do chão por luz e não por borda — sem o papel morno por baixo,
+     um card branco sobre branco não existe e a página fica uma folha em branco
+     com texto lá dentro. */
+  --background: oklch(0.97 0.006 65);
+  --surface: oklch(1 0 0);
+  --raised: oklch(0.945 0.010 62);
+  --line: oklch(0.89 0.012 60);
 
-     O `--laranja` é o `#FB7803` do selo, convertido para OKLCH sem arredondar
-     para "mais bonito": é a cor que está pintada na lona à porta do stand, nas
-     fotografias todas do inventário, e o site tem de bater com ela.
+  /* a lavagem laranja pálida. Serve para uma secção respirar cor sem ser uma
+     banda cheia — o meio-termo entre o papel e a faixa laranja. */
+  --areia: oklch(0.955 0.035 68);
 
-     Ao contrário do metálico de que este sistema veio, aqui não se procura
-     imitar matéria. Um laranja é tinta: os três tons são o mesmo laranja mais
-     claro e mais escuro, com o hue a rodar para o vermelho à medida que
-     escurece — que é como um pigmento quente se comporta — e não uma série de
-     reflexos. Subir a croma do `--laranja` põe-no fora do sRGB e o browser
-     corta-o à bruta; descê-la dá um tijolo. */
+  /* o antracite do logótipo, agora **fundo**: rodapé e faixas escuras. É o
+     único sítio onde a cor escura da marca aparece em massa. */
+  --escuro: oklch(0.235 0.006 60);
+  --escuro-muted: oklch(0.72 0.012 60);
+
+  /* laranjas — a cor da marca, medida do próprio logótipo.
+
+     **A inversão que governa o tema claro:** sobre branco, o `--laranja` a
+     L 0.71 dá 2,6:1 para texto, e não passa. Como fundo, com antracite por
+     cima, dá 6,1:1 e passa com folga.
+
+     Ou seja, o laranja deixa de ser cor de letra e passa a cor de mancha, com
+     o texto por cima a antracite. Não é um compromisso de acessibilidade — é
+     exactamente o que o logótipo faz: «Colibri Auto» está escrito a antracite
+     dentro do selo laranja. O sistema passou a fazer o que a marca já fazia.
+
+     Para laranja em texto — links, o `01` das secções, ícones — existe o
+     `--laranja-deep`, que a L 0.55 dá 4,8:1 sobre o papel. */
   --laranja: oklch(0.71 0.187 50);
-  --laranja-bright: oklch(0.81 0.15 58);
-  --laranja-deep: oklch(0.52 0.155 42);
+  --laranja-bright: oklch(0.78 0.16 55);
+  --laranja-deep: oklch(0.55 0.17 45);
 
-  /* o neutro claro e quente que acompanha o laranja: texto de botão de
-     contorno e notas discretas. Croma baixa de propósito — a esta claridade,
-     qualquer coisa acima de ~0.05 lê-se como um segundo laranja e a paleta
-     passa a ter duas cores de marca. */
-  --creme: oklch(0.90 0.045 62);
+  /* estado "vendido" — cinza claro com texto esbatido.
 
-  /* estado "vendido".
+     Continua a não ser vermelho, e a razão não mudou com o tema: o vermelho
+     ficava a 23° de hue do laranja da marca e, num card pequeno, o selo que
+     devia dizer "esta já não está à venda" lia-se como um selo da casa. O
+     tratamento a sério continua a ser a dessaturação da fotografia. */
+  --vendido: oklch(0.925 0.006 60);
+  --vendido-linha: oklch(0.80 0.008 60);
 
-     No sistema de origem isto era um vermelho metálico. Com uma marca laranja
-     deixa de dar: o vermelho estava a hue 27 e o laranja está a 50, com a
-     mesma croma — a 20px de distância num card são a mesma mancha, e o badge
-     que devia dizer "este já não está à venda" lia-se como um selo da casa.
-
-     O vendido passa a grafite: fundo de superfície, borda de linha, texto
-     esbatido. Não desaparece — continua a haver `opacity-60 saturate-50` na
-     fotografia, que é o tratamento a sério. O que desaparece é a competição
-     com a cor da marca. */
-  --vendido: oklch(0.32 0.008 50);
-  --vendido-linha: oklch(0.44 0.012 50);
-
-  /* estado "disponível" — o par semântico do vendido, para o painel, onde uma
-     tabela densa precisa de distinguir três estados de relance.
-
-     Mais claro e menos saturado que o laranja de propósito. Disponível é o
-     estado de quase todas as viaturas — se gritasse tanto como a cor da
-     marca, a listagem virava um semáforo. Hue 152, o verde mais neutro; a 145
-     puxa a amarelo e choca com o laranja. */
-  --sucesso: oklch(0.62 0.12 152);
-  --sucesso-deep: oklch(0.48 0.1 152);
-
-  /* vermelho, agora só para erro — validação de formulário e falha do painel.
-     Empurrado para hue 22 para se afastar o mais possível do laranja da marca
-     sem virar magenta. Três tons porque a mensagem de erro precisa dos três de
-     uma vez: borda (`deep`), fundo a 10% (`erro`) e texto (`bright`). */
-  --erro: oklch(0.58 0.19 22);
-  --erro-deep: oklch(0.44 0.16 22);
-  --erro-bright: oklch(0.72 0.17 22);
+  /* estados, escurecidos para o fundo claro. Os valores do tema escuro eram
+     claros de propósito, para brilharem sobre preto; sobre papel ficavam
+     ilegíveis. */
+  --sucesso: oklch(0.45 0.13 152);
+  --sucesso-deep: oklch(0.38 0.11 152);
+  --erro: oklch(0.50 0.20 25);
+  --erro-deep: oklch(0.42 0.17 25);
+  --erro-bright: oklch(0.50 0.20 25);
 
   /* texto */
-  --ink: oklch(0.96 0.012 95);
-  --muted: oklch(0.7 0.022 95);
+  --ink: oklch(0.235 0.006 60);
+  --muted: oklch(0.50 0.014 60);
+
+  /* sombras — o material que o tema claro traz e o escuro não tinha.
+
+     No escuro a separação vinha da borda, e a regra era "cards estáticos não
+     levam sombra". Num tema claro isso deixa de funcionar: um card branco
+     sobre papel morno precisa de luz por baixo para existir. A regra passa a
+     ser sombra baixa em cards, sombra alta no que flutua. */
+  --sombra-card: 0 1px 2px rgb(32 29 27 / 0.04), 0 8px 24px -12px rgb(32 29 27 / 0.10);
+  --sombra-alta: 0 2px 4px rgb(32 29 27 / 0.05), 0 20px 48px -16px rgb(32 29 27 / 0.16);
 }
 
 @theme inline {
@@ -78,7 +84,9 @@
   --color-laranja: var(--laranja);
   --color-laranja-bright: var(--laranja-bright);
   --color-laranja-deep: var(--laranja-deep);
-  --color-creme: var(--creme);
+  --color-areia: var(--areia);
+  --color-escuro: var(--escuro);
+  --color-escuro-muted: var(--escuro-muted);
   /* Todas as cores de estado ficam expostas ao Tailwind, sem excepção. No
      sistema de origem os vermelhos viviam em `:root` mas nunca chegaram aqui,
      e `bg-red`/`text-red` simplesmente não existiam — foi essa lacuna que
@@ -96,10 +104,12 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-display);
+  --shadow-card: var(--sombra-card);
+  --shadow-alta: var(--sombra-alta);
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -112,7 +122,7 @@ body {
 
 ::selection {
   background: var(--laranja);
-  color: var(--background);
+  color: var(--ink);
 }
 
 :focus-visible {
@@ -127,13 +137,13 @@ body {
    são finos como um cabelo e o peso na página fica leve. O Montserrat a 700 é
    uma mancha sólida — ao mesmo corpo esmagava a secção inteira.
 
-   Daí três correcções: o tecto do hero desce de 6.5rem para 5rem, o
+   Daí três correcções: o tecto do hero desce dos 6.5rem do Didone, o
    `letter-spacing` aperta (num grotesco pesado o espaço entre letras cresce
    opticamente com o corpo, e sem apertar o título parece desmontado), e as
    entrelinhas ganham um cabelo, porque as maiúsculas do Montserrat são altas
    e a 1.0 as linhas tocavam-se. */
 .h-hero {
-  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-size: clamp(3rem, 8vw, 6.25rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
@@ -194,11 +204,14 @@ body {
   margin-block: -0.14em;
   padding-inline: 0.06em;
   margin-inline: -0.06em;
+  /* Sobre papel os stops têm de ser os escuros: um degradê que passe pelo
+     `--laranja-bright` a meio de uma palavra deixa uma zona ilegível no meio
+     do título. Vai do `deep` ao `laranja` e pára aí. */
   background-image: linear-gradient(
     100deg,
     var(--laranja-deep) 0%,
-    var(--laranja) 45%,
-    var(--laranja-bright) 100%
+    var(--laranja-deep) 25%,
+    var(--laranja) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -206,16 +219,22 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* preenchimento das superfícies laranja: todos os CTA primários.
+/* preenchimento das superfícies laranja: os CTA primários, as etiquetas de
+   preço e o badge "Reservado".
 
-   O mesmo degradê de três paragens, na diagonal. Um botão laranja chapado a
-   `#FB7803` numa página escura fica com aspecto de rectângulo de aviso; o
-   degradê curto dá-lhe a mesma profundidade que o selo tem, sem o transformar
-   num efeito. */
+   **O texto por cima é antracite, e é a regra que governa o tema claro.** O
+   `--laranja` com branco por cima dá 2,6:1 e não passa; com o `--ink` dá
+   6,1:1. É também o que o logótipo faz — o nome do stand está escrito a
+   antracite dentro do selo laranja. O `color` fica declarado aqui para não
+   depender de cada sítio se lembrar.
+
+   O degradê é curto e já não começa no `--laranja-deep`: sobre papel, essa
+   ponta escura fazia o botão parecer sujo de um lado. */
 .laranja-fill {
+  color: var(--ink);
   background-image: linear-gradient(
     140deg,
-    var(--laranja-deep) 0%,
+    var(--laranja) 0%,
     var(--laranja) 45%,
     var(--laranja-bright) 100%
   );
@@ -232,6 +251,17 @@ body {
   background: var(--vendido);
   border: 1px solid var(--vendido-linha);
   color: var(--muted);
+}
+
+/* faixas escuras sobre o site claro — o rodapé, e qualquer secção que precise
+   de fechar a página. É o antracite do logótipo em massa, e o único sítio onde
+   ele aparece assim.
+
+   O texto esbatido lá dentro é o `--escuro-muted` e não o `--muted`: este foi
+   calibrado para o papel e sobre este fundo dá 2,8:1. */
+.faixa-escura {
+  background: var(--escuro);
+  color: var(--background);
 }
 
 /* resposta ao premir — botões e controlos.
@@ -256,44 +286,81 @@ body {
 
 /* linha fina laranja, assinatura visual do site */
 .hairline {
-  height: 1px;
+  /* 2px e não 1px: sobre papel, uma linha de um pixel a desvanecer nas pontas
+     desaparecia por completo. O que no escuro era subtil, aqui era invisível. */
+  height: 2px;
   background: linear-gradient(
     90deg,
     transparent,
-    var(--laranja-deep) 20%,
+    var(--laranja) 20%,
     var(--laranja) 50%,
-    var(--laranja-deep) 80%,
+    var(--laranja) 80%,
     transparent
   );
 }
 
-/* a montra a passar — `RailStock`.
+/* a montra e a faixa da lona — os dois marquees da home.
 
-   A fila é a lista de viaturas duplicada, e o deslocamento é de exactamente
-   uma cópia: quando a primeira acaba de sair pela esquerda, a segunda está no
-   sítio onde a primeira começou, e o ciclo recomeça sem salto.
+   A técnica é a mesma nos dois: a fila é o conteúdo **duplicado**, e o
+   deslocamento é de exactamente uma cópia. Quando a primeira acaba de sair, a
+   segunda está no sítio onde a primeira começou, e o ciclo recomeça sem salto.
 
-   O `calc(-50% - 0.5rem)` e não `-50%`: entre as duas cópias há uma goteira
-   (`--rail-goteira`), portanto meia largura fica meia goteira aquém do início
-   da segunda cópia. Sem a correcção o rail dá um solavanco de 8px a cada
-   volta — pequeno, mas é a única coisa que se vê nesta secção.
+   Na montra é `calc(-50% - goteira/2)` e não `-50%`: entre as duas cópias há
+   uma goteira, portanto meia largura fica meia goteira aquém do início da
+   segunda. Sem a correcção o rail dá um solavanco de 8px a cada volta —
+   pequeno, mas é a única coisa que se vê nesta secção. A faixa da lona não
+   precisa dela: as passagens estão encostadas e não há goteira nenhuma.
 
-   A duração vem do componente por `--rail-duracao`, para o valor viver ao pé
-   da razão de ser dele e não aqui. */
-.rail-fila {
-  --rail-goteira: 1rem;
+   As durações são diferentes de propósito. Duas filas à mesma velocidade lêem-
+   se como duas tiras; a velocidades diferentes lêem-se como profundidade, com
+   a mais rápida a parecer mais perto. */
+.montra-fila {
+  --montra-goteira: 1rem;
   display: flex;
   width: max-content;
-  gap: var(--rail-goteira);
-  animation: rail var(--rail-duracao, 44s) linear infinite;
+  gap: var(--montra-goteira);
 }
 
-@keyframes rail {
+.montra-esquerda {
+  animation: montra-esq 50s linear infinite;
+}
+
+.montra-direita {
+  animation: montra-dir 68s linear infinite;
+}
+
+@keyframes montra-esq {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(calc(-50% - (var(--rail-goteira) / 2)));
+    transform: translateX(calc(-50% - (var(--montra-goteira) / 2)));
+  }
+}
+
+/* A fila da direita arranca já deslocada e volta a zero — é o que a faz andar
+   no sentido contrário sem se duplicar a marcação nem inverter a lista. */
+@keyframes montra-dir {
+  from {
+    transform: translateX(calc(-50% - (var(--montra-goteira) / 2)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.faixa-fila {
+  display: flex;
+  width: max-content;
+  animation: faixa 38s linear infinite;
+}
+
+@keyframes faixa {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
@@ -347,5 +414,28 @@ body {
   /* sem a anulação, o botão continuava a encolher — só que de repente */
   .press:active {
     scale: 1;
+  }
+
+  /*
+    Os marquees precisam de `animation: none` e não do `0.01ms` da regra acima.
+
+    Acelerar uma animação para 0.01ms fá-la saltar para o **fim** — e o fim
+    destas é `translateX(-50%)`, ou seja, a fila deslocada de uma cópia
+    inteira. Quem pede movimento reduzido via a montra encostada à esquerda e a
+    faixa da lona a começar a meio de uma palavra. Anuladas, ficam no princípio
+    e leem-se como o que são: uma fila de fotografias e uma faixa com o lema.
+  */
+  .montra-esquerda,
+  .montra-direita,
+  .faixa-fila {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Sem animação, a montra deixa de andar e passa a ser uma fila que se
+     percorre à mão. Sem isto ficavam catorze fotografias cortadas na margem
+     sem forma de chegar às restantes. */
+  .montra-fila {
+    overflow-x: auto;
   }
 }

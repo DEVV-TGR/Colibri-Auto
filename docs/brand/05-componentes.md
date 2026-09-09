@@ -243,29 +243,59 @@ A régua anima `scaleX` com `origin-left`, e não a largura. Transformar não
 obriga o browser a recalcular a disposição da página a cada fotograma; uma
 largura obriga.
 
-### `RailStock` — a montra a passar
+### `MontraFundo` — o stock a atravessar o ecrã
 
-Tira de margem a margem com a capa de cada viatura, a correr da direita para a
-esquerda em 44s. Pára quando o rato entra. Cada tira liga à viatura e o nome
-aparece em hover.
+Duas filas com a capa de cada viatura, em **sentidos opostos** e a velocidades
+diferentes (50s e 68s), logo por baixo do título da abertura.
 
-**É cenário, não é o carrossel dos destaques**, e a distinção é o que os
-impede de se lerem como o mesmo elemento feito duas vezes:
+As duas filas não são decoração duplicada. Uma só lê-se como uma tira a passar;
+duas em sentidos contrários lêem-se como **profundidade**, com a mais rápida a
+parecer mais perto. Se as durações forem iguais, o efeito desaparece e ficam
+duas tiras.
 
-| | `RailStock` | `DestaquesCarrossel` |
+A segunda fila arranca a meio da lista. Com as duas a começarem na mesma
+viatura e a andarem em sentidos opostos, havia um instante em que as mesmas
+fotografias ficavam alinhadas na vertical — e via-se que era a mesma lista duas
+vezes.
+
+**É cenário, não é o carrossel dos destaques**, e a distinção é o que os impede
+de se lerem como o mesmo elemento feito duas vezes:
+
+| | `MontraFundo` | `DestaquesCarrossel` |
 |---|---|---|
 | O que é | Cenário. A montra a passar | Componente de produto |
-| Conteúdo | Só fotografia. Nome em hover | Foto, preço, meta, versão, ligação |
+| Conteúdo | Fotografia e nome | Foto, preço, meta, versão, ligação |
 | Escala | Tiras baixas, cortadas nas margens | Cards grandes, dentro do container |
 | Controlo | Nenhum | Setas, pontos, arrasto |
 
-Se alguma vez o rail ganhar um preço ou uma seta, passa a ser um segundo
+Se alguma vez a montra ganhar um preço ou uma seta, passa a ser um segundo
 carrossel — e aí um dos dois está a mais.
 
-A emenda: a fila é a lista **duplicada** e o deslocamento é de exactamente uma
-cópia, com a correcção de meia goteira (`calc(-50% - 0.5rem)` em `globals.css`).
-Sem ela o rail dá um solavanco de 8px a cada volta. A segunda cópia leva
-`aria-hidden` — para um leitor de ecrã são as mesmas viaturas.
+### `FaixaLona` — a lona à largura do ecrã
+
+Banda laranja de margem a margem com `COMPRA · VENDA · RETOMA · GARANTIA
+INCLUÍDA` a passar em maiúsculas pesadas antracite. É literalmente a lona
+pendurada à porta do stand.
+
+**Quebra a regra 2 do sistema de propósito** — «o laranja nunca preenche áreas
+grandes». A regra existe para impedir que o laranja se torne fundo por
+preguiça, e continua a valer em todo o lado menos aqui, onde a área laranja
+**é** a identidade. Uma banda, e só uma: a segunda deixa de ser identidade e
+passa a ser um tema laranja. Se aparecer o pedido de uma segunda, a resposta é
+mudar esta de sítio.
+
+### A emenda dos dois marquees
+
+A técnica é a mesma nos dois: a fila é o conteúdo **duplicado**, e o
+deslocamento é de exactamente uma cópia. Quando a primeira acaba de sair, a
+segunda está no sítio onde a primeira começou.
+
+Na montra é `calc(-50% - goteira/2)` e não `-50%`, porque entre as cópias há
+uma goteira; sem a correcção dá um solavanco de 8px a cada volta. A faixa não
+precisa dela — as passagens estão encostadas.
+
+A segunda cópia leva sempre `aria-hidden`: para um leitor de ecrã é o mesmo
+conteúdo, e anunciá-lo duas vezes seria mentira.
 
 ### `FiltrosBarra` — os filtros no topo
 

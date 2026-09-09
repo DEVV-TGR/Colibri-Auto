@@ -60,13 +60,13 @@ export function Lightbox({
         >
           <div className="flex items-center justify-between px-5 py-4">
             <p className="text-sm text-muted">
-              <span className="text-laranja">{indice + 1}</span> / {fotos.length}
+              <span className="text-laranja-deep">{indice + 1}</span> / {fotos.length}
             </p>
             <button
               type="button"
               onClick={onFechar}
               aria-label="Fechar galeria"
-              className="press flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink hover:border-laranja hover:text-laranja"
+              className="press flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink hover:border-laranja hover:text-laranja-deep"
             >
               ✕
             </button>
@@ -102,7 +102,7 @@ export function Lightbox({
               type="button"
               aria-label="Foto anterior"
               onClick={() => onNavegar((indice - 1 + fotos.length) % fotos.length)}
-              className="press absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-background/70 text-xl text-ink backdrop-blur hover:border-laranja hover:text-laranja"
+              className="press absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-background/70 text-xl text-ink backdrop-blur hover:border-laranja hover:text-laranja-deep"
             >
               ‹
             </button>
@@ -110,7 +110,7 @@ export function Lightbox({
               type="button"
               aria-label="Foto seguinte"
               onClick={() => onNavegar((indice + 1) % fotos.length)}
-              className="press absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-background/70 text-xl text-ink backdrop-blur hover:border-laranja hover:text-laranja"
+              className="press absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-background/70 text-xl text-ink backdrop-blur hover:border-laranja hover:text-laranja-deep"
             >
               ›
             </button>

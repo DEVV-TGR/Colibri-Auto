@@ -27,7 +27,7 @@ export function BotaoSair() {
       type="button"
       disabled={aSair}
       onClick={() => iniciar(() => void sair())}
-      className={`${ALTURA} press border border-line text-muted transition-colors hover:border-laranja hover:text-laranja-bright disabled:opacity-60`}
+      className={`${ALTURA} press border border-line text-muted transition-colors hover:border-laranja hover:text-laranja-deep disabled:opacity-60`}
     >
       {aSair ? "A sair…" : "Sair"}
     </button>

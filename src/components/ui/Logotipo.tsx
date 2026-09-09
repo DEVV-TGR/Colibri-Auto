@@ -38,7 +38,13 @@ export function Logotipo({
         priority={prioridade}
         className={`${altura} w-auto`}
       />
-      <span className="hidden font-display text-[0.95em] font-extrabold uppercase leading-none tracking-[0.06em] text-ink sm:block">
+      {/*
+        Sem cor declarada: a palavra **herda** a do contexto. No cabeçalho, sobre
+        papel, sai antracite; dentro do rodapé, que é uma `.faixa-escura`, sai
+        clara. Com `text-ink` fixo ficava antracite sobre antracite e o wordmark
+        desaparecia do rodapé.
+      */}
+      <span className="hidden font-display text-[0.95em] font-extrabold uppercase leading-none tracking-[0.06em] sm:block">
         {stand.nome}
       </span>
     </span>

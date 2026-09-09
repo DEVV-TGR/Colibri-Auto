@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     template: `%s${SUFIXO_TITULO}`,
   },
   description:
-    "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Mário Brito 3343, Matosinhos.",
+    "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Maria Brito 3343, Matosinhos.",
   openGraph: {
     siteName: SITE_NAME,
     locale: "pt_PT",

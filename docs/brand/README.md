@@ -28,13 +28,13 @@ Quando o código e a documentação divergirem, **o código ganha** — e o docu
 
 O resumo executivo. Cada uma está desenvolvida no documento respetivo.
 
-1. **Tema escuro, sempre.** Não há light mode, não há `dark:`. `color-scheme: dark` é fixo.
-2. **O laranja é cor de ação e realce** — CTAs, bordas ativas, hover, detalhes finos. Nunca preenche áreas grandes, por muito que a lona do stand o faça.
+1. **Tema claro, sempre.** Não há dark mode, não há `dark:`. `color-scheme: light` é fixo. O site nasceu escuro, herdado de outro stand; a mudança e o porquê estão em [02](02-cor-e-materia.md).
+2. **O laranja é cor de mancha, não de letra.** Sobre branco dá 2,6:1 como texto e 6,1:1 como fundo com antracite por cima — que é o que o logótipo faz. Para laranja em texto existe o `--laranja-deep`. Áreas grandes de laranja só numa: a `FaixaLona`.
 3. **As fotos das viaturas são o elemento dominante.** Tudo o resto é moldura.
 4. **As secções têm duas assinaturas, e usam-se sempre as duas.** A estrutural — `01 ───── O STOCK`, numerada, com a régua a desenhar-se ao entrar no ecrã (`TituloSeccao`). E a tipográfica — o heading em Montserrat 600 com a última palavra a 800 em laranja. Uma secção sem as duas destoa imediatamente.
 5. **Tudo é redondo.** `rounded-full` em botões, chips, badges e indicadores (31 usos); `rounded-2xl` em cards (10).
 6. **Hover: texto vai a `laranja-bright`, bordas vão a `laranja`.** Sem exceções.
-7. **O divisor decorativo é `.hairline`.** Nunca `<hr>`, nunca `border-t` para separar visualmente.
+7. **O divisor decorativo é `.hairline`, e os cards levantam por sombra.** Nunca `<hr>`. Sombra baixa (`shadow-card`) em cards, sombra alta no que flutua — num fundo claro a borda sozinha não chega para separar.
 8. **Glifos de texto em vez de ícones** — `‹ › → ↗ ✕ ▾ ◆ · ⤢ ✓`. Só existem 4 SVGs inline no projeto inteiro.
 9. **Conteúdo em PT-PT**, formatado por `Intl` com locale `pt-PT`. Pluralização é manual e obrigatória.
 10. **Sem bibliotecas de utilidade de classes.** Não há `clsx`, `cva` nem `tailwind-merge` — composição por template strings.

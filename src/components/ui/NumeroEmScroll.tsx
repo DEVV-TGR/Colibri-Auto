@@ -30,10 +30,19 @@ export function NumeroEmScroll({
   useEffect(() => {
     const el = ref.current;
     if (!el || !noEcra) return;
-    if (reduzido) {
+
+    /*
+      Contar exige que a página esteja visível. Num separador em segundo plano
+      o browser não corre `requestAnimationFrame`, a animação não avança, e o
+      número fica **parado no zero** — que é o pior sítio onde parar, porque
+      "0 viaturas em stock" é uma frase que se lê e se acredita. Quem chega a
+      um separador aberto há bocado apanhava exactamente isso.
+    */
+    if (reduzido || document.hidden) {
       el.textContent = String(valor);
       return;
     }
+
     const controlo = animate(0, valor, {
       duration: duracao,
       ease: ENTRADA,
@@ -41,7 +50,21 @@ export function NumeroEmScroll({
         el.textContent = String(Math.round(v));
       },
     });
-    return () => controlo.stop();
+
+    /*
+      O valor final escrito à mão no fim, e outra vez se a animação for
+      interrompida. O `onUpdate` chega ao alvo por arredondamento e não por
+      igualdade, e uma paragem a meio deixava o número no que lá estivesse.
+    */
+    const fixar = () => {
+      el.textContent = String(valor);
+    };
+    controlo.then(fixar, fixar);
+
+    return () => {
+      controlo.stop();
+      fixar();
+    };
   }, [noEcra, valor, duracao, reduzido]);
 
   /*

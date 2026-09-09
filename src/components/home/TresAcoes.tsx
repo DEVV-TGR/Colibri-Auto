@@ -53,7 +53,7 @@ export function TresAcoes() {
           titulo={
             <>
               Compra, venda e{" "}
-              <span className="font-extrabold text-laranja">retoma</span>.
+              <span className="font-extrabold text-laranja-deep">retoma</span>.
             </>
           }
         >
@@ -67,7 +67,7 @@ export function TresAcoes() {
           <Reveal key={a.titulo} delay={i * 0.08} className="h-full">
             <Link
               href={a.href}
-              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line/60 bg-surface p-8 transition-colors duration-300 hover:border-laranja/50"
+              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line/60 bg-surface p-8 shadow-card transition-colors duration-300 hover:border-laranja/50"
             >
               {/*
                 O varrimento. Um degradê laranja que sobe do fundo do painel ao
@@ -80,7 +80,7 @@ export function TresAcoes() {
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-laranja/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               />
 
-              <span className="relative font-mono text-sm text-laranja transition-transform duration-500 group-hover:-translate-y-1">
+              <span className="relative font-mono text-sm text-laranja-deep transition-transform duration-500 group-hover:-translate-y-1">
                 {a.n}
               </span>
               <h3 className="relative mt-6 font-display h-sub text-ink">
@@ -89,7 +89,7 @@ export function TresAcoes() {
               <p className="relative mt-3 flex-1 text-sm leading-relaxed text-muted">
                 {a.texto}
               </p>
-              <span className="relative mt-8 inline-flex items-center gap-2 text-sm text-creme transition-colors duration-300 group-hover:text-laranja-bright">
+              <span className="relative mt-8 inline-flex items-center gap-2 text-sm text-ink transition-colors duration-300 group-hover:text-laranja-deep">
                 {a.accao}
                 <span
                   aria-hidden

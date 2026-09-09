@@ -18,11 +18,15 @@ export const contentType = "image/png";
  * Antes não existia nenhuma: partilhar o site no WhatsApp — o canal principal
  * de contacto deste stand — mostrava um cartão sem imagem.
  *
- * Sem fonte externa de propósito: o Bodoni só existe via next/font e um fetch
- * a servidores de fontes no build é um ponto de falha desnecessário. A marca
- * aqui é o wordmark, e o resto segue a assinatura do site (maiúsculas com
- * tracking largo). Os laranjas são os tokens OKLCH de globals.css convertidos
- * para sRGB — satori não interpreta oklch().
+ * Sem fonte externa de propósito: o Montserrat só existe via next/font, e um
+ * fetch a servidores de fontes no build é um ponto de falha desnecessário. A
+ * marca aqui é o selo, e o resto segue a assinatura do site (maiúsculas com
+ * tracking largo).
+ *
+ * As cores são os tokens de `globals.css` convertidos para sRGB — o satori não
+ * interpreta `oklch()`. Ao mexer na paleta, mexer aqui também: esta imagem é o
+ * que as pessoas veem quando o site é partilhado no WhatsApp, que é o canal
+ * principal deste stand, e não há nada que avise quando fica dessincronizada.
  */
 export default async function Image() {
   const logo = await readFile(
@@ -40,11 +44,12 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "#070707",
-          // véu quente no canto superior direito, como o grão do hero
+          // --background
+          background: "#F8F4F1",
+          // lavagem laranja no canto superior direito, o eco da faixa da home
           backgroundImage:
-            "radial-gradient(1000px 500px at 88% -10%, rgba(192,150,90,0.22), rgba(7,7,7,0) 70%)",
-          border: "1px solid #2a261e",
+            "radial-gradient(1100px 560px at 90% -12%, rgba(250,118,3,0.20), rgba(248,244,241,0) 70%)",
+          borderBottom: "16px solid #FA7603",
           fontFamily: "sans-serif",
         }}
       >
@@ -64,7 +69,7 @@ export default async function Image() {
               fontSize: 26,
               letterSpacing: 7,
               textTransform: "uppercase",
-              color: "#c0965a",
+              color: "#BD4600",
             }}
           >
             Compra · Venda · Retoma
@@ -75,7 +80,7 @@ export default async function Image() {
               marginTop: 22,
               fontSize: 62,
               fontWeight: 600,
-              color: "#f4f2e9",
+              color: "#201D1B",
               lineHeight: 1.1,
             }}
           >
@@ -89,7 +94,7 @@ export default async function Image() {
               display: "flex",
               width: "100%",
               height: 1,
-              background: "#2a261e",
+              background: "#E2DBD5",
             }}
           />
           <div
@@ -98,13 +103,13 @@ export default async function Image() {
               justifyContent: "space-between",
               marginTop: 26,
               fontSize: 25,
-              color: "#a29f8f",
+              color: "#69625B",
             }}
           >
             <div style={{ display: "flex" }}>
               {enderecoLinha}
             </div>
-            <div style={{ display: "flex", color: "#e3d6bd" }}>
+            <div style={{ display: "flex", color: "#BD4600" }}>
               colibriauto.pt
             </div>
           </div>

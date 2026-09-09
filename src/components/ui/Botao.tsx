@@ -3,11 +3,18 @@ import type { ComponentProps, ReactNode } from "react";
 
 type Variante = "laranja" | "contorno" | "fantasma";
 
+/*
+  No tema escuro o contorno era uma borda laranja a 40% com texto creme: sobre
+  preto lia-se bem. Sobre papel, 40% de laranja é um risco cor de pêssego que
+  desaparece. Passa a borda cheia com texto antracite, e o hover pinta o
+  interior de laranja pálido em vez de mudar a cor da letra — num fundo claro,
+  ver a área a acender é mais claro do que ver a palavra mudar de tom.
+*/
 const estilos: Record<Variante, string> = {
-  laranja: "laranja-fill text-background font-medium",
+  laranja: "laranja-fill font-medium shadow-card",
   contorno:
-    "border border-laranja/40 text-creme hover:border-laranja hover:text-laranja-bright",
-  fantasma: "text-muted hover:text-laranja-bright",
+    "border border-laranja text-ink hover:bg-laranja/10 hover:text-laranja-deep",
+  fantasma: "text-muted hover:text-laranja-deep",
 };
 
 // `press` trata da transição (cor, brilho e escala) — ver globals.css

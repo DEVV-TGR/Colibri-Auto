@@ -70,7 +70,7 @@ export function Bloco({
   return (
     <fieldset>
       <legend className="font-display h-sub text-ink">
-        {titulo} <span className="font-extrabold text-laranja">{laranja}</span>
+        {titulo} <span className="font-extrabold text-laranja-deep">{laranja}</span>
       </legend>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">{children}</div>
     </fieldset>
@@ -233,7 +233,7 @@ export function FormularioPedido({
       href={paraOWhatsApp}
       target="_blank"
       rel="noreferrer"
-      className="press inline-flex items-center justify-center rounded-full border border-laranja/40 px-6 py-3 text-center text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
+      className="press inline-flex items-center justify-center rounded-full border border-laranja px-6 py-3 text-center text-sm tracking-wide text-ink hover:border-laranja hover:text-laranja-deep"
     >
       Falar no WhatsApp
     </a>
@@ -259,7 +259,7 @@ export function FormularioPedido({
               */
               window.location.reload();
             }}
-            className="press inline-flex items-center justify-center rounded-full px-6 py-3 text-sm tracking-wide text-muted hover:text-laranja-bright"
+            className="press inline-flex items-center justify-center rounded-full px-6 py-3 text-sm tracking-wide text-muted hover:text-laranja-deep"
           >
             Enviar outro pedido
           </button>
@@ -290,7 +290,7 @@ export function FormularioPedido({
         >
           Autorizo o {stand.nome} a usar estes dados para responder ao meu pedido,
           nos termos da{" "}
-          <Link href="/privacidade" className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline">
+          <Link href="/privacidade" className="text-ink underline-offset-4 hover:text-laranja-deep hover:underline">
             Política de Privacidade
           </Link>
           .
@@ -302,7 +302,7 @@ export function FormularioPedido({
           <button
             type="submit"
             disabled={aEnviar}
-            className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60 sm:w-auto sm:px-8"
+            className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-ink disabled:opacity-60 sm:w-auto sm:px-8"
           >
             {aEnviar ? "A enviar…" : "Enviar pedido"}
           </button>

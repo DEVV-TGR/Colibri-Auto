@@ -9,12 +9,12 @@ export function BadgeEstado({ viatura }: { viatura: Viatura }) {
         </span>
       )}
       {viatura.estadoVenda === "reservado" && (
-        <span className="laranja-fill rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-background shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
+        <span className="laranja-fill rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-ink shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
           Reservado
         </span>
       )}
       {viatura.ivaDedutivel && (
-        <span className="rounded-full border border-laranja/50 bg-background/70 px-3 py-1 text-[11px] uppercase tracking-[0.15em] text-creme backdrop-blur">
+        <span className="rounded-full border border-laranja/50 bg-background/70 px-3 py-1 text-[11px] uppercase tracking-[0.15em] text-ink backdrop-blur">
           IVA Dedutível
         </span>
       )}

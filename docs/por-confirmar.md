@@ -45,7 +45,20 @@ Eles têm os originais. É a diferença entre uma ficha de viatura que se percor
 e uma que acaba no primeiro ecrã, e é o item desta lista com maior efeito
 visível no site.
 
-## 4. Facebook
+## 4. A morada no Standvirtual está errada
+
+**Onde:** no perfil deles, não no repositório.
+
+O site diz **Avenida Maria Brito 3343**, que é o que o Instagram, o Google e o
+cliente confirmam. O perfil do Standvirtual diz "Avenida Mário Brito" — e foi
+de lá que os dados vieram para aqui antes de a grafia ser confirmada.
+
+Não é um pormenor de ortografia. O Google cruza o nome, a morada e o telefone
+do negócio entre o site, o Perfil de Empresa e os portais; quando divergem,
+deixa de ter a certeza de que são a mesma entidade e a ficha perde posições no
+Maps. **Corrigir no Standvirtual.**
+
+## 5. Facebook
 
 **Onde:** `src/data/stand.ts`, campo `facebook`, hoje vazio.
 
@@ -53,7 +66,7 @@ Não foi encontrada página. Enquanto estiver vazio, o botão não aparece no
 rodapé nem na página de contactos, e o `sameAs` do JSON-LD leva só o Instagram.
 Se existir, basta preencher — o resto já está preparado.
 
-## 5. Matrículas e VIN
+## 6. Matrículas e VIN
 
 **Onde:** `src/data/viaturas.ts`, constante `SEM_DADOS`.
 
@@ -68,7 +81,7 @@ mostrado ao dono das viaturas: ele sabe as matrículas de cor.
 Isto foi tudo tirado das fontes deles e não precisa de confirmação — mas vale a
 pena passar os olhos na reunião, porque é o que está no ar em cada página:
 
-- **Morada** — Avenida Mário Brito 3343, 4455-495 Perafita (Matosinhos)
+- **Morada** — Avenida Maria Brito 3343, 4455-495 Perafita (Matosinhos)
 - **Telefone** — 912 458 400 · **WhatsApp** — 928 492 602
 - **Email** — geral.colibrilda@gmail.com
 - **Instagram** — [@colibriauto_stand](https://www.instagram.com/colibriauto_stand/)

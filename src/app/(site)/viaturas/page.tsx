@@ -60,14 +60,14 @@ export default async function ViaturasPage() {
       */}
       <header className="mb-10">
         <div className="mb-6 flex items-center gap-4">
-          <span className="font-mono text-sm text-laranja">01</span>
+          <span className="font-mono text-sm text-laranja-deep">01</span>
           <span aria-hidden className="h-px flex-1 bg-gradient-to-r from-laranja-deep to-laranja/20" />
           <span className="text-xs uppercase tracking-[0.2em] text-muted">
             Stock
           </span>
         </div>
         <h1 className="font-display h-section text-ink">
-          Está tudo <span className="font-extrabold text-laranja">aqui</span>.
+          Está tudo <span className="font-extrabold text-laranja-deep">aqui</span>.
         </h1>
         <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted">
           O stock completo da Colibri Auto, com preço à vista. Filtre pelo que

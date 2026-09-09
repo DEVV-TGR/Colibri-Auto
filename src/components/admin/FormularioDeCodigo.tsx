@@ -80,7 +80,7 @@ export function FormularioDeCodigo({ paraOnde }: { paraOnde: string }) {
         <button
           type="submit"
           disabled={aConfirmar}
-          className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-background disabled:opacity-60"
+          className="laranja-fill press w-full rounded-full px-6 py-3 text-sm font-medium text-ink disabled:opacity-60"
         >
           {aConfirmar ? "A confirmar…" : "Entrar"}
         </button>
@@ -92,7 +92,7 @@ export function FormularioDeCodigo({ paraOnde }: { paraOnde: string }) {
         onClick={() =>
           iniciarReenvio(async () => setReenvio(await reenviarCodigo()))
         }
-        className="w-full text-xs text-muted underline-offset-4 transition-colors hover:text-laranja-bright hover:underline disabled:opacity-60"
+        className="w-full text-xs text-muted underline-offset-4 transition-colors hover:text-laranja-deep hover:underline disabled:opacity-60"
       >
         {aReenviar ? "A enviar…" : "Não recebi o código — enviar outro"}
       </button>

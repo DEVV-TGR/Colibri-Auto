@@ -5,7 +5,8 @@ import { ChamadaFinal } from "@/components/home/ChamadaFinal";
 import { Destaques } from "@/components/home/Destaques";
 import { Incluido } from "@/components/home/Incluido";
 import { OndeEstamos } from "@/components/home/OndeEstamos";
-import { RailStock } from "@/components/home/RailStock";
+import { FaixaLona } from "@/components/home/FaixaLona";
+import { MontraFundo } from "@/components/home/MontraFundo";
 import { TresAcoes } from "@/components/home/TresAcoes";
 import { getDestaques } from "@/lib/derivados";
 import { openGraphRota, seoDescricao } from "@/lib/seo";
@@ -14,7 +15,7 @@ import { getViaturas } from "@/lib/viaturas";
 
 const TITULO = `${SITE_NAME} — Stand de carros usados em Perafita, Matosinhos`;
 const DESCRICAO = seoDescricao(
-  "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Mário Brito 3343, Matosinhos.",
+  "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Maria Brito 3343, Matosinhos.",
 );
 
 export const metadata: Metadata = {
@@ -35,11 +36,14 @@ export default async function Home() {
   /*
     A ordem da página, e a razão de ser dela.
 
-    Abertura → montra → pesquisa é uma sequência deliberada: diz-se a frase,
-    mostra-se o que há, e só depois se oferece uma forma de filtrar. O sistema
-    de origem punha a pesquisa dentro do hero, antes de a pessoa ter visto uma
-    única viatura — pedia-lhe para escolher marca e combustível sem lhe ter
-    mostrado nada.
+    Abertura → montra → lona → pesquisa é uma sequência deliberada: diz-se a
+    frase, mostra-se o que há, diz-se o que se faz, e só depois se oferece uma
+    forma de filtrar. O sistema de origem punha a pesquisa dentro do hero,
+    antes de a pessoa ter visto uma única viatura — pedia-lhe para escolher
+    marca e combustível sem lhe ter mostrado nada.
+
+    Os três primeiros são o que se vê sem fazer scroll, e são de propósito de
+    naturezas diferentes: tipografia, fotografia e cor.
 
     Depois disso a página é uma lista numerada, do concreto para o abstracto:
     os carros (01), o que o stand faz (02), as condições (03), a morada (04). A
@@ -48,8 +52,9 @@ export default async function Home() {
   */
   return (
     <>
-      <Abertura />
-      <RailStock viaturas={viaturas} />
+      <Abertura viaturas={viaturas} />
+      <MontraFundo viaturas={viaturas} />
+      <FaixaLona />
       <BarraPesquisa viaturas={viaturas} />
       <Destaques destaques={getDestaques(viaturas)} />
       <TresAcoes />

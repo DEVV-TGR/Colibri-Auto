@@ -30,7 +30,7 @@ export function FormularioCompra() {
       sucesso={{
         titulo: (
           <>
-            Pedido <span className="font-extrabold text-laranja">enviado</span>
+            Pedido <span className="font-extrabold text-laranja-deep">enviado</span>
           </>
         ),
         texto:

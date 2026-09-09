@@ -65,7 +65,7 @@ export default function TermosPage() {
     <div className="mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6">
       <header>
         <h1 className="font-display h-section text-ink">
-          Termos e <span className="font-extrabold text-laranja">Condições</span>
+          Termos e <span className="font-extrabold text-laranja-deep">Condições</span>
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-muted">
           Estas condições aplicam-se à utilização deste site e à informação
@@ -230,7 +230,7 @@ export default function TermosPage() {
             href="https://www.livroreclamacoes.pt/inicio"
             target="_blank"
             rel="noreferrer"
-            className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline"
+            className="text-ink underline-offset-4 hover:text-laranja-deep hover:underline"
           >
             Livro de Reclamações eletrónico
           </a>
@@ -243,7 +243,7 @@ export default function TermosPage() {
             href="https://www.cicap.pt"
             target="_blank"
             rel="noreferrer"
-            className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline"
+            className="text-ink underline-offset-4 hover:text-laranja-deep hover:underline"
           >
             cicap.pt
           </a>
@@ -257,7 +257,7 @@ export default function TermosPage() {
           O tratamento de dados pessoais está descrito na{" "}
           <Link
             href="/privacidade"
-            className="text-creme underline-offset-4 hover:text-laranja-bright hover:underline"
+            className="text-ink underline-offset-4 hover:text-laranja-deep hover:underline"
           >
             Política de Privacidade
           </Link>

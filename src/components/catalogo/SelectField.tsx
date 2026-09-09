@@ -33,7 +33,7 @@ export function SelectField({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja-deep"
         >
           ▾
         </span>

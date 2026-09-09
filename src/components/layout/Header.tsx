@@ -121,7 +121,7 @@ export function Header() {
                 href={l.href}
                 onClick={aoClicar(l.href)}
                 className={`text-sm tracking-wide transition-colors ${
-                  ativo ? "text-laranja" : "text-muted hover:text-ink"
+                  ativo ? "text-laranja-deep" : "text-muted hover:text-ink"
                 }`}
               >
                 {l.rotulo}
@@ -130,7 +130,7 @@ export function Header() {
           })}
           <a
             href={telHref(stand.telemovel)}
-            className="press rounded-full border border-laranja/40 px-5 py-2 text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
+            className="press rounded-full border border-laranja px-5 py-2 text-sm tracking-wide text-ink hover:border-laranja hover:text-laranja-deep"
           >
             Fale connosco
           </a>
@@ -190,7 +190,7 @@ export function Header() {
                 <Link
                   href={l.href}
                   onClick={aoClicarNoMenu(l.href)}
-                  className="press font-display text-3xl text-ink transition-colors hover:text-laranja-bright"
+                  className="press font-display text-3xl text-ink transition-colors hover:text-laranja-deep"
                 >
                   {l.rotulo}
                 </Link>
@@ -203,10 +203,10 @@ export function Header() {
           <a
             href={telHref(stand.telemovel)}
             onClick={() => setAberto(false)}
-            className="press block text-center text-xs uppercase tracking-[0.2em] text-laranja"
+            className="press block text-center text-xs uppercase tracking-[0.2em] text-laranja-deep"
           >
             Fale connosco
-            <span className="mt-2 block text-lg normal-case tracking-normal text-creme">
+            <span className="mt-2 block text-lg normal-case tracking-normal text-ink">
               {stand.telemovel}
             </span>
           </a>

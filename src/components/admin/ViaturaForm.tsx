@@ -591,7 +591,7 @@ export function ViaturaForm({
                 <button
                   type="button"
                   onClick={() => addItem(ci)}
-                  className="text-xs tracking-wide text-laranja transition-colors hover:text-laranja-bright"
+                  className="text-xs tracking-wide text-laranja-deep transition-colors hover:text-laranja-deep"
                 >
                   + Adicionar item
                 </button>
@@ -601,7 +601,7 @@ export function ViaturaForm({
           <button
             type="button"
             onClick={addCategoria}
-            className="border border-laranja/40 px-4 py-2.5 text-sm text-creme transition-colors hover:border-laranja hover:text-laranja-bright"
+            className="border border-laranja px-4 py-2.5 text-sm text-ink transition-colors hover:border-laranja hover:text-laranja-deep"
           >
             + Adicionar categoria
           </button>
@@ -651,8 +651,8 @@ export function ViaturaForm({
                       aria-hidden
                       className={`absolute left-1.5 top-1.5 flex h-6 items-center px-1.5 text-[10px] font-medium uppercase tracking-wider tabular-nums ${
                         i === 0
-                          ? "bg-laranja text-background"
-                          : "bg-background/70 text-creme backdrop-blur"
+                          ? "bg-laranja text-ink"
+                          : "bg-background/70 text-ink backdrop-blur"
                       }`}
                     >
                       {i === 0 ? "Capa" : i + 1}
@@ -668,7 +668,7 @@ export function ViaturaForm({
                       onClick={() => removerFoto(i)}
                       aria-label={`Remover foto ${i + 1}`}
                       title="Remover"
-                      className="press absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-creme hover:text-erro-bright"
+                      className="press absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-ink hover:text-erro-bright"
                     >
                       <span
                         aria-hidden
@@ -699,7 +699,7 @@ export function ViaturaForm({
                       aria-disabled={i === 0}
                       aria-label={`Mover a foto ${i + 1} para trás`}
                       title="Mover para trás"
-                      className="press flex h-11 items-center justify-center text-creme hover:text-laranja-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
+                      className="press flex h-11 items-center justify-center text-ink hover:text-laranja-deep aria-disabled:pointer-events-none aria-disabled:opacity-30"
                     >
                       <span aria-hidden>←</span>
                     </button>
@@ -709,7 +709,7 @@ export function ViaturaForm({
                       aria-disabled={i === 0}
                       aria-label={`Tornar a foto ${i + 1} a capa`}
                       title="Tornar capa"
-                      className="press flex h-11 items-center justify-center text-[11px] uppercase tracking-[0.12em] text-muted hover:text-laranja-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
+                      className="press flex h-11 items-center justify-center text-[11px] uppercase tracking-[0.12em] text-muted hover:text-laranja-deep aria-disabled:pointer-events-none aria-disabled:opacity-30"
                     >
                       Capa
                     </button>
@@ -719,7 +719,7 @@ export function ViaturaForm({
                       aria-disabled={i === f.fotos.length - 1}
                       aria-label={`Mover a foto ${i + 1} para a frente`}
                       title="Mover para a frente"
-                      className="press flex h-11 items-center justify-center text-creme hover:text-laranja-bright aria-disabled:pointer-events-none aria-disabled:opacity-30"
+                      className="press flex h-11 items-center justify-center text-ink hover:text-laranja-deep aria-disabled:pointer-events-none aria-disabled:opacity-30"
                     >
                       <span aria-hidden>→</span>
                     </button>
@@ -742,7 +742,7 @@ export function ViaturaForm({
               <button
                 type="button"
                 onClick={anularRemocao}
-                className="press underline underline-offset-4 hover:text-laranja-bright"
+                className="press underline underline-offset-4 hover:text-laranja-deep"
               >
                 Anular
               </button>
@@ -750,7 +750,7 @@ export function ViaturaForm({
           </div>
         )}
 
-        <label className="press inline-flex cursor-pointer items-center gap-2 rounded-full border border-laranja/40 px-5 py-2.5 text-sm text-creme transition-colors hover:border-laranja hover:text-laranja-bright">
+        <label className="press inline-flex cursor-pointer items-center gap-2 rounded-full border border-laranja px-5 py-2.5 text-sm text-ink transition-colors hover:border-laranja hover:text-laranja-deep">
           {aEnviar
             ? `A carregar ${aEnviar.feitas + 1} de ${aEnviar.total}…`
             : "+ Carregar fotos"}
@@ -792,14 +792,14 @@ export function ViaturaForm({
         <button
           type="button"
           onClick={() => router.push("/admin")}
-          className="px-5 py-2.5 text-sm tracking-wide text-muted transition-colors hover:text-creme"
+          className="px-5 py-2.5 text-sm tracking-wide text-muted transition-colors hover:text-ink"
         >
           Cancelar
         </button>
         <button
           type="submit"
           disabled={aGuardar}
-          className="laranja-fill px-6 py-2.5 text-sm font-medium tracking-wide text-background disabled:opacity-60"
+          className="laranja-fill px-6 py-2.5 text-sm font-medium tracking-wide text-ink disabled:opacity-60"
         >
           {aGuardar
             ? "A guardar…"

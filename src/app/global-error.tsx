@@ -18,7 +18,7 @@ export default function GlobalError({ reset }: { reset: () => void }) {
   return (
     <html lang="pt-PT" className={`${geistSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col items-center justify-center px-6 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-laranja">
+        <p className="text-xs uppercase tracking-[0.3em] text-laranja-deep">
           Algo correu mal
         </p>
         <h1 className="mt-4 text-2xl text-ink">
@@ -32,7 +32,7 @@ export default function GlobalError({ reset }: { reset: () => void }) {
           <button
             type="button"
             onClick={reset}
-            className="press laranja-fill inline-flex cursor-pointer items-center justify-center rounded-full px-6 py-3 text-sm font-medium tracking-wide text-background"
+            className="press laranja-fill inline-flex cursor-pointer items-center justify-center rounded-full px-6 py-3 text-sm font-medium tracking-wide text-ink"
           >
             Tentar de novo
           </button>
@@ -41,7 +41,7 @@ export default function GlobalError({ reset }: { reset: () => void }) {
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/"
-            className="press inline-flex items-center justify-center rounded-full border border-laranja/40 px-6 py-3 text-sm tracking-wide text-creme hover:border-laranja hover:text-laranja-bright"
+            className="press inline-flex items-center justify-center rounded-full border border-laranja px-6 py-3 text-sm tracking-wide text-ink hover:border-laranja hover:text-laranja-deep"
           >
             Voltar ao início
           </a>

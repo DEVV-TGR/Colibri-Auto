@@ -208,7 +208,7 @@ export function CampoSelecao({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-laranja-deep"
         >
           ▾
         </span>
@@ -279,9 +279,9 @@ export function CampoEscolha({
         {opcoes.map(([v, r]) => (
           <label
             key={v}
-            className={`press cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors has-[:checked]:border-laranja has-[:checked]:text-laranja-bright has-[:focus-visible]:border-laranja ${
+            className={`press cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors has-[:checked]:border-laranja has-[:checked]:text-laranja-deep has-[:focus-visible]:border-laranja ${
               valor === v
-                ? "border-laranja text-laranja-bright"
+                ? "border-laranja text-laranja-deep"
                 : erro
                   ? "border-erro-deep text-muted"
                   : "border-line text-muted"

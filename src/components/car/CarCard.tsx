@@ -83,7 +83,7 @@ export function CarCard({
       sem sombra a crescer, porque a regra do sistema é que só o que flutua
       sobre outro conteúdo leva sombra, e um card de uma grelha não flutua.
     */
-    <article className="press group relative overflow-hidden rounded-2xl border border-line/60 bg-surface transition-colors duration-300 hover:-translate-y-1 hover:border-laranja/50">
+    <article className="press group relative overflow-hidden rounded-2xl border border-line/60 bg-surface shadow-card transition-colors duration-300 hover:-translate-y-1 hover:border-laranja/50">
       <div
         className={`relative aspect-[4/3] overflow-hidden ${
           total > 1 ? "cursor-grab touch-pan-y select-none active:cursor-grabbing" : ""
@@ -108,7 +108,7 @@ export function CarCard({
           badge de estado, esse, continua no canto oposto.
         */}
         {!vendido && (
-          <p className="laranja-fill absolute right-3 top-3 z-10 rounded-full px-3.5 py-1.5 font-display text-sm font-medium text-background shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
+          <p className="laranja-fill absolute right-3 top-3 z-10 rounded-full px-3.5 py-1.5 font-display text-sm font-medium text-ink shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]">
             {formatarPreco(viatura.preco)}
           </p>
         )}
@@ -177,7 +177,7 @@ export function CarCard({
         número em vez de acabar numa acção.
       */}
       <Link href={urlViatura(viatura)} className="block p-5">
-        <h3 className="font-display text-xl text-ink transition-colors group-hover:text-laranja-bright">
+        <h3 className="font-display text-xl text-ink transition-colors group-hover:text-laranja-deep">
           {viatura.marca} {viatura.modelo}
         </h3>
         <p className="mt-0.5 truncate text-sm text-muted">{viatura.versao}</p>
@@ -197,7 +197,7 @@ export function CarCard({
           */}
           <span
             aria-hidden
-            className="shrink-0 text-laranja transition-transform duration-300 group-hover:translate-x-1"
+            className="shrink-0 text-laranja-deep transition-transform duration-300 group-hover:translate-x-1"
           >
             →
           </span>

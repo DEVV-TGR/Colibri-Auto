@@ -61,7 +61,7 @@ export default function PrivacidadePage() {
     <div className="mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6">
       <header>
         <h1 className="font-display h-section text-ink">
-          Política de <span className="font-extrabold text-laranja">Privacidade</span>
+          Política de <span className="font-extrabold text-laranja-deep">Privacidade</span>
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-muted">
           Esta política explica que dados pessoais são tratados a partir deste

@@ -5,12 +5,23 @@ import { enderecoLinha, stand, telHref } from "@/data/stand";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line/60 bg-surface">
+    /*
+      O rodapé é a única faixa escura do site, e é de propósito.
+
+      Num tema claro a página tem de acabar em alguma coisa — sem isto o
+      conteúdo desvanecia em papel e o site parecia cortado a meio. E é o
+      sítio onde o antracite do logótipo aparece em massa, o que fecha o par
+      com o laranja da faixa lá em cima.
+
+      Dentro de `.faixa-escura` o texto esbatido é o `--escuro-muted`: o
+      `--muted` foi calibrado para o papel e aqui dava 2,8:1.
+    */
+    <footer className="faixa-escura">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <Logotipo altura="h-14" />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-escuro-muted">
               {stand.slogan}
             </p>
           </div>
@@ -21,14 +32,14 @@ export function Footer() {
             </p>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link href="/" className="text-muted transition-colors hover:text-ink">
+                <Link href="/" className="text-escuro-muted transition-colors hover:text-background">
                   Início
                 </Link>
               </li>
               <li>
                 <Link
                   href="/viaturas"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="text-escuro-muted transition-colors hover:text-background"
                 >
                   Stock
                 </Link>
@@ -36,7 +47,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/compramos"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="text-escuro-muted transition-colors hover:text-background"
                 >
                   Vender o meu carro
                 </Link>
@@ -44,7 +55,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/importamos"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="text-escuro-muted transition-colors hover:text-background"
                 >
                   Encomendar uma viatura
                 </Link>
@@ -52,7 +63,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/contactos"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="text-escuro-muted transition-colors hover:text-background"
                 >
                   Contactos
                 </Link>
@@ -69,7 +80,7 @@ export function Footer() {
                   href="https://www.livroreclamacoes.pt/inicio"
                   target="_blank"
                   rel="noopener"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="text-escuro-muted transition-colors hover:text-background"
                 >
                   Livro de Reclamações ↗
                 </a>
@@ -81,21 +92,21 @@ export function Footer() {
             <p className="text-xs uppercase tracking-[0.2em] text-laranja">
               Contactos
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-muted">
+            <ul className="mt-4 space-y-2 text-sm text-escuro-muted">
               <li>
                 {enderecoLinha}
               </li>
               <li>
                 <a
                   href={telHref(stand.telemovel)}
-                  className="transition-colors hover:text-ink"
+                  className="transition-colors hover:text-background"
                 >
                   {stand.telemovel}
                 </a>
                 {" · "}
                 <a
                   href={telHref(stand.telefone)}
-                  className="transition-colors hover:text-ink"
+                  className="transition-colors hover:text-background"
                 >
                   {stand.telefone}
                 </a>
@@ -103,7 +114,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${stand.email}`}
-                  className="transition-colors hover:text-ink"
+                  className="transition-colors hover:text-background"
                 >
                   {stand.email}
                 </a>
@@ -113,16 +124,16 @@ export function Footer() {
                   href={stand.whatsapp}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-ink"
+                  className="transition-colors hover:text-background"
                 >
                   WhatsApp ↗
                 </a>
-                <span className="text-laranja-deep">·</span>
+                <span className="text-laranja">·</span>
                 <a
                   href={stand.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-ink"
+                  className="transition-colors hover:text-background"
                 >
                   Instagram ↗
                 </a>
@@ -134,12 +145,12 @@ export function Footer() {
                 */}
                 {stand.facebook && (
                   <>
-                    <span className="text-laranja-deep">·</span>
+                    <span className="text-laranja">·</span>
                     <a
                       href={stand.facebook}
                       target="_blank"
                       rel="noreferrer"
-                      className="transition-colors hover:text-ink"
+                      className="transition-colors hover:text-background"
                     >
                       Facebook ↗
                     </a>
@@ -151,28 +162,28 @@ export function Footer() {
         </div>
 
         <div className="hairline mt-12" />
-        <div className="mt-6 flex flex-col items-center justify-center gap-1 text-xs text-muted sm:flex-row sm:gap-2.5">
+        <div className="mt-6 flex flex-col items-center justify-center gap-1 text-xs text-escuro-muted sm:flex-row sm:gap-2.5">
           <Link
             href="/termos"
-            className="transition-colors hover:text-creme"
+            className="transition-colors hover:text-background"
           >
             Termos e Condições
           </Link>
-          <span aria-hidden className="hidden text-laranja-deep sm:inline">
+          <span aria-hidden className="hidden text-laranja sm:inline">
             ·
           </span>
           <Link
             href="/privacidade"
-            className="transition-colors hover:text-creme"
+            className="transition-colors hover:text-background"
           >
             Política de Privacidade
           </Link>
         </div>
-        <div className="mt-6 flex flex-col items-center justify-center gap-1 text-xs text-muted sm:flex-row sm:gap-2.5">
+        <div className="mt-6 flex flex-col items-center justify-center gap-1 text-xs text-escuro-muted sm:flex-row sm:gap-2.5">
           <p>
             © {new Date().getFullYear()} {stand.nome}
           </p>
-          <span aria-hidden className="hidden text-laranja-deep sm:inline">
+          <span aria-hidden className="hidden text-laranja sm:inline">
             ·
           </span>
           <p>
@@ -181,7 +192,7 @@ export function Footer() {
               href={agencia.url}
               target="_blank"
               rel="noreferrer"
-              className="text-creme transition-colors hover:text-laranja-bright"
+              className="text-background transition-colors hover:text-laranja"
             >
               {agencia.nome} ↗
             </a>

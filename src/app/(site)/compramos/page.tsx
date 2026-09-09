@@ -54,7 +54,7 @@ export default function Compramos() {
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
       <header className="mb-12 max-w-2xl">
         <h1 className="font-display h-section text-ink">
-          Compramos o seu <span className="font-extrabold text-laranja">carro</span>
+          Compramos o seu <span className="font-extrabold text-laranja-deep">carro</span>
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted">
           Venda directa ou retoma na compra de outra viatura. Diga-nos o que

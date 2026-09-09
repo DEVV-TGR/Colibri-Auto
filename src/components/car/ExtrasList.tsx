@@ -7,12 +7,12 @@ export function ExtrasList({ viatura }: { viatura: Viatura }) {
     <section aria-labelledby="extras">
       <div className="hairline w-16" />
       <h2 id="extras" className="mt-5 font-display h-sub text-ink">
-        Extras e <span className="font-extrabold text-laranja">equipamento</span>
+        Extras e <span className="font-extrabold text-laranja-deep">equipamento</span>
       </h2>
       <div className="mt-6 grid gap-8 sm:grid-cols-2">
         {viatura.extras.map((grupo) => (
           <div key={grupo.categoria}>
-            <p className="text-xs uppercase tracking-[0.2em] text-laranja">
+            <p className="text-xs uppercase tracking-[0.2em] text-laranja-deep">
               {grupo.categoria}
             </p>
             <ul className="mt-3 space-y-2">

@@ -111,7 +111,7 @@ Sem excepção, em todas as secções:
 | Quatro para *começar* | `home/Destaques.tsx` |
 | Compra, venda e *retoma* | `home/TresAcoes.tsx` |
 | O que vai no *preço* | `home/Incluido.tsx` |
-| Estamos na Avenida Mário *Brito* | `home/OndeEstamos.tsx` |
+| Estamos na Avenida Maria *Brito* | `home/OndeEstamos.tsx` |
 | Não está aqui o que *procura*? | `home/ChamadaFinal.tsx` |
 | Está tudo *aqui* | `app/(site)/viaturas/page.tsx` |
 | Ficha *técnica* | `car/SpecsTable.tsx` |

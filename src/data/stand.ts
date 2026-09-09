@@ -6,7 +6,13 @@ export const stand = {
    * inventário, e é a promessa que eles já fazem a quem passa na Avenida.
    */
   slogan: "Compra · Venda · Retoma",
-  morada: "Avenida Mário Brito 3343",
+  /*
+    "Maria" e não "Mário". O perfil do Standvirtual — de onde vieram estes
+    dados — escreve "Avenida Mário Brito", e está errado: o Instagram deles, o
+    Google e o próprio cliente dizem Maria. Quem precisa de correcção é o
+    portal, não o site. Está na lista de `docs/por-confirmar.md`.
+  */
+  morada: "Avenida Maria Brito 3343",
   codigoPostal: "4455-495",
   localidade: "Perafita",
   distrito: "Porto",
@@ -29,7 +35,7 @@ export const stand = {
   facebook: "",
   // WhatsApp: abre direto a conversa (+351 928 492 602)
   whatsapp: "https://wa.me/351928492602",
-  mapsUrl: "https://maps.google.com/?q=Avenida+Mário+Brito+3343+4455-495+Perafita",
+  mapsUrl: "https://maps.google.com/?q=Avenida+Maria+Brito+3343+4455-495+Perafita",
   /**
    * ⚠️ **Horário por confirmar.** O perfil do Standvirtual tem os sete dias
    * marcados como fechados (ou seja, nunca foi preenchido) e o Instagram não o

@@ -32,7 +32,7 @@ export function TituloSeccao({
   numero: string;
   /** O rótulo curto ao fim da régua, em maiúsculas. */
   rotulo: string;
-  /** O heading. Vem como nó para poder levar a última palavra a `font-extrabold text-laranja`. */
+  /** O heading. Vem como nó para poder levar a última palavra a `font-extrabold text-laranja-deep`. */
   titulo: ReactNode;
   /** Subtítulo opcional. */
   children?: ReactNode;
@@ -44,7 +44,7 @@ export function TituloSeccao({
   return (
     <div>
       <div className="flex items-center gap-4">
-        <span className="font-mono text-sm text-laranja">{numero}</span>
+        <span className="font-mono text-sm text-laranja-deep">{numero}</span>
         {/*
           A régua. `origin-left` com `scaleX` e não uma largura a animar —
           transformar não obriga o browser a recalcular a disposição da página

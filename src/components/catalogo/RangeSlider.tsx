@@ -33,7 +33,7 @@ export function RangeSlider({
         <span className="block uppercase tracking-[0.2em] text-muted">
           {rotulo}
         </span>
-        <span className="mt-1 block text-creme">
+        <span className="mt-1 block text-ink">
           {formatar(valorMin)} — {formatar(valorMax)}
         </span>
       </legend>

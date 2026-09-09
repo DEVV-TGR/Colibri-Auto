@@ -27,10 +27,15 @@ Mais `src/app/not-found.tsx` e `src/app/(site)/viaturas/loading.tsx`.
 Além destas, as páginas de serviço (`/contactos`, `/compramos`, `/importamos`) e as legais (`/termos`, `/privacidade`).
 
 A home é a que define a identidade e a de detalhe é a que fecha a venda. A
-sequência da home — **abertura → montra → pesquisa** — é deliberada: diz-se a
-frase, mostra-se o que há, e só depois se oferece uma forma de filtrar. O
-sistema de origem punha a pesquisa dentro do hero, a pedir marca e combustível
-a quem ainda não tinha visto uma única viatura.
+sequência da home — **abertura → montra → lona → pesquisa** — é deliberada:
+diz-se a frase, mostra-se o que há, diz-se o que se faz, e só depois se oferece
+uma forma de filtrar. O sistema de origem punha a pesquisa dentro do hero, a
+pedir marca e combustível a quem ainda não tinha visto uma única viatura.
+
+Os três primeiros são o que se vê sem fazer scroll, e são de naturezas
+diferentes de propósito: **tipografia, fotografia e cor**. Foi a resposta a uma
+home que o cliente descreveu como "escura e morta" — o problema não era faltar
+um efeito, era o primeiro ecrã ter só uma dessas três coisas.
 
 A página de detalhe é a **mais trabalhada das três** — é onde a demo se prova. Tem rotas estáticas geradas em build (`generateStaticParams`) e metadata dinâmica por viatura (`generateMetadata`, com Open Graph e a primeira foto).
 
