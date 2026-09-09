@@ -143,7 +143,15 @@ body {
    entrelinhas ganham um cabelo, porque as maiúsculas do Montserrat são altas
    e a 1.0 as linhas tocavam-se. */
 .h-hero {
-  font-size: clamp(3rem, 8vw, 6.25rem);
+  /* O tecto desceu de 6.25rem quando a abertura passou a ter a fotografia da
+     lona ao lado: o título deixou de ter a página toda e passou a ter metade.
+
+     3.5rem é o valor **medido** e não escolhido. Num ecrã de 1920 a coluna do
+     texto tem 998px, mas 384 vão para o alinhamento com o container e 48 para
+     a goteira — sobram 566. «sem letra pequena.» a 3.5rem ocupa cerca de 517.
+     A 4rem passava dos 590 e partia em duas linhas dentro da máscara da
+     animação, que é para uma linha só. */
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
@@ -299,56 +307,18 @@ body {
   );
 }
 
-/* a montra e a faixa da lona — os dois marquees da home.
+/* a faixa da lona — o marquee do lema, na home.
 
-   A técnica é a mesma nos dois: a fila é o conteúdo **duplicado**, e o
-   deslocamento é de exactamente uma cópia. Quando a primeira acaba de sair, a
-   segunda está no sítio onde a primeira começou, e o ciclo recomeça sem salto.
+   A fila é o conteúdo **duplicado**, e o deslocamento é de exactamente uma
+   cópia: quando a primeira acaba de sair, a segunda está no sítio onde a
+   primeira começou, e o ciclo recomeça sem salto. As passagens estão
+   encostadas e não há goteira entre elas, portanto `-50%` chega — sem
+   correcções.
 
-   Na montra é `calc(-50% - goteira/2)` e não `-50%`: entre as duas cópias há
-   uma goteira, portanto meia largura fica meia goteira aquém do início da
-   segunda. Sem a correcção o rail dá um solavanco de 8px a cada volta —
-   pequeno, mas é a única coisa que se vê nesta secção. A faixa da lona não
-   precisa dela: as passagens estão encostadas e não há goteira nenhuma.
-
-   As durações são diferentes de propósito. Duas filas à mesma velocidade lêem-
-   se como duas tiras; a velocidades diferentes lêem-se como profundidade, com
-   a mais rápida a parecer mais perto. */
-.montra-fila {
-  --montra-goteira: 1rem;
-  display: flex;
-  width: max-content;
-  gap: var(--montra-goteira);
-}
-
-.montra-esquerda {
-  animation: montra-esq 50s linear infinite;
-}
-
-.montra-direita {
-  animation: montra-dir 68s linear infinite;
-}
-
-@keyframes montra-esq {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - (var(--montra-goteira) / 2)));
-  }
-}
-
-/* A fila da direita arranca já deslocada e volta a zero — é o que a faz andar
-   no sentido contrário sem se duplicar a marcação nem inverter a lista. */
-@keyframes montra-dir {
-  from {
-    transform: translateX(calc(-50% - (var(--montra-goteira) / 2)));
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
+   Houve aqui um segundo marquee, a `MontraFundo`, com duas filas de
+   fotografias do stock a deslizar por baixo do título. Saiu: dava actividade
+   e não dava presença, e o cliente foi directo ao dizer que não gostava nada
+   dela. O que ficou no lugar é a fotografia da lona a ocupar meio ecrã. */
 .faixa-fila {
   display: flex;
   width: max-content;
@@ -417,25 +387,15 @@ body {
   }
 
   /*
-    Os marquees precisam de `animation: none` e não do `0.01ms` da regra acima.
+    A faixa precisa de `animation: none` e não do `0.01ms` da regra acima.
 
     Acelerar uma animação para 0.01ms fá-la saltar para o **fim** — e o fim
-    destas é `translateX(-50%)`, ou seja, a fila deslocada de uma cópia
-    inteira. Quem pede movimento reduzido via a montra encostada à esquerda e a
-    faixa da lona a começar a meio de uma palavra. Anuladas, ficam no princípio
-    e leem-se como o que são: uma fila de fotografias e uma faixa com o lema.
+    desta é `translateX(-50%)`, ou seja, a fila deslocada de uma cópia inteira.
+    Quem pede movimento reduzido via a faixa a começar a meio de uma palavra.
+    Anulada, fica no princípio e lê-se como o que é: uma banda com o lema.
   */
-  .montra-esquerda,
-  .montra-direita,
   .faixa-fila {
     animation: none !important;
     transform: none !important;
-  }
-
-  /* Sem animação, a montra deixa de andar e passa a ser uma fila que se
-     percorre à mão. Sem isto ficavam catorze fotografias cortadas na margem
-     sem forma de chegar às restantes. */
-  .montra-fila {
-    overflow-x: auto;
   }
 }

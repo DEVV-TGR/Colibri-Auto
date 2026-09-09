@@ -27,7 +27,7 @@ completo está no token `--vendido` em `src/app/globals.css`.
 ## Onde aparece
 
 - **Catálogo `/viaturas`** e qualquer grelha de cards — componente `CarCard`.
-- **Carrossel "Viaturas em Destaque"** na homepage — componente `DestaquesCarrossel`.
+- **Grelha "Em destaque"** na homepage — o mesmo `CarCard` da listagem.
 
 ## Como marcar uma viatura
 
@@ -57,6 +57,5 @@ Os três estados renderizam com os dados actuais. No sistema de origem o
 - `src/data/viaturas.ts` — campo `estadoVenda` por viatura.
 - `src/lib/types.ts` — tipo `EstadoVenda`.
 - `src/components/car/BadgeEstado.tsx` — badge nos cards.
-- `src/components/home/DestaquesCarrossel.tsx` — badge no carrossel de destaques.
 - `src/app/globals.css` — tokens de cor (`--laranja*`, `--vendido*`) e as
   classes de preenchimento (`.laranja-fill`, `.vendido-fill`).

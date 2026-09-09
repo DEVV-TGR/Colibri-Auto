@@ -18,7 +18,7 @@ O código do painel de gestão (`/admin`) vem incluído do repositório de orige
 
 | Rota | Ficheiro | O que tem |
 |---|---|---|
-| `/` | `src/app/(site)/page.tsx` | Abertura tipográfica, rail do stock, barra de pesquisa com contagem viva e tira de marcas, e quatro secções numeradas — destaques, o que fazemos, o que vai no preço, onde estamos — mais a chamada final |
+| `/` | `src/app/(site)/page.tsx` | Abertura a duas colunas — título à esquerda, a lona do stand na outra metade —, faixa laranja, barra de pesquisa com contagem viva e tira de marcas, e quatro secções numeradas — destaques, o que fazemos, o que vai no preço, onde estamos — mais a chamada final |
 | `/viaturas` | `src/app/(site)/viaturas/page.tsx` | Barra de filtros no topo com gaveta de intervalos, chips de filtros activos, grelha de cards a três colunas, "Ordenar por" |
 | `/carros/[marca]/[modelo]/[id]` | `src/app/(site)/carros/.../page.tsx` | Fotografia de abertura de largura total com parallax e lightbox, ficha técnica, extras por categoria, cartão-resumo sticky, sugestões |
 
@@ -27,15 +27,17 @@ Mais `src/app/not-found.tsx` e `src/app/(site)/viaturas/loading.tsx`.
 Além destas, as páginas de serviço (`/contactos`, `/compramos`, `/importamos`) e as legais (`/termos`, `/privacidade`).
 
 A home é a que define a identidade e a de detalhe é a que fecha a venda. A
-sequência da home — **abertura → montra → lona → pesquisa** — é deliberada:
-diz-se a frase, mostra-se o que há, diz-se o que se faz, e só depois se oferece
-uma forma de filtrar. O sistema de origem punha a pesquisa dentro do hero, a
-pedir marca e combustível a quem ainda não tinha visto uma única viatura.
+sequência da home — **abertura → lona → pesquisa** — é deliberada: diz-se a
+frase com a montra ao lado, diz-se o que se faz, e só depois se oferece uma
+forma de filtrar. O sistema de origem punha a pesquisa dentro do hero, a pedir
+marca e combustível a quem ainda não tinha visto uma única viatura.
 
-Os três primeiros são o que se vê sem fazer scroll, e são de naturezas
-diferentes de propósito: **tipografia, fotografia e cor**. Foi a resposta a uma
-home que o cliente descreveu como "escura e morta" — o problema não era faltar
-um efeito, era o primeiro ecrã ter só uma dessas três coisas.
+O primeiro ecrã tem de trazer três naturezas de uma vez — **tipografia,
+fotografia e cor**. Chegar lá levou três tentativas, e as duas primeiras
+falharam da mesma maneira: procuraram impacto por **movimento** (filas de
+miniaturas a deslizar, um carrossel de destaques) quando o que faltava era
+**presença**. O que resolveu foi dar meio ecrã à melhor fotografia que existe —
+a lona do stand com um carro à frente.
 
 A página de detalhe é a **mais trabalhada das três** — é onde a demo se prova. Tem rotas estáticas geradas em build (`generateStaticParams`) e metadata dinâmica por viatura (`generateMetadata`, com Open Graph e a primeira foto).
 
@@ -48,10 +50,10 @@ Ambos correm na mesma plataforma white-label, pelo que partilham funcionalidades
 
 Funcionalidades que definem a categoria e que o projeto implementa:
 
-- Pesquisa rápida no hero (Marca, Modelo, Combustível) com **contagem de resultados em tempo real** no botão.
+- Pesquisa rápida numa banda de largura total (Marca, Combustível, tecto de preço) com **contagem de resultados em tempo real** no botão.
 - Pesquisa detalhada: intervalos de Preço, Ano e Quilómetros por slider duplo; dropdowns de Transmissão, Combustível e Segmento; "Limpar Parâmetros".
-- Cards com carrossel de fotos, badges de estado e a linha de meta `Mês/Ano · Combustível · Km`.
-- Grelha de marcas cujos logótipos filtram a listagem.
+- Cards com carrossel de fotos **dentro do card**, badges de estado e a linha de meta `Mês/Ano · Combustível · Km`.
+- Logótipos de marca que filtram a listagem — numa tira ao lado da pesquisa, e não numa secção própria: com cinco marcas e sete carros, um ecrã inteiro para escolher entre uma e duas viaturas era espaço mal gasto.
 
 ## Fora de âmbito
 

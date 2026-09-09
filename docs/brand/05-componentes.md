@@ -90,7 +90,7 @@ Nenhuma viatura está `reservado` nem tem IVA dedutível hoje; o MINI está `ven
 
 ### Estado "vendido" — dessaturar, não esconder
 
-Foto a `opacity-60 saturate-50` (`opacity-70 saturate-50` no carrossel), e o preço substituído pela palavra "Vendido" em três sítios: `CarCard`, `StickyCard`, `DestaquesCarrossel`. A viatura continua navegável.
+Foto a `opacity-60 saturate-50`, e o preço substituído pela palavra "Vendida" em dois sítios: `CarCard` e `StickyCard`. A viatura continua navegável.
 
 ### Select estilizado
 
@@ -175,7 +175,7 @@ O projeto usa caracteres de texto para quase toda a iconografia:
 | `⤢` | Expandir galeria |
 | `✓` | Confirmação ("Ligação copiada ✓") |
 
-Só existem **4 SVGs inline** em todo o projeto: `IconeFiltros` (`CatalogoClient.tsx`, 16×16) e três ícones de meta no carrossel (`DestaquesCarrossel.tsx`, 15×15). Todos com `viewBox="0 0 24 24"`, `fill="none"`, `stroke="currentColor"`, `strokeWidth` 1.6–1.7, `strokeLinecap="round"`, `aria-hidden`.
+Só existem **4 SVGs inline** em todo o projecto: `IconeFiltros` (`CatalogoClient.tsx`), o do WhatsApp (`CtaFlutuante.tsx`) e dois no `AcoesViatura.tsx` do painel. Eram sete — os outros três eram ícones de meta do carrossel de destaques e saíram com ele. Todos com `viewBox="0 0 24 24"`, `fill="none"`, `stroke="currentColor"`, `strokeWidth` 1.6–1.7, `strokeLinecap="round"`, `aria-hidden`.
 
 Antes de acrescentar um ícone: verificar se há glifo que sirva.
 
@@ -243,33 +243,35 @@ A régua anima `scaleX` com `origin-left`, e não a largura. Transformar não
 obriga o browser a recalcular a disposição da página a cada fotograma; uma
 largura obriga.
 
-### `MontraFundo` — o stock a atravessar o ecrã
+### `Abertura` — metade do primeiro ecrã é a lona
 
-Duas filas com a capa de cada viatura, em **sentidos opostos** e a velocidades
-diferentes (50s e 68s), logo por baixo do título da abertura.
+Duas colunas: o título e os factos à esquerda, e à direita a **fotografia da
+lona do stand com um carro à frente**, a sangrar até à margem e até ao topo.
 
-As duas filas não são decoração duplicada. Uma só lê-se como uma tira a passar;
-duas em sentidos contrários lêem-se como **profundidade**, com a mais rápida a
-parecer mais perto. Se as durações forem iguais, o efeito desaparece e ficam
-duas tiras.
+Houve aqui duas tentativas anteriores, e as duas erradas pela mesma razão —
+procuraram impacto por **movimento** quando faltava **presença**. A primeira foi
+uma abertura só tipográfica; a segunda acrescentou-lhe duas filas de miniaturas
+a deslizar (`MontraFundo`), que o cliente foi directo a dizer que não gostava
+nada. Tinha razão: ninguém compra um carro a olhar para uma tira de 200px a
+passar.
 
-A segunda fila arranca a meio da lista. Com as duas a começarem na mesma
-viatura e a andarem em sentidos opostos, havia um instante em que as mesmas
-fotografias ficavam alinhadas na vertical — e via-se que era a mesma lista duas
-vezes.
+O que resolveu foi dar meio ecrã à melhor fotografia que existe. E o laranja em
+massa passou a vir da **imagem** e não do CSS — um painel laranja ao lado desta
+fotografia punha dois laranjas e dois wordmarks a competir.
 
-**É cenário, não é o carrossel dos destaques**, e a distinção é o que os impede
-de se lerem como o mesmo elemento feito duas vezes:
+Três decisões que se medem e não se estimam:
 
-| | `MontraFundo` | `DestaquesCarrossel` |
-|---|---|---|
-| O que é | Cenário. A montra a passar | Componente de produto |
-| Conteúdo | Fotografia e nome | Foto, preço, meta, versão, ligação |
-| Escala | Tiras baixas, cortadas nas margens | Cards grandes, dentro do container |
-| Controlo | Nenhum | Setas, pontos, arrasto |
-
-Se alguma vez a montra ganhar um preço ou uma seta, passa a ser um segundo
-carrossel — e aí um dos dois está a mais.
+- **A altura é 62svh porque a fotografia tem 1.44 de proporção.** A 78svh o
+  painel ficava a 1.19 e o `object-cover` cortava 17% da largura — na prática,
+  a traseira do carro. A 62svh o painel fica a ~1.34 e a viatura cabe inteira.
+  **É a imagem que manda na altura, não o contrário.**
+- **A viatura é escolhida pelos dados:** de entre os destaques, a que tem mais
+  fotografias. Hoje dá o Ford Focus, o único com um álbum a sério; uma escolha
+  fixa deixava meia página com uma fotografia de 630px esticada no dia em que
+  ele se vendesse.
+- **O `.h-hero` desceu para 3.5rem** porque o título passou a ter metade da
+  página. Acima disso partia em duas linhas dentro da máscara da animação, que
+  é para uma linha só.
 
 ### `FaixaLona` — a lona à largura do ecrã
 
@@ -284,18 +286,28 @@ preguiça, e continua a valer em todo o lado menos aqui, onde a área laranja
 passa a ser um tema laranja. Se aparecer o pedido de uma segunda, a resposta é
 mudar esta de sítio.
 
-### A emenda dos dois marquees
+### A emenda do marquee
 
-A técnica é a mesma nos dois: a fila é o conteúdo **duplicado**, e o
-deslocamento é de exactamente uma cópia. Quando a primeira acaba de sair, a
-segunda está no sítio onde a primeira começou.
+A fila é o conteúdo **duplicado**, e o deslocamento é de exactamente uma cópia:
+quando a primeira acaba de sair, a segunda está no sítio onde a primeira
+começou. As passagens estão encostadas e não há goteira entre elas, portanto
+`-50%` chega.
 
-Na montra é `calc(-50% - goteira/2)` e não `-50%`, porque entre as cópias há
-uma goteira; sem a correcção dá um solavanco de 8px a cada volta. A faixa não
-precisa dela — as passagens estão encostadas.
+A segunda cópia leva `aria-hidden`: para um leitor de ecrã é o mesmo conteúdo, e
+anunciá-lo duas vezes seria mentira.
 
-A segunda cópia leva sempre `aria-hidden`: para um leitor de ecrã é o mesmo
-conteúdo, e anunciá-lo duas vezes seria mentira.
+### Os destaques são uma grelha, não um carrossel
+
+Era um carrossel com coverflow, herdado do sistema de origem. Saiu com o
+`MontraFundo` e pela mesma razão. Com **quatro** viaturas em destaque a grelha
+ganha o argumento sozinha: mostra as quatro de uma vez em vez de esconder três
+atrás de setas, e não obriga ninguém a interagir para ver o que há.
+
+**Um carrossel paga-se quando o conteúdo não cabe.** Quatro cards cabem.
+
+Os cards da grelha são `flex h-full flex-col` com a linha de meta em `mt-auto`.
+Sem isso, um nome que parte em duas linhas — «Mercedes-Benz E 350» é o caso —
+deixava um degrau visível numa fila de quatro.
 
 ### `FiltrosBarra` — os filtros no topo
 
@@ -333,7 +345,7 @@ Divergências reais entre o padrão e o código. Documentadas, não corrigidas �
 1. **O botão "contorno" está replicado à mão** fora do `Botao.tsx`: no `Header`, no `StickyCard`, no `CatalogoClient` e no `DadosContacto`. A string de classes é a mesma, mas os paddings divergem (`px-5 py-2`, `px-5 py-2.5`, `px-6 py-3`, `px-6 py-3.5`). É a maior divergência entre o componente e o uso real.
 2. **`BarraPesquisa` duplica o `SelectField`** — tem um componente `Campo` local com a mesma receita, em vez de importar. Herdado do `HeroSearch`, que substituiu.
 3. **O badge "Reservado" tem dois tratamentos.** `BadgeEstado` usa `.laranja-fill`; o `StickyCard` usa `bg-laranja` chapado.
-4. **O carrossel tem um `Badge` próprio** (`DestaquesCarrossel.tsx:54`) que reimplementa o `BadgeEstado` com pequenas divergências: `font-bold` e `tracking-[0.14em]` (contra `font-medium` e `tracking-[0.15em]`), `border-laranja/60` (contra `/50`), sem sombra, e mostra **apenas um** badge por prioridade em vez de empilhar. A semântica de cor é a mesma.
+4. **O `CarCard` tem um carrossel de fotografias lá dentro** — setas, pontos e arrasto. Não é o carrossel que saiu da home: é a forma de ver as fotografias de uma viatura sem abrir a ficha, e em desktop as setas só aparecem em hover. Com uma fotografia só, que é o caso de seis das sete viaturas, não aparece nada.
 
 ## Nunca
 

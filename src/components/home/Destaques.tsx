@@ -1,11 +1,24 @@
-import { DestaquesCarrossel } from "@/components/home/DestaquesCarrossel";
+import { CarCard } from "@/components/car/CarCard";
 import { porExtenso } from "@/lib/format";
 import { BotaoLink } from "@/components/ui/Botao";
 import { Reveal } from "@/components/ui/Reveal";
 import { TituloSeccao } from "@/components/ui/TituloSeccao";
 import type { Viatura } from "@/lib/types";
 
+/*
+  Os destaques, em grelha.
+
+  Era um carrossel com efeito de coverflow, herdado do sistema de origem e
+  mantido a pedido — até o cliente ver a home montada e dizer que não gostava
+  nada dos carrosséis. Com **quatro** viaturas em destaque, a grelha ganha o
+  argumento sozinha: mostra as quatro de uma vez em vez de esconder três atrás
+  de setas, e não obriga ninguém a interagir para ver o que há.
+
+  Um carrossel paga-se quando o conteúdo não cabe. Quatro cards cabem.
+*/
 export function Destaques({ destaques }: { destaques: Viatura[] }) {
+  if (destaques.length === 0) return null;
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
       <Reveal>
@@ -39,9 +52,15 @@ export function Destaques({ destaques }: { destaques: Viatura[] }) {
         </TituloSeccao>
       </Reveal>
 
-      <DestaquesCarrossel destaques={destaques} />
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {destaques.map((v, i) => (
+          <Reveal key={v.id} delay={i * 0.08} className="h-full">
+            <CarCard viatura={v} />
+          </Reveal>
+        ))}
+      </div>
 
-      <div className="mt-8 text-center sm:hidden">
+      <div className="mt-10 text-center sm:hidden">
         <BotaoLink href="/viaturas" variante="contorno">
           Ver o stock todo
         </BotaoLink>

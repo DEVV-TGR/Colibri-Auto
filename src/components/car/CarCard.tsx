@@ -83,7 +83,13 @@ export function CarCard({
       sem sombra a crescer, porque a regra do sistema é que só o que flutua
       sobre outro conteúdo leva sombra, e um card de uma grelha não flutua.
     */
-    <article className="press group relative overflow-hidden rounded-2xl border border-line/60 bg-surface shadow-card transition-colors duration-300 hover:-translate-y-1 hover:border-laranja/50">
+    /*
+      `flex h-full flex-col` para os cards de uma fila acabarem todos à mesma
+      altura. Sem isto, um nome que parte em duas linhas — «Mercedes-Benz E
+      350» é o caso — empurra a linha de meta para baixo e o card fica mais
+      alto do que os vizinhos. Numa grelha de quatro, um degrau vê-se.
+    */
+    <article className="press group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line/60 bg-surface shadow-card transition-colors duration-300 hover:-translate-y-1 hover:border-laranja/50">
       <div
         className={`relative aspect-[4/3] overflow-hidden ${
           total > 1 ? "cursor-grab touch-pan-y select-none active:cursor-grabbing" : ""
@@ -176,13 +182,14 @@ export function CarCard({
         ordem era a inversa (meta, nome, versão, preço), e o card acabava num
         número em vez de acabar numa acção.
       */}
-      <Link href={urlViatura(viatura)} className="block p-5">
+      <Link href={urlViatura(viatura)} className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-xl text-ink transition-colors group-hover:text-laranja-deep">
           {viatura.marca} {viatura.modelo}
         </h3>
-        <p className="mt-0.5 truncate text-sm text-muted">{viatura.versao}</p>
+        <p className="mb-4 mt-0.5 truncate text-sm text-muted">{viatura.versao}</p>
 
-        <div className="mt-4 flex items-center justify-between gap-3 border-t border-line/50 pt-4">
+        {/* `mt-auto` empurra a linha de meta para o fundo do card, seja qual for a altura do título. */}
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-line/50 pt-4">
           <p className="flex flex-wrap items-center gap-x-2 text-xs uppercase tracking-[0.15em] text-muted">
             <span>{formatarRegisto(viatura.registoMes, viatura.registoAno)}</span>
             <span className="text-laranja-deep">·</span>
@@ -204,7 +211,7 @@ export function CarCard({
         </div>
 
         {vendido && (
-          <p className="mt-3 text-xs uppercase tracking-[0.15em] text-muted">
+          <p className="pt-3 text-xs uppercase tracking-[0.15em] text-muted">
             Vendida
           </p>
         )}

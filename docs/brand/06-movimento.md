@@ -8,18 +8,21 @@
 
 **CSS por defeito; `motion/react` só onde o CSS não chega.**
 
-Os dois marquees da home — `MontraFundo` e `FaixaLona` — são o exemplo do lado
-certo desta regra: são `@keyframes` em `globals.css`, e por isso os dois
-componentes ficam **de servidor**. Uma versão em `motion` custaria JavaScript
-no cliente para fazer o que o compositor faz sozinho.
+A `FaixaLona` é o exemplo do lado certo desta regra: são `@keyframes` em
+`globals.css`, e por isso o componente fica **de servidor**. Uma versão em
+`motion` custaria JavaScript no cliente para fazer o que o compositor faz
+sozinho.
 
-Mas obrigam a uma anulação explícita em `prefers-reduced-motion`. A regra
-global do projecto acelera as animações para `0.01ms`, o que as faz **saltar
-para o fim** — e o fim destas é a fila deslocada de uma cópia inteira. Quem
-pede movimento reduzido via a montra encostada à esquerda e a faixa a começar a
-meio de uma palavra. Daí o `animation: none !important` para as três classes,
-mais `overflow-x: auto` na montra, que sem animação passa a ser uma fila que se
-percorre à mão.
+Mas obriga a uma anulação explícita em `prefers-reduced-motion`. A regra global
+do projecto acelera as animações para `0.01ms`, o que as faz **saltar para o
+fim** — e o fim desta é a fila deslocada de uma cópia inteira. Quem pede
+movimento reduzido via a faixa a começar a meio de uma palavra. Daí o
+`animation: none !important`.
+
+> **Houve aqui um segundo marquee.** A `MontraFundo` punha duas filas de
+> fotografias do stock a deslizar por baixo do título da abertura. Saiu, e a
+> lição ficou: movimento não é presença. O que resolveu a entrada foi dar meio
+> ecrã a uma fotografia grande — ver [05](05-componentes.md).
 
 O projeto tem `motion` v12 instalado, mas usa-o em apenas **5 ficheiros**: `Reveal`, `Contador`, `LogoAnel`, `Preloader` e `Lightbox`. Todo o resto — 45 usos de `transition-colors` — é CSS.
 
@@ -66,7 +69,7 @@ Estava escrito à mão em cada sítio. Com a home nova passaram a ser seis, e se
 |---|---|
 | `duration-200` (6) | Mudança de cor, opacidade de setas, rotação do `›` |
 | `duration-300` (6) | Hover de card, aparecimento do CTA flutuante |
-| `duration-500` (4) | Zoom de foto no hover, trilho e coverflow do carrossel |
+| `duration-500` (4) | Zoom de foto no hover, varrimento dos painéis de `TresAcoes` |
 | `0.25s` | Fade do lightbox |
 | `0.3s` | Slide de foto no lightbox (`x: 24 → 0`) |
 | `0.4s` | Contador |
@@ -118,7 +121,7 @@ drag="x"  dragConstraints={{ left: 0, right: 0 }}  dragElastic={0.15}
 ```
 Threshold de ±80px para trocar de foto. Mais teclado: `Escape`, `ArrowLeft`, `ArrowRight`.
 
-**`DestaquesCarrossel`** — loop infinito por triplicação (`COPIAS = 3`), `GAP = 24`, `LIMIAR_ARRASTO = 6`, largura de card `Math.min(460, container * 0.8)`, medido com `ResizeObserver`. Efeito coverflow: card central `z-10 scale-100 opacity-100`, laterais `scale-[0.82] opacity-35 blur-[2px]`, com `transition-[transform,opacity,filter] duration-500 ease-out`.
+**(removido)** — o carrossel de destaques tinha loop infinito por triplicação (`COPIAS = 3`), `GAP = 24`, `LIMIAR_ARRASTO = 6`, largura de card `Math.min(460, container * 0.8)`, medido com `ResizeObserver`. Efeito coverflow: card central `z-10 scale-100 opacity-100`, laterais `scale-[0.82] opacity-35 blur-[2px]`, com `transition-[transform,opacity,filter] duration-500 ease-out`.
 
 ## Ken Burns
 
