@@ -33,7 +33,15 @@ O espaçamento entre secções não é uniforme; varia com o peso da secção:
 | `py-16` | Sugestões (secundária, no fim do detalhe) |
 | `py-14` | Footer |
 
-O hero não usa padding vertical — usa `min-h-[92svh]` com `flex items-center`. As páginas de estado (404, loading) usam `min-h-[70svh]`.
+**A abertura da home usa `svh` com tecto** — `min-height: min(88svh, 52rem)`, na classe `.altura-abertura` do `globals.css`, mais `pb-16 pt-28 lg:pb-24 lg:pt-32`.
+
+O tecto é o que distingue isto da versão que rebentou. Já usou `min-h-[92svh]`, e depois `62svh` com a fotografia ao lado em `lg:h-auto`: numa janela alta a imagem esticava com a linha da grelha e o `object-cover` respondia com um grande plano da jante — mil e duzentos píxeis de carro, medidos a 1440×3400. A imagem é 1.79 de proporção, e o `object-cover` só se porta bem enquanto a caixa andar perto disso; sem tecto, um `88svh` numa janela de 1400 dava uma caixa a 1.14 e cortava 36% da largura.
+
+Medido hoje: 671 px numa janela de 700 (manda o conteúdo), 792 numa de 900, e **832 a partir daí para cima**, por mais alta que a janela seja.
+
+A abertura é também a única secção **de largura total sem container por baixo**: a fotografia é `fill` sobre o `<section>`, e o container (`max-w-6xl`) só envolve o texto.
+
+As páginas de estado (404, loading) continuam a usar `min-h-[70svh]`.
 
 Unidade: **`svh`, não `vh`** — evita o salto na barra de endereço em mobile.
 

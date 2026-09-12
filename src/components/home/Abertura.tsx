@@ -1,247 +1,256 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
-import { ENTRADA } from "@/components/ui/Reveal";
-import { BotaoLink } from "@/components/ui/Botao";
-import { NumeroEmScroll } from "@/components/ui/NumeroEmScroll";
+import { PesquisaRapida, TiraMarcas } from "@/components/home/BarraPesquisa";
 import { stand } from "@/data/stand";
-import { getDestaques } from "@/lib/derivados";
 import { formatarPreco } from "@/lib/format";
-import { SITE_NAME } from "@/lib/site";
-import { urlViatura } from "@/lib/slug";
 import type { Viatura } from "@/lib/types";
 
 /*
   A abertura da home.
 
-  **A lona ocupa metade do primeiro ecrã, e é uma fotografia e não um painel.**
+  **Uma fotografia de ecrã inteiro com uma capa escura por cima.**
 
-  As versões anteriores tentaram impacto por movimento — filas de miniaturas a
-  deslizar — e a resposta do cliente foi que não gostava nada delas. Tinha
-  razão, e o erro tem nome: pôr *actividade* onde faltava *presença*. Ninguém
-  compra um carro a olhar para uma tira de 200px a passar.
+  O caminho até aqui vale a pena estar escrito, porque é a quarta tentativa e
+  as três anteriores falharam todas pela mesma razão.
 
-  O stand tem uma coisa que nenhum efeito substitui: uma lona laranja de seis
-  metros com um carro à frente. É o que se vê ao passar na avenida, e está
-  fotografado — a 1600px, com o nome e o selo legíveis. Estava a ser usada como
-  miniatura de uma galeria.
+  As duas primeiras puseram aqui as fotografias do stand: carro em cima de
+  relva sintética, lona laranja de seis metros atrás, luz dura de telemóvel,
+  seis das sete viaturas com uma única foto saída do Instagram a 630 px. O erro
+  não estava no arranjo — estava em pedir a essa fotografia que carregasse meio
+  ecrã. Não há grelha nem tipografia que a salve.
 
-  Daí também o laranja em massa vir da **fotografia** e não do CSS. Um painel
-  laranja ao lado desta imagem punha dois laranjas e dois wordmarks a competir
-  no mesmo ecrã.
+  A terceira tirou a fotografia do caminho: fundo branco e o carro recortado a
+  flutuar. Resolvia o problema técnico e falhava o resto — um carro sem chão
+  não é uma montra, é um catálogo de peças.
 
-  O cartão sobre a fotografia não é decoração: liga à ficha, e faz do primeiro
-  ecrã um sítio de onde se sai para um carro concreto.
+  Esta usa uma imagem feita para o efeito, escurecida. O véu é o que torna
+  possível o que não era: com a capa por cima, a fotografia deixa de ter de ser
+  perfeita em todo o lado e passa a ter de ser boa **onde se vê**.
+
+  ## A imagem
+
+  É um **render** e não uma fotografia do carro real — está registado em
+  `docs/por-confirmar.md` para o cliente saber. Mostra o modelo que está no
+  stock (o E 350 Coupé), num espaço neutro que não se faz passar pelas
+  instalações deles.
+
+  Vinha com o selo Colibri aplicado ao canto superior direito, e esse foi
+  removido do ficheiro. Não é preciosismo: o cabeçalho já tem o logótipo ao
+  canto esquerdo, e dois wordmarks da mesma marca no mesmo ecrã é exactamente
+  o erro que a primeira versão desta secção já tinha documentado. A parede por
+  trás do selo era lisa — desvio-padrão 1 em RGB 24 — o que permitiu clonar uma
+  banda limpa por cima sem inventar nada; a zona ficou a 16/2, igual à
+  vizinhança. O método está em `public/cars/CREDITS.md`.
+
+  ## O chão escuro não é dark mode
+
+  A regra 1 do sistema proíbe o tema alternável e as classes `dark:`, não uma
+  secção escura. O rodapé já é `--escuro` em mancha. A página passa a ser
+  abertura escura → corpo claro → rodapé escuro.
+
+  O texto forte usa o mesmo `--background` do rodapé. O secundário **não** usa
+  o `--escuro-muted` do rodapé, e a razão está medida no comentário da linha de
+  factos: aquele token foi calibrado contra uma cor chapada, e esta secção tem
+  uma fotografia por baixo. Nenhum tom novo foi inventado — o secundário é o
+  mesmo branco, esbatido a 80%.
+
+  ## A altura vem do conteúdo
+
+  Não há `svh` nesta secção. Uma versão anterior usava `62svh` com `lg:h-auto`
+  na coluna da imagem, e numa janela alta a fotografia esticava com a linha da
+  grelha — o `object-cover` respondia com um grande plano de uma jante. Medido
+  a 1440×3400: mil e duzentos píxeis de carro. Uma caixa que não estica não tem
+  esse problema.
 */
 
-const LINHAS = ["Carros usados", "sem letra pequena."] as const;
-
 /**
- * A viatura da abertura: de entre os destaques, a que tem mais fotografias.
+ * A imagem da abertura.
  *
- * Escolhida pelos dados e não escrita à mão, por uma razão prática — hoje só o
- * Ford Focus tem um álbum a sério (19 fotografias do Standvirtual); as outras
- * têm uma cada, recortada do Instagram a 630px. No dia em que o Ford se vender,
- * uma escolha fixa deixava meia página com uma fotografia esticada quatro
- * vezes. Assim, a abertura acompanha sempre o melhor material que houver.
+ * Constante, e de propósito fácil de trocar: quando chegarem fotografias
+ * melhores do cliente, muda-se o caminho e mais nada. O `object-position`
+ * acompanha, porque o enquadramento depende da imagem.
  */
-function viaturaDaAbertura(viaturas: Viatura[]): Viatura | undefined {
-  return [...getDestaques(viaturas)].sort(
-    (a, b) => b.fotos.length - a.fotos.length,
-  )[0];
-}
+const FUNDO = {
+  src: "/cars/hero/abertura.jpg",
+  alt: "Mercedes-Benz E 350 Coupé, o modelo em stock na Colibri Auto",
+  /*
+    O carro vive no centro-direita da imagem e a zona escura útil à esquerda.
+    Empurrar o enquadramento para a direita mantém o carro à vista quando a
+    secção é mais larga do que alta e o `object-cover` corta pelos lados.
+  */
+  posicao: "68% 52%",
+} as const;
 
 export function Abertura({ viaturas }: { viaturas: Viatura[] }) {
-  const reduzido = useReducedMotion();
+  /*
+    Uma viatura vendida não é stock, e não entra em nenhum dos dois números
+    desta secção — nem na contagem nem na pesquisa.
 
-  const disponiveis = viaturas.filter((v) => v.estadoVenda !== "vendido");
-  const emStock = disponiveis.length;
+    Antes entrava num e não no outro: a linha de factos dizia «6 viaturas em
+    stock» (as não-vendidas) e o botão da pesquisa dizia «Ver 7 viaturas»
+    (`filtrarViaturas` ordena as vendidas para o fim mas não as remove). Eram
+    dois números a contradizerem-se no mesmo ecrã. O catálogo em `/viaturas`
+    continua a mostrar a vendida, com o selo — lá o propósito é ser o registo
+    completo; aqui é dizer o que há para comprar.
+  */
+  const emStock = viaturas.filter((v) => v.estadoVenda !== "vendido");
 
   /*
     O preço mais baixo é o mínimo real e **não** o `getIntervalos().preco[0]`.
     Esse arredonda para fora, ao milhar, para dar limites redondos aos sliders
     dos filtros — o que ali é certo e aqui era uma mentira: com a viatura mais
-    barata a 4 999 €, a abertura anunciava "desde 4 000 €" e não havia nenhum
+    barata a 4 999 €, a abertura anunciava «desde 4 000 €» e não havia nenhum
     carro por esse preço.
   */
-  const maisBarato = Math.min(...disponiveis.map((v) => v.preco));
-  const destaque = viaturaDaAbertura(viaturas);
-
-  /*
-    Cada linha do título é uma caixa com `overflow-hidden` e o texto sobe de
-    baixo. Com movimento reduzido não há máscara nem deslocamento.
-
-    `whileInView` e não `animate`, apesar de isto estar sempre à vista: é o
-    padrão único de entrada do projecto (`docs/brand/06`), o
-    `IntersectionObserver` resolve no primeiro fotograma, e se o JavaScript
-    demorar ou falhar o texto fica no estado final em vez de preso fora da
-    máscara. Um hero que não aparece é pior do que um hero que não anima.
-  */
-  const linha = (i: number) => ({
-    initial: reduzido ? false : { y: "110%" },
-    whileInView: { y: "0%" },
-    viewport: { once: true },
-    transition: { duration: 0.9, delay: 0.1 + i * 0.12, ease: ENTRADA },
-  });
+  const maisBarato = Math.min(...emStock.map((v) => v.preco));
 
   return (
-    /*
-      **62svh e não 78, e a razão é a fotografia.**
+    <section className="relative isolate overflow-hidden bg-escuro">
+      {/* ── a fotografia ────────────────────────────────────────────── */}
+      <Image
+        src={FUNDO.src}
+        alt={FUNDO.alt}
+        fill
+        /*
+          É o LCP da página. O `priority` está deprecado no Next 16 — a
+          documentação em `node_modules/next/dist/docs` manda usar
+          `fetchPriority`/`loading` directamente, que é o que o atributo sempre
+          significou.
+        */
+        fetchPriority="high"
+        loading="eager"
+        /*
+          A imagem ocupa sempre a largura toda do ecrã, em qualquer tamanho —
+          daí `100vw` e não um cálculo por breakpoint. Sem isto o browser
+          assumia a largura da viewport na mesma, mas o `srcset` gerado ficava
+          curto e um portátil recebia a variante errada.
+        */
+        sizes="100vw"
+        className="-z-10 object-cover"
+        style={{ objectPosition: FUNDO.posicao }}
+      />
 
-      A lona é uma imagem de 1600×1111, ou seja 1.44 de proporção. Metade de um
-      ecrã com 78svh de altura dá um painel a 1.19, e o `object-cover` resolve
-      essa diferença cortando 17% da largura — o que na prática cortava a
-      traseira do carro. Medido, não estimado.
+      {/*
+        A capa escura. A força está no `--veu-abertura`, em `globals.css` — é
+        um número só, e é esse que se mexe para escurecer ou clarear.
+      */}
+      <div aria-hidden className="veu-abertura -z-10" />
 
-      A 62svh o painel fica a ~1.34 e a viatura cabe inteira. O primeiro ecrã
-      não perde nada: o que se ganha em altura vazia perde-se em carro, e por
-      baixo entram a faixa laranja e a barra de pesquisa, que enchem o resto.
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        {/*
+          Três itens e não dois, e a razão é o telemóvel.
 
-      Se um dia houver fotografias mais largas, esta altura pode subir. É a
-      imagem que manda na altura, não o contrário.
-    */
-    <section className="relative bg-background lg:min-h-[62svh]">
-      <div className="lg:grid lg:min-h-[62svh] lg:grid-cols-[minmax(0,52%)_1fr]">
-        {/* ── texto ─────────────────────────────────────────────────── */}
-        <div className="relative z-10 flex flex-col justify-center px-4 pb-14 pt-32 sm:px-6 lg:py-24 lg:pl-[max(1.5rem,calc((100vw-72rem)/2))] lg:pr-12">
-          <h1 className="sr-only">
-            {SITE_NAME} — stand de carros usados em Perafita, Matosinhos
-          </h1>
+          Em coluna única a ordem natural — título, pesquisa, factos — punha o
+          formulário logo a seguir à frase, e num ecrã estreito via-se uma
+          frase e um formulário e mais nada. Separando a pesquisa do resto, ela
+          desce para debaixo dos factos e o primeiro ecrã do telemóvel fica com
+          a frase sobre a fotografia, que é o que se quer ver primeiro.
 
-          <motion.p
-            initial={reduzido ? false : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: ENTRADA }}
-            className="text-xs uppercase tracking-[0.3em] text-laranja-deep"
-          >
-            Perafita · Matosinhos
-          </motion.p>
+          Em `lg` a grelha volta a duas colunas: tudo à esquerda, e a metade
+          direita deixada vazia de propósito para o carro da fotografia se ver.
+        */}
+        <div className="altura-abertura grid gap-y-8 pb-16 pt-28 lg:grid-cols-[minmax(0,54%)_1fr] lg:content-center lg:pb-24 lg:pt-32">
+          <div className="order-1 min-w-0 lg:col-start-1">
+            {/*
+              O `h1` é esta frase, e é visível.
 
-          <p className="mt-6 font-display h-hero text-ink">
-            {LINHAS.map((texto, i) => (
-              <span key={texto} className="block overflow-hidden pb-[0.06em]">
-                <motion.span
-                  {...linha(i)}
-                  className={`block ${i === 1 ? "text-laranja-metal" : ""}`}
-                >
-                  {texto}
-                </motion.span>
+              Havia aqui dois títulos: um `h1` em `sr-only` com o nome do stand
+              e a localidade, para os motores de busca, e um `<p>` com a frase
+              grande, para as pessoas. Um documento com um título escondido e
+              outro à vista é o mesmo documento a dizer duas coisas diferentes
+              a dois leitores. A localidade não se perde — está na linha de
+              factos aqui em baixo, no `<title>` da página e na secção da
+              morada.
+            */}
+            <h1 className="font-display h-hero text-background">
+              <span className="entrada-abertura block">Carros usados</span>
+              {/*
+                `--laranja-bright` e não o `--laranja-deep` do tema claro: o
+                deep foi escolhido para ter contraste **sobre papel**, e sobre
+                escuro apaga-se. O bright é o laranja que o sistema já usa em
+                superfície escura, e é o par que o rodapé usa há muito.
+              */}
+              <span
+                className="entrada-abertura block text-laranja-bright"
+                style={{ animationDelay: "0.09s" }}
+              >
+                sem letra pequena.
               </span>
-            ))}
-          </p>
-
-          {/*
-            A linha de factos. Números e não promessas — «garantia incluída ·
-            financiamento · retoma» está na faixa laranja logo a seguir, com
-            seis vezes o tamanho. Os dois números saem do inventário e mudam
-            sozinhos quando o stock mudar.
-          */}
-          <motion.div
-            initial={reduzido ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.45, ease: ENTRADA }}
-            className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-base text-muted"
-          >
-            <span>
-              <strong className="font-display text-xl font-extrabold text-ink">
-                <NumeroEmScroll valor={emStock} />
-              </strong>{" "}
-              viaturas em stock
-            </span>
-            <span aria-hidden className="text-laranja">
-              ◆
-            </span>
-            <span>
-              desde{" "}
-              <strong className="font-display text-xl font-extrabold text-ink">
-                {formatarPreco(maisBarato)}
-              </strong>
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={reduzido ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.58, ease: ENTRADA }}
-            className="mt-9 flex flex-wrap gap-3"
-          >
-            <BotaoLink href="/viaturas">Ver o stock</BotaoLink>
-            <BotaoLink
-              href={stand.whatsapp}
-              variante="contorno"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Falar no WhatsApp ↗
-            </BotaoLink>
-          </motion.div>
-        </div>
-
-        {/* ── a lona ────────────────────────────────────────────────── */}
-        {destaque && (
-          <div className="relative h-[62svh] min-h-[320px] lg:h-auto">
-            <Image
-              src={destaque.fotos[0]}
-              alt={`${destaque.marca} ${destaque.modelo} à porta do stand`}
-              fill
-              priority
-              /*
-                A fotografia é o maior elemento da página e o LCP. O `sizes`
-                diz ao browser que num telemóvel ela ocupa a largura toda mas
-                em desktop pouco mais de metade — sem isto ia buscar a variante
-                de 1600px a um ecrã de 390.
-              */
-              sizes="(max-width: 1024px) 100vw, 55vw"
-              className="object-cover object-center"
-            />
+            </h1>
 
             {/*
-              Um véu curto só do lado esquerdo, e só a partir de `lg`. Serve a
-              costura entre a fotografia e o papel: sem ele há uma linha dura a
-              meio do ecrã. Não escurece a imagem — funde-a com o fundo.
-            */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 hidden w-24 bg-gradient-to-r from-background to-transparent lg:block"
-            />
+              A linha de factos, que absorveu o rótulo `PERAFITA · MATOSINHOS`
+              que estava em maiúsculas espaçadas por cima do título. Um rótulo
+              desses diz menos do que uma frase que diga a mesma coisa a contar
+              carros e preços, e poupa um elemento decorativo ao primeiro ecrã.
 
-            <motion.div
-              initial={reduzido ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.7, ease: ENTRADA }}
-              className="absolute bottom-5 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-xs"
+              Os dois números saem do inventário e mudam sozinhos quando o
+              stock mudar.
+            */}
+            {/*
+              Branco esbatido, e **não** o `--escuro-muted` que o rodapé usa
+              para texto secundário sobre escuro.
+
+              Esse token foi medido contra um fundo liso (`--escuro`, uma cor
+              chapada). Aqui o fundo é uma fotografia com uma janela de luz, e
+              o pixel mais claro por baixo desta linha é branco puro: contra
+              ele o `--escuro-muted` dá 3,47:1 e não passa, por mais que se
+              carregue no véu. Branco a 80% dá 5,71:1 no mesmo sítio.
+
+              A hierarquia entre esta linha e o título continua a existir —
+              faz-se pelo corpo (16 px contra 56) e não pelo tom.
+            */}
+            <p
+              className="entrada-abertura mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-base text-background/80"
+              style={{ animationDelay: "0.2s" }}
             >
-              <Link
-                href={urlViatura(destaque)}
-                className="press group flex items-center gap-4 rounded-2xl border border-line/60 bg-surface/95 p-4 shadow-alta backdrop-blur-xl transition-colors hover:border-laranja"
-              >
-                <span className="min-w-0 flex-1">
-                  <span className="block text-xs uppercase tracking-[0.2em] text-laranja-deep">
-                    Em destaque
-                  </span>
-                  <span className="mt-1 block truncate font-display text-lg text-ink">
-                    {destaque.marca} {destaque.modelo}
-                  </span>
-                  <span className="block text-sm text-muted">
-                    {formatarPreco(destaque.preco)}
-                  </span>
-                </span>
-                <span
-                  aria-hidden
-                  className="shrink-0 text-laranja-deep transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </Link>
-            </motion.div>
+              <span>
+                <strong className="font-display text-lg font-extrabold text-background">
+                  {emStock.length}
+                </strong>{" "}
+                viaturas em stock
+              </span>
+              <span aria-hidden className="text-laranja">
+                ◆
+              </span>
+              <span>
+                desde{" "}
+                <strong className="font-display text-lg font-extrabold text-background">
+                  {formatarPreco(maisBarato)}
+                </strong>
+              </span>
+              <span aria-hidden className="text-laranja">
+                ◆
+              </span>
+              <span>Perafita, Matosinhos</span>
+            </p>
           </div>
-        )}
+
+          {/* ── a pesquisa e as marcas ─────────────────────────────── */}
+          <div className="order-2 min-w-0 lg:col-start-1">
+            <div
+              className="entrada-abertura"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <PesquisaRapida viaturas={emStock} />
+            </div>
+
+            <div
+              className="entrada-abertura mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-background/15 pt-6"
+              style={{ animationDelay: "0.38s" }}
+            >
+              <TiraMarcas viaturas={emStock} />
+              <Link
+                href={stand.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="press text-sm text-background/80 transition-colors hover:text-background"
+              >
+                Falar no WhatsApp ↗
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

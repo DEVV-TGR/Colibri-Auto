@@ -122,10 +122,12 @@ Sem excepção, em todas as secções:
 
 Duas variações deliberadas:
 
-- **Abertura da home** — usa `text-laranja-metal` em vez de `text-laranja`, e
-  o realce é a **linha inteira** e não a última palavra. É o único sítio com o
-  degradê aplicado ao texto, e é o que faz da abertura o momento tipográfico
-  mais forte do site.
+- **Abertura da home** — o realce é a **linha inteira** («sem letra pequena.»)
+  e não a última palavra, em `text-laranja-deep` chapado. Já foi um degradê
+  recortado pela forma das letras (`.text-laranja-metal`); saiu com a abertura
+  nova. Um degradê em texto é decoração que não significa nada, e num título
+  obriga a escolher entre o efeito ser visível e a palavra ser legível a meio.
+  O chapado dá 5,20:1 sobre o branco da abertura e lê-se de ponta a ponta.
 - **Página de detalhe** — o realce cai sobre a **versão** da viatura
   (`<span className="font-extrabold text-laranja">{v.versao}</span>`), não
   sobre a última palavra. Faz sentido: separa marca+modelo da versão,

@@ -143,14 +143,18 @@ body {
    entrelinhas ganham um cabelo, porque as maiúsculas do Montserrat são altas
    e a 1.0 as linhas tocavam-se. */
 .h-hero {
-  /* O tecto desceu de 6.25rem quando a abertura passou a ter a fotografia da
-     lona ao lado: o título deixou de ter a página toda e passou a ter metade.
+  /* O tecto desceu de 6.25rem quando a abertura passou a ter uma imagem ao
+     lado: o título deixou de ter a página toda e passou a ter pouco mais de
+     metade.
 
-     3.5rem é o valor **medido** e não escolhido. Num ecrã de 1920 a coluna do
-     texto tem 998px, mas 384 vão para o alinhamento com o container e 48 para
-     a goteira — sobram 566. «sem letra pequena.» a 3.5rem ocupa cerca de 517.
-     A 4rem passava dos 590 e partia em duas linhas dentro da máscara da
-     animação, que é para uma linha só. */
+     3.5rem é o valor **medido** e não escolhido. A coluna do texto é 54% do
+     container de 72rem, ou seja 622px no máximo; «sem letra pequena.» a
+     3.5rem ocupa cerca de 517 e cabe numa linha com folga. A 4rem passa dos
+     590 e, com o `letter-spacing` a -0.03em, fica a um cabelo de partir.
+
+     Cada linha é um `<span class="block">` e pode partir sem nada se
+     quebrar — a máscara `overflow-hidden` que aqui havia, e que obrigava a
+     frase a caber numa linha só, desapareceu com a animação em JavaScript. */
   font-size: clamp(2.25rem, 4vw, 3.5rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
@@ -185,46 +189,148 @@ body {
   }
 }
 
-/* laranja em texto: o degradê curto que o logótipo tem no selo.
+/* a rede de segurança do ecrã de abertura, em CSS.
 
-   Herdeiro de um efeito de folha de ouro, e deliberadamente reduzido. O ouro
-   levava cinco paragens e passava pelo creme a meio, porque é assim que um
-   metal reflecte. O laranja não é metal — é tinta —, e cinco paragens numa
-   palavra faziam-na parecer um logótipo de anos 90. Ficam três: escuro em
-   baixo à esquerda, cheio no meio, claro em cima à direita. Só se lê como
-   volume, que é tudo o que se quer. */
-.text-laranja-metal {
-  /*
-    O gradiente é recortado pela forma das letras, mas pintado só dentro da
-    caixa do elemento — o que sair da caixa fica transparente, ou seja,
-    invisível. Num grotesco pesado a tinta sai por menos lados do que saía no
-    Bodoni itálico (não há inclinação a empurrá-la para fora da largura de
-    avanço), mas continua a sair: com `line-height: 1.02` os descendentes do
-    `g` e do `p` passam por baixo da linha.
+   O `Preloader` monta visível — no servidor e no cliente — e é um `useEffect`
+   que o desmonta. O componente já tinha um `LIMITE_MS = 3000` comentado como
+   «rede de segurança: nunca deixar o ecrã preso», mas essa rede é JavaScript:
+   se o JavaScript não correr, nunca dispara e o site inteiro fica a ser um
+   logótipo sobre papel. Medido com a execução de scripts desligada — a página
+   toda era o splash, e mais nada.
 
-    O `padding` alarga a área pintada e a `margin` negativa devolve o espaço,
-    para o texto ocupar exactamente o mesmo que ocupava e o alinhamento do
-    bloco não mexer. O `inline-block` é o que faz o padding valer aqui. Tudo
-    em `em`, para acompanhar a escala fluida sem depender da largura do ecrã.
-  */
-  display: inline-block;
-  padding-block: 0.14em;
-  margin-block: -0.14em;
-  padding-inline: 0.06em;
-  margin-inline: -0.06em;
-  /* Sobre papel os stops têm de ser os escuros: um degradê que passe pelo
-     `--laranja-bright` a meio de uma palavra deixa uma zona ilegível no meio
-     do título. Vai do `deep` ao `laranja` e pára aí. */
-  background-image: linear-gradient(
-    100deg,
-    var(--laranja-deep) 0%,
-    var(--laranja-deep) 25%,
-    var(--laranja) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+   Isto cumpre a intenção que já lá estava escrita. Com JavaScript a funcionar
+   o componente desaparece muito antes (1,1 s) e esta regra nunca chega a
+   contar; sem ele, a página fica utilizável ao fim dos mesmos três segundos em
+   vez de nunca.
+
+   `visibility` e não `display`: a animação tem de poder ter um degrau no fim,
+   e `pointer-events` garante que a camada deixa de apanhar cliques. */
+@keyframes preloader-desiste {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+.preloader-rede {
+  animation: preloader-desiste 0s linear 3s forwards;
+}
+
+/* a altura da abertura.
+
+   Alta o suficiente para a fotografia encher o primeiro ecrã, **com tecto**.
+
+   O tecto não é timidez, é a lição de um defeito que já aconteceu nesta
+   secção. A imagem é 2752×1536, ou seja 1.79 de proporção. Enquanto a caixa
+   andar perto disso, o `object-cover` mal corta e vê-se a fotografia quase
+   inteira. Numa janela de 1400 de altura, um `90svh` sem tecto dava uma caixa
+   a 1.14 — e o `object-cover` resolve essa diferença cortando 36% da largura,
+   que na prática é mergulhar num grande plano da porta do carro. Foi
+   exactamente assim que a versão de Setembro rebentou, medida a 1440×3400.
+
+   `min()` resolve os dois casos com um valor só: manda o `88svh` enquanto o
+   ecrã for normal, e o tecto de 52rem assim que a janela passar dos ~945 px de
+   altura. Num portátil de 900 dá 792 px e a caixa fica a 1.82, praticamente a
+   proporção da imagem.
+
+   Vive aqui e não numa classe `min-h-[min(88svh,52rem)]` porque um valor
+   arbitrário com vírgulas dentro de parênteses é precisamente o que o Tailwind
+   não gera — já aconteceu neste ficheiro com a sombra do carro recortado, a
+   classe foi para o HTML e o CSS nunca apareceu. */
+@media (min-width: 1024px) {
+  .altura-abertura {
+    min-height: min(88svh, 52rem);
+  }
+}
+
+/* o véu escuro da abertura.
+
+   A abertura é uma fotografia de ecrã inteiro com uma capa escura por cima. O
+   véu faz duas coisas ao mesmo tempo: dá contraste ao texto branco, e afoga o
+   que na fotografia não interessa.
+
+   **A opacidade vive num sítio só, aqui em cima, e é o número a mexer.** Subir
+   escurece, descer clareia. Não mexer nos degradês em baixo para afinar o
+   tom — eles distribuem o véu, o `--veu-abertura` é que lhe dá a força.
+
+   A distribuição não é uniforme de propósito: denso à esquerda, onde assenta o
+   título e a pesquisa e a legibilidade manda, e mais leve à direita, onde está
+   o carro e o que se quer é deixá-lo ver-se. A segunda camada é um véu suave
+   de cima para baixo, que assenta a imagem e evita que o cabeçalho flutue
+   sobre a zona mais clara da fotografia.
+
+   Vive aqui e não numa classe `bg-[...]` do Tailwind: um valor arbitrário com
+   parênteses aninhados e vírgulas não gera regra nenhuma — a classe vai parar
+   ao HTML e o CSS nunca aparece. Aconteceu neste ficheiro com a sombra do
+   carro recortado, e só se deu por isso a medir o CSS servido. */
+.veu-abertura {
+  /* O valor é **medido**. O pixel mais claro por baixo da coluna de texto é
+     branco puro (a janela de luz do render), e a 0.78 o texto branco dá
+     7,81:1, o branco a 80% dá 5,71:1 e o laranja do título dá 4,00:1 — todos
+     com folga sobre os mínimos (4,5 para texto normal, 3 para o título, que é
+     texto grande). A 0.70 o laranja caía para 3,01 e ficava no fio.
+
+     Subir escurece e clareia o texto; descer mostra mais fotografia e aperta o
+     contraste. Abaixo de 0.74 deixa de passar. */
+  --veu-abertura: 0.78; /* ← o número a mexer */
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      95deg,
+      rgb(18 16 15 / var(--veu-abertura)) 0%,
+      /* A densidade mantém-se até aos 56%, e não até aos 38%.
+
+         A coluna de texto acaba a 53% da largura da imagem, e a janela de luz
+         do render começa a 39% — ou seja, a parte mais clara da fotografia
+         passa **por trás** do fim do texto. Com o degradê a afrouxar aos 38%,
+         a linha de factos apanhava véu a menos justamente onde apanhava mais
+         luz. Medido, não suposto: era aí que o contraste caía. */
+        rgb(18 16 15 / calc(var(--veu-abertura) * 0.96)) 56%,
+      rgb(18 16 15 / calc(var(--veu-abertura) * 0.58)) 78%,
+      rgb(18 16 15 / calc(var(--veu-abertura) * 0.42)) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(18 16 15 / calc(var(--veu-abertura) * 0.45)) 0%,
+      rgb(18 16 15 / calc(var(--veu-abertura) * 0.12)) 45%,
+      rgb(18 16 15 / calc(var(--veu-abertura) * 0.38)) 100%
+    );
+}
+
+/* a entrada da abertura, em CSS e não em JavaScript.
+
+   O primeiro ecrã animava com `motion` — `initial={{ y: "110%" }}` dentro de
+   uma máscara `overflow-hidden`, e o texto só saía de lá quando o
+   `whileInView` disparasse. Isso dá três maneiras de o título simplesmente
+   não aparecer: o separador está oculto e o `IntersectionObserver` não corre,
+   a hidratação falha ou demora e o estilo inicial fica aplicado, ou a página
+   é renderizada sem JavaScript. Estava a acontecer — medido num screenshot
+   headless, onde o primeiro ecrã saiu com um buraco branco no sítio da frase.
+
+   Uma animação CSS não tem nenhum desses modos de falha: corre sempre, sem
+   JavaScript e sem observer, e termina sozinha. O `both` mantém o primeiro
+   fotograma antes de começar; o escalonamento faz-se com `animation-delay`
+   inline, que é a única parte que varia entre linhas.
+
+   Regra do `docs/brand/06`: o easing é o mesmo `ENTRADA` do resto do site,
+   aqui escrito à mão porque o CSS não lê a constante do TypeScript. */
+@keyframes entrada-abertura {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.entrada-abertura {
+  animation: entrada-abertura 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .entrada-abertura {
+    animation: none;
+  }
 }
 
 /* preenchimento das superfícies laranja: os CTA primários, as etiquetas de
@@ -272,6 +378,33 @@ body {
   color: var(--background);
 }
 
+/* a faixa da lona — o marquee do lema, na home.
+
+   A fila é o conteúdo **duplicado**, e o deslocamento é de exactamente uma
+   cópia: quando a primeira acaba de sair, a segunda está no sítio onde a
+   primeira começou, e o ciclo recomeça sem salto. As passagens estão
+   encostadas e não há goteira entre elas, portanto `-50%` chega — sem
+   correcções.
+
+   Houve aqui um segundo marquee, a `MontraFundo`, com duas filas de
+   fotografias do stock a deslizar por baixo do título. Saiu: dava actividade
+   e não dava presença, e o cliente foi directo ao dizer que não gostava nada
+   dela. O que ficou no lugar é a fotografia da lona a ocupar meio ecrã. */
+.faixa-fila {
+  display: flex;
+  width: max-content;
+  animation: faixa 38s linear infinite;
+}
+
+@keyframes faixa {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* resposta ao premir — botões e controlos.
    usa a propriedade `scale` nativa (não `transform`) de propósito: metade dos
    controlos estão centrados com -translate-y-1/2, e um transform sobreporia
@@ -305,33 +438,6 @@ body {
     var(--laranja) 80%,
     transparent
   );
-}
-
-/* a faixa da lona — o marquee do lema, na home.
-
-   A fila é o conteúdo **duplicado**, e o deslocamento é de exactamente uma
-   cópia: quando a primeira acaba de sair, a segunda está no sítio onde a
-   primeira começou, e o ciclo recomeça sem salto. As passagens estão
-   encostadas e não há goteira entre elas, portanto `-50%` chega — sem
-   correcções.
-
-   Houve aqui um segundo marquee, a `MontraFundo`, com duas filas de
-   fotografias do stock a deslizar por baixo do título. Saiu: dava actividade
-   e não dava presença, e o cliente foi directo ao dizer que não gostava nada
-   dela. O que ficou no lugar é a fotografia da lona a ocupar meio ecrã. */
-.faixa-fila {
-  display: flex;
-  width: max-content;
-  animation: faixa 38s linear infinite;
-}
-
-@keyframes faixa {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 /* sliders de intervalo (dois inputs sobrepostos; só os thumbs recebem eventos) */
@@ -386,7 +492,9 @@ body {
     scale: 1;
   }
 
-  /*
+  
+
+/*
     A faixa precisa de `animation: none` e não do `0.01ms` da regra acima.
 
     Acelerar uma animação para 0.01ms fá-la saltar para o **fim** — e o fim

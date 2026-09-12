@@ -58,7 +58,13 @@ export function Preloader() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-background"
+      /*
+        `preloader-rede` é o `LIMITE_MS` acima escrito em CSS, para a rede de
+        segurança existir mesmo quando o JavaScript não corre — ver
+        `globals.css`. Com o JavaScript a funcionar isto nunca chega a
+        disparar: o componente desmonta-se muito antes.
+      */
+      className="preloader-rede fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-background"
     >
       <motion.div
         style={{ width: LARGURA_PX }}

@@ -44,7 +44,7 @@ Não há bibliotecas de componentes (Radix e afins). Tudo o que é UI é escrito
 `CarCard`, `Lightbox`, `SpecsTable`, `StickyCard`, `FiltersPanel`, `RangeSlider`, `SelectField`, `SortSelect`, `Header`, `Footer`.
 
 **Todo o vocabulário de negócio, props, variáveis, estado e comentários ficam em PT-PT:**
-`Viatura`, `Botao`, `Reveal`, `Contador`, `NumeroEmScroll`, `TituloSeccao`, `Logotipo`, `LogoAnel`, `Preloader`, `TransicaoRota`, `CtaFlutuante`, `Sugestoes`, `Destaques`, `Abertura`, `RailStock`, `BarraPesquisa`, `TresAcoes`, `Incluido`, `OndeEstamos`, `ChamadaFinal`, `FiltrosBarra`, `AberturaViatura`, `BadgeEstado`, e props como `rotulo`, `valor`, `opcoes`, `aberto`, `visivel`, `filtros`, `resultados`, `onLimpar`, `onFechar`, `onNavegar`, `variante`, `prioridade`, `tamanho`.
+`Viatura`, `Botao`, `Reveal`, `Contador`, `NumeroEmScroll`, `TituloSeccao`, `Logotipo`, `LogoAnel`, `Preloader`, `TransicaoRota`, `CtaFlutuante`, `Sugestoes`, `Destaques`, `Abertura`, `RailStock`, `PesquisaRapida`, `TiraMarcas`, `TresAcoes`, `Incluido`, `OndeEstamos`, `ChamadaFinal`, `FiltrosBarra`, `AberturaViatura`, `BadgeEstado`, e props como `rotulo`, `valor`, `opcoes`, `aberto`, `visivel`, `filtros`, `resultados`, `onLimpar`, `onFechar`, `onNavegar`, `variante`, `prioridade`, `tamanho`.
 
 Constantes de gesto e tempo em maiúsculas portuguesas: `LIMIAR_MOVE`, `LIMIAR_SWIPE`, `MINIMO_MS`, `LIMITE_MS`, `COPIAS`, `TAMANHOS`, `DURACAO_S`, `ENTRADA`, `SEM_DADOS`.
 
@@ -69,7 +69,9 @@ Não se exportam interfaces de props. A única exceção é o `Botao`, que esten
 
 Tudo o que não tem estado, efeito, evento de DOM ou hook de browser fica no servidor: `Botao`, `Logotipo`, `BadgeEstado`, `SpecsTable`, `ExtrasList`, `Sugestoes`, `Footer`, `Destaques`, `TresAcoes`, `Incluido`, `OndeEstamos`, `ChamadaFinal` e todas as `page.tsx`.
 
-As secções novas da home são quase todas de servidor — `TresAcoes`, `Incluido`, `OndeEstamos` e `ChamadaFinal` só recebem props e renderizam, e o movimento delas vem do `Reveal`, `TituloSeccao` e `NumeroEmScroll`, que são de cliente e ficam contidos. As de cliente são as que têm mesmo estado: `Abertura` (animação de entrada), `RailStock` (`useReducedMotion`) e `BarraPesquisa` (os selects e a navegação).
+As secções novas da home são quase todas de servidor — `TresAcoes`, `Incluido`, `OndeEstamos` e `ChamadaFinal` só recebem props e renderizam, e o movimento delas vem do `Reveal`, `TituloSeccao` e `NumeroEmScroll`, que são de cliente e ficam contidos.
+
+**A `Abertura` também é de servidor**, e passou a ser quando a animação de entrada desceu para CSS (`.entrada-abertura`): sem `useReducedMotion` nem `motion`, deixou de haver estado para justificar a fronteira. O único cliente que ela monta é a `PesquisaRapida`, que tem mesmo estado. Restam de cliente as que o têm: `PesquisaRapida` (os selects e a navegação), `TiraMarcas` e `RailStock` (`useReducedMotion`).
 
 A regra: `"use client"` só quando há estado, efeito, evento de DOM ou hook de browser. Um componente que só recebe props e renderiza fica no servidor.
 
@@ -116,7 +118,7 @@ Três decisões embutidas aqui:
 - **`window.history` direto, não `router.replace`** — o router do Next revalidaria a rota no servidor a cada tecla.
 - **A guarda `primeiraRender`** evita reescrever o URL com o que dele acabou de sair.
 
-**Exceção:** a `BarraPesquisa` da homepage usa `router.push()` com `serializeFiltros()` — é uma navegação real entre páginas, e essa deve ficar no histórico.
+**Exceção:** a `PesquisaRapida` da abertura usa `router.push()` com `serializeFiltros()` — é uma navegação real entre páginas, e essa deve ficar no histórico.
 
 Ao mexer em filtros: manter o padrão. `router.push` a cada alteração destrói a fluidez; `pushState` destrói o botão "voltar".
 

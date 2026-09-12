@@ -41,7 +41,12 @@ function Passagem({ duplicada }: { duplicada: boolean }) {
     >
       {LEMA.map((palavra) => (
         <span key={palavra} className="flex items-center">
-          <span className="px-6 font-display text-2xl font-extrabold uppercase tracking-[0.02em] text-ink sm:px-9 sm:text-4xl">
+          {/*
+            A escala desceu de `text-2xl sm:text-4xl`: a esse corpo as palavras
+            saíam cortadas nas duas pontas e a faixa lia-se como um banner mal
+            medido.
+          */}
+          <span className="px-5 font-display text-lg font-extrabold uppercase tracking-[0.02em] text-ink sm:px-7 sm:text-2xl">
             {palavra}
           </span>
           {/* O losango é o separador do sistema, aqui à escala da faixa. */}
@@ -56,7 +61,7 @@ export function FaixaLona() {
   return (
     <section
       aria-label="Compra, venda e retoma"
-      className="overflow-hidden bg-laranja py-4 sm:py-5"
+      className="overflow-hidden bg-laranja py-3 sm:py-4"
     >
       {/*
         A fila é o lema duplicado e o deslocamento é de exactamente uma cópia —

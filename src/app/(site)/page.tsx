@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Abertura } from "@/components/home/Abertura";
-import { BarraPesquisa } from "@/components/home/BarraPesquisa";
 import { ChamadaFinal } from "@/components/home/ChamadaFinal";
 import { Destaques } from "@/components/home/Destaques";
 import { Incluido } from "@/components/home/Incluido";
@@ -35,27 +34,26 @@ export default async function Home() {
   /*
     A ordem da página, e a razão de ser dela.
 
-    Abertura → lona → pesquisa é uma sequência deliberada: diz-se a frase com a
-    montra ao lado, diz-se o que se faz, e só depois se oferece uma forma de
-    filtrar. O sistema de origem punha a pesquisa dentro do hero, antes de a
-    pessoa ter visto uma única viatura — pedia-lhe para escolher marca e
-    combustível sem lhe ter mostrado nada.
+    **A pesquisa subiu para dentro da abertura.** Estava por baixo da faixa
+    laranja, e a nota que aqui estava defendia-o: não pedir à pessoa que
+    escolha marca e combustível antes de lhe termos mostrado um carro. O
+    argumento cai com o tamanho do stock — com sete viaturas não há catálogo
+    para explorar, há uma montra para filtrar, e quem chega quer é filtrar.
+    É também o que faz o site que o cliente apontou como boa referência.
 
-    A abertura já traz as três naturezas de uma vez — tipografia à esquerda,
-    fotografia à direita — e a faixa acrescenta a cor. Houve uma versão com
-    duas filas de miniaturas a deslizar entre as duas; saíram, e o porquê está
-    em `Abertura.tsx`.
+    Fica então: abertura (a frase, a pesquisa e a fotografia escurecida) → a
+    faixa laranja, que é a lona real do stand e acrescenta a cor que a
+    abertura escura não tem → e daí para baixo a lista numerada, do concreto
+    para o abstracto: os carros (01), o que o stand faz (02), as condições
+    (03), a morada (04).
 
-    Depois disso a página é uma lista numerada, do concreto para o abstracto:
-    os carros (01), o que o stand faz (02), as condições (03), a morada (04). A
-    chamada final fica fora da numeração de propósito — não é uma secção da
+    A chamada final fica fora da numeração de propósito — não é uma secção da
     montra, é a saída para quem não encontrou nada.
   */
   return (
     <>
       <Abertura viaturas={viaturas} />
       <FaixaLona />
-      <BarraPesquisa viaturas={viaturas} />
       <Destaques destaques={getDestaques(viaturas)} />
       <TresAcoes />
       <Incluido viaturas={viaturas} />

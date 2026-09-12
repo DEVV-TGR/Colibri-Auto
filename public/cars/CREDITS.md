@@ -13,9 +13,28 @@ públicas da Colibri Auto em setembro de 2026.
 | `renault-captur/` | 1 | Instagram, com a etiqueta de preço e a faixa de contactos cortadas |
 | `renault-kangoo/` | 1 | Instagram, com a etiqueta de preço e a faixa de contactos cortadas |
 
-`hero/showroom.jpg` é a mesma fotografia do Mercedes E 350 Coupé, escolhida
-para o topo da homepage por ser a única em que a lona laranja do stand se lê de
-ponta a ponta.
+## `hero/abertura.jpg` — a imagem da abertura
+
+**Não é uma fotografia: é um render**, gerado para servir de fundo ao primeiro
+ecrã. Mostra o modelo que está no stock (o E 350 Coupé) num espaço neutro, que
+não se faz passar pelas instalações do stand. Está registado em
+`docs/por-confirmar.md` para o cliente saber o que é.
+
+2752×1536. Existe porque nenhuma fotografia do inventário serve para fundo de
+ecrã inteiro: as de alta resolução (1600 px) são as exteriores com a lona
+laranja a ocupar o terço de cima, e as boas — o interior em pele cognac do Ford
+(08, 12, 14, 18), sem lona nem relva — são 900 px e em retrato.
+
+**O original trazia o selo Colibri aplicado ao canto superior direito**, e esse
+foi removido: o cabeçalho já tem o logótipo ao canto esquerdo, e dois wordmarks
+da mesma marca no mesmo ecrã competem um com o outro.
+
+Como foi removido, para ser repetível: a parede por trás do selo é lisa —
+medida a RGB 24 com desvio-padrão 1 — portanto clonou-se a banda limpa do topo
+(x 2250–2752, y 0–40), esticou-se na vertical até 552 px (o que reproduz o
+degradê horizontal da parede sem inventar textura), e compôs-se por cima com as
+arestas interior e inferior esbatidas. Feito com o `sharp` que o Next já traz.
+Prova: a zona do selo passou de desvio-padrão 93 para 2, igual à vizinhança.
 
 ## O que falta
 

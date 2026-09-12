@@ -137,7 +137,35 @@ export function CarCard({
             draggable={false}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             priority={prioridade && foto === inicial}
-            className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${
+            /*
+              O enquadramento desce para o carro em vez de ficar centrado.
+
+              Todas as fotografias do stand têm a mesma composição: a lona
+              laranja de seis metros no terço de cima, o carro no meio, a relva
+              sintética em baixo. Centradas, a grelha de destaques lia-se como
+              quatro rectângulos laranja iguais.
+
+              **Isto só morde em três das sete viaturas, e a razão é aritmética.**
+              O `object-position` vertical só tem efeito quando há corte
+              vertical, ou seja, quando a fotografia é mais quadrada do que a
+              caixa. As sete dividem-se em três casos:
+
+              - 630×585 (rácio 1,08) — Captur, Kangoo e CX-3, as do Instagram:
+                mais quadradas do que 4/3, cortam na vertical, e aqui os 62%
+                fazem o que se quer.
+              - 1120×840 (rácio 1,33) — Mercedes E 350, B 150 e Golf: é
+                **exactamente** 4/3, a proporção da caixa. Não há corte nenhum,
+                e a posição não muda absolutamente nada.
+              - 1600×1111 (rácio 1,44) — o Ford: mais larga do que a caixa,
+                corta na horizontal, e a posição vertical volta a não contar.
+
+              Ou seja, é uma melhoria em três cards e um no-op nos outros
+              quatro. Fica porque não tem custo e porque nos três casos em que
+              conta o ganho vê-se. O que resolve a sério são fotografias sem a
+              lona a ocupar um terço do enquadramento — está anotado em
+              `docs/por-confirmar.md`. Chegando, isto volta a `object-center`.
+            */
+            className={`object-cover object-[50%_62%] transition-transform duration-500 group-hover:scale-[1.03] ${
               vendido ? "opacity-60 saturate-50" : ""
             }`}
           />

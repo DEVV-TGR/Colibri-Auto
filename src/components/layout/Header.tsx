@@ -19,6 +19,47 @@ export function Header() {
   const [aberto, setAberto] = useState(false);
 
   /*
+    O cabeçalho não tem fundo enquanto se está no topo.
+
+    Tinha `bg-background/70` sempre, e isso era invisível enquanto a página
+    inteira era de papel. Deixou de ser quando a home passou a abrir com uma
+    imagem de ecrã inteiro: uma barra de papel translúcido por cima dela lê-se
+    como uma tira colada ao topo, com uma linha dura por baixo — uma costura
+    onde não devia haver nenhuma.
+
+    A resposta não é pintar o cabeçalho de branco, que só mudava a costura de
+    página: é não ter fundo nenhum enquanto não for preciso. Ele só existe para
+    o texto se ler quando houver conteúdo a passar por baixo, e no topo não há.
+
+    Arranca transparente também no servidor, que é o estado certo para quem
+    abre a página de raiz. Se o browser restaurar a posição do scroll, o efeito
+    corrige no primeiro fotograma.
+  */
+  const [noTopo, setNoTopo] = useState(true);
+
+  /*
+    A home abre com uma fotografia escura de ecrã inteiro, e o cabeçalho fica
+    por cima dela. Com os tokens do tema claro — `text-muted`, `text-ink`, as
+    barras pretas do menu — não se lia nada.
+
+    O sinal é «estou no topo **da home**», e não «estou no topo»: nas outras
+    rotas o primeiro ecrã é papel, e lá o texto claro é que desaparecia. Assim
+    que se rola, o cabeçalho ganha o fundo de papel e volta tudo ao normal —
+    é por isso que `sobreEscuro` depende do `noTopo` e não só do `pathname`.
+
+    Se um dia outra rota abrir com uma secção escura, esta condição é o sítio
+    onde isso se diz.
+  */
+  const sobreEscuro = pathname === "/" && noTopo && !aberto;
+
+  useEffect(() => {
+    const aoRolar = () => setNoTopo(window.scrollY <= 8);
+    aoRolar();
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    return () => window.removeEventListener("scroll", aoRolar);
+  }, []);
+
+  /*
     Com o menu a ocupar o ecrã, o que está por trás não deve deslizar — e o
     Escape tem de o fechar, que é o que qualquer pessoa tenta primeiro.
 
@@ -93,13 +134,28 @@ export function Header() {
 
   return (
     <>
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-background/70 backdrop-blur-xl">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        aberto || !noTopo
+          ? "border-line/60 bg-background/70 backdrop-blur-xl"
+          : "border-transparent bg-transparent"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
           aria-label={stand.nome}
           onClick={aoClicar("/")}
-          className="flex items-center"
+          /*
+            A cor tem de vir daqui. O `Logotipo` não declara cor nenhuma de
+            propósito — a palavra «COLIBRI AUTO» herda a do contexto, que é o
+            que a faz sair antracite no cabeçalho e clara no rodapé. Sobre a
+            fotografia da abertura o contexto é escuro, e sem isto o wordmark
+            ficava antracite sobre antracite e desaparecia.
+          */
+          className={`flex items-center transition-colors duration-300 ${
+            sobreEscuro ? "text-background" : ""
+          }`}
         >
           <Logotipo altura="h-10" prioridade />
         </Link>
@@ -121,7 +177,13 @@ export function Header() {
                 href={l.href}
                 onClick={aoClicar(l.href)}
                 className={`text-sm tracking-wide transition-colors ${
-                  ativo ? "text-laranja-deep" : "text-muted hover:text-ink"
+                  ativo
+                    ? sobreEscuro
+                      ? "text-laranja-bright"
+                      : "text-laranja-deep"
+                    : sobreEscuro
+                      ? "text-background/75 hover:text-background"
+                      : "text-muted hover:text-ink"
                 }`}
               >
                 {l.rotulo}
@@ -130,7 +192,11 @@ export function Header() {
           })}
           <a
             href={telHref(stand.telemovel)}
-            className="press rounded-full border border-laranja px-5 py-2 text-sm tracking-wide text-ink hover:border-laranja hover:text-laranja-deep"
+            className={`press rounded-full border border-laranja px-5 py-2 text-sm tracking-wide ${
+              sobreEscuro
+                ? "text-background hover:text-laranja-bright"
+                : "text-ink hover:text-laranja-deep"
+            }`}
           >
             Fale connosco
           </a>
@@ -144,10 +210,10 @@ export function Header() {
           className="press flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
         >
           <span
-            className={`h-px w-6 bg-ink transition-transform ${aberto ? "translate-y-[3.5px] rotate-45" : ""}`}
+            className={`h-px w-6 transition-transform ${sobreEscuro ? "bg-background" : "bg-ink"} ${aberto ? "translate-y-[3.5px] rotate-45" : ""}`}
           />
           <span
-            className={`h-px w-6 bg-ink transition-transform ${aberto ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+            className={`h-px w-6 transition-transform ${sobreEscuro ? "bg-background" : "bg-ink"} ${aberto ? "-translate-y-[3.5px] -rotate-45" : ""}`}
           />
         </button>
       </div>
