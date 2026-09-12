@@ -74,6 +74,82 @@ Seis das sete viaturas têm a matrícula e o VIN a `—` na ficha técnica. Não
 públicos, e inventá-los era o pior que se podia fazer num site que vai ser
 mostrado ao dono das viaturas: ele sabe as matrículas de cor.
 
+## 7. As fotografias — o ponto mais caro de todos
+
+**Onde:** `public/cars/`, `public/cars/CREDITS.md`.
+
+As sete viaturas estão todas fotografadas da mesma maneira: carro em cima da
+relva sintética, a lona laranja de seis metros atrás, vedação ao fundo, luz
+dura de meio-dia, telemóvel. Seis das sete têm **uma** fotografia, recortada
+do Instagram a 630 px. Só o Ford tem álbum a sério (19, do Standvirtual).
+
+Isto não é um detalhe de acabamento — é o que impede o site de parecer o que
+devia. A abertura da home foi refeita quatro vezes por causa disto: duas a
+tentar arranjar esta fotografia com tipografia e grelha, uma a recortar o carro
+do fundo, e a que ficou a usar uma **imagem feita para o efeito** (ver abaixo).
+Nenhuma das três primeiras falhou por causa do layout.
+
+**Pedir ao cliente:** as fotografias originais, sem a etiqueta de preço nem a
+faixa de contactos sobrepostas, e em resolução alta. Ele tem-nas todas.
+
+Duas coisas voltam ao normal quando chegarem:
+
+- O `object-[50%_62%]` no `CarCard` — um remendo para as fotos do Instagram
+  não mostrarem só lona — volta a `object-center`. (Hoje só faz efeito em três
+  das sete; a explicação da aritmética está no comentário do componente.)
+- A abertura pode trocar o render por fotografia própria: é a constante `FUNDO`
+  em `Abertura.tsx`, e mais nada.
+
+**`scripts/recortar.py` fica.** Não é usado pelo site neste momento, mas é a
+ferramenta que separa um carro do fundo a partir das fotografias do stand
+(Vision do macOS, offline). Serve no dia em que se quiser um carro sobre chão
+limpo — num card, numa página de campanha, ou numa abertura futura.
+
+**O melhor que se pode pedir:** meia dúzia de fotos de cada carro tiradas
+longe da lona e com o carro a preencher o enquadramento. Não é preciso
+fotógrafo; é preciso não ter um cartaz laranja atrás.
+
+### A imagem da abertura é um render — dizer isto ao cliente
+
+`public/cars/hero/abertura.jpg`, o fundo do primeiro ecrã, **não é uma
+fotografia**: é uma imagem gerada, do modelo que está no stock (o E 350 Coupé),
+num espaço neutro. Não se faz passar pelas instalações deles, e o carro
+anunciado tem as fotografias verdadeiras na ficha dele.
+
+Como imagem de ambiente isto é prática corrente no sector, mas **vale o cliente
+saber**, para não ser apanhado desprevenido se alguém lhe perguntar. É também a
+decisão que se reverte sozinha no dia em que houver fotografia própria à altura:
+muda-se a constante `FUNDO` em `Abertura.tsx` e mais nada.
+
+## 8. Texto do cliente editado na secção «Promessa»
+
+**Onde:** `src/data/stand.ts` (`sobre[0]`) e `src/components/home/Promessa.tsx`.
+
+A secção escura entre a abertura e a montra tem por título:
+
+> Escolhidas pelo estado em que estão, não pela etiqueta que têm.
+
+**A frase é do cliente** — estava em `stand.sobre[0]`, o parágrafo que ele
+escreveu sobre o stand, e passava despercebida a meio dele na secção da morada.
+Subiu a título.
+
+**Duas coisas para a reunião:**
+
+1. **A oração foi retirada do parágrafo original**, para a mesma frase não
+   aparecer duas vezes na página. É uma edição a texto dele, não uma correcção.
+   Se preferir o parágrafo como o escreveu, repõe-se — e nesse caso a secção
+   precisa de outro título.
+2. **Aqui esteve uma frase inventada, e foi retirada.** Dizia «O preço do
+   anúncio é o preço final.» Não tinha fonte: o que o cliente afirma é que **a
+   garantia** vai incluída no preço, o que não é o mesmo que não haver mais
+   nada a pagar — numa compra de usado há quase sempre a transferência de
+   propriedade. Fica aqui registada como aviso: é fácil escorregar do tom do
+   site para uma afirmação que o stand não pode sustentar ao balcão.
+
+As quatro linhas dos serviços (Compra, Venda, Retoma, Financiamento) foram
+escritas a partir do que as secções 02 e 03 já dizem, em versão curta. Convém
+serem lidas ao mesmo tempo.
+
 ---
 
 ## O que já está confirmado

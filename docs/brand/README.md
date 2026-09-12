@@ -29,7 +29,7 @@ Quando o código e a documentação divergirem, **o código ganha** — e o docu
 O resumo executivo. Cada uma está desenvolvida no documento respetivo.
 
 1. **Tema claro, sempre.** Não há dark mode, não há `dark:`. `color-scheme: light` é fixo. O site nasceu escuro, herdado de outro stand; a mudança e o porquê estão em [02](02-cor-e-materia.md).
-2. **O laranja é cor de mancha, não de letra.** Sobre branco dá 2,6:1 como texto e 6,1:1 como fundo com antracite por cima — que é o que o logótipo faz. Para laranja em texto existe o `--laranja-deep`. Áreas grandes de laranja só numa: a `FaixaLona`.
+2. **O laranja é cor de mancha, não de letra.** Sobre branco dá 2,6:1 como texto e 6,1:1 como fundo com antracite por cima — que é o que o logótipo faz. Para laranja em texto existe o `--laranja-deep`. **Áreas grandes de laranja: nenhuma.** Houve uma, a `FaixaLona`, e saiu — a secção que ocupava o lugar dela é escura (ver `Promessa.tsx`). O laranja em mancha ficou nas superfícies pequenas: botões, etiquetas de preço, badges.
 3. **As fotos das viaturas são o elemento dominante.** Tudo o resto é moldura.
 4. **As secções têm duas assinaturas, e usam-se sempre as duas.** A estrutural — `01 ───── O STOCK`, numerada, com a régua a desenhar-se ao entrar no ecrã (`TituloSeccao`). E a tipográfica — o heading em Montserrat 600 com a última palavra a 800 em laranja. Uma secção sem as duas destoa imediatamente.
 5. **Tudo é redondo.** `rounded-full` em botões, chips, badges e indicadores (31 usos); `rounded-2xl` em cards (10).

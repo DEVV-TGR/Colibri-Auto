@@ -94,7 +94,7 @@ Foto a `opacity-60 saturate-50`, e o preço substituído pela palavra "Vendida" 
 
 ### Select estilizado
 
-O `<select>` nativo é estilizado à mão em três sítios (`BarraPesquisa`, `SelectField`, `SortSelect`). A receita:
+O `<select>` nativo é estilizado à mão em três sítios (`PesquisaRapida`, `SelectField`, `SortSelect`). A receita:
 
 ```tsx
 <span className="relative block">
@@ -199,7 +199,7 @@ priority={prioridade && foto === inicial}
 
 `priority` é seletivo — só as primeiras da grelha (`i < 2`) e as cópias visíveis do carrossel. Zoom no hover: `group-hover:scale-[1.03]` no card, `scale-[1.02]` na galeria, sempre com `duration-500`.
 
-Exceção documentada: os logótipos de marca usam `<img>` com `eslint-disable-next-line` e justificação inline em `BarraPesquisa.tsx`.
+Exceção documentada: os logótipos de marca usam `<img>` com `eslint-disable-next-line` e justificação inline em `BarraPesquisa.tsx` (o ficheiro que exporta a `PesquisaRapida` e a `TiraMarcas`).
 
 Detalhe de composição no `CarCard`: o **preço não é texto por baixo da foto, é uma etiqueta `.laranja-fill` sobre ela**, no canto superior direito. Não é escolha de layout — é o idioma que a Colibri já usa em todas as publicações do Instagram, e reconhecê-lo é metade do que faz o site parecer deles. A abertura da ficha repete-a à sua escala, para quem clicou num card a encontrar onde a deixou. Uma viatura vendida não leva etiqueta nenhuma: o preço deixou de ser uma proposta.
 
@@ -273,28 +273,41 @@ Três decisões que se medem e não se estimam:
   página. Acima disso partia em duas linhas dentro da máscara da animação, que
   é para uma linha só.
 
-### `FaixaLona` — a lona à largura do ecrã
+### `Promessa` — a secção escura entre a abertura e a montra
 
-Banda laranja de margem a margem com `COMPRA · VENDA · RETOMA · GARANTIA
-INCLUÍDA` a passar em maiúsculas pesadas antracite. É literalmente a lona
-pendurada à porta do stand.
+Substituiu a `FaixaLona`, que era uma banda laranja de margem a margem com
+`COMPRA · VENDA · RETOMA · GARANTIA INCLUÍDA · FINANCIAMENTO` a deslizar em
+maiúsculas pesadas.
 
-**Quebra a regra 2 do sistema de propósito** — «o laranja nunca preenche áreas
-grandes». A regra existe para impedir que o laranja se torne fundo por
-preguiça, e continua a valer em todo o lado menos aqui, onde a área laranja
-**é** a identidade. Uma banda, e só uma: a segunda deixa de ser identidade e
-passa a ser um tema laranja. Se aparecer o pedido de uma segunda, a resposta é
-mudar esta de sítio.
+A troca não foi de estilo. Essas cinco palavras são exactamente a soma dos
+títulos das secções 02 e 03, que vêm logo a seguir — a banda repetia, ao dobro
+do corpo e com as palavras cortadas nas pontas pelo marquee, o que a página
+diz a seguir em condições.
 
-### A emenda do marquee
+A secção nova usa a `.faixa-escura` (a mesma classe do rodapé), afirma a
+promessa da casa — «o preço do anúncio é o preço final» — e põe os quatro
+serviços por baixo com uma linha cada, separados por filetes a partir de `lg`.
 
-A fila é o conteúdo **duplicado**, e o deslocamento é de exactamente uma cópia:
-quando a primeira acaba de sair, a segunda está no sítio onde a primeira
-começou. As passagens estão encostadas e não há goteira entre elas, portanto
-`-50%` chega.
+**Custo assumido:** o site deixou de ter qualquer área grande de laranja. A
+regra 2 foi corrigida em conformidade. O laranja aqui é acento tipográfico
+(`--laranja-bright` sobre o antracite).
 
-A segunda cópia leva `aria-hidden`: para um leitor de ecrã é o mesmo conteúdo, e
-anunciá-lo duas vezes seria mentira.
+**Por resolver:** a secção 02 (`TresAcoes`) continua a explicar Comprar /
+Vender / Trocar em três cartões, poucos ecrãs abaixo. A duplicação diminuiu mas
+mudou de sítio; se se arrumar, é a 02 que sai.
+
+### Já não há marquees no projecto
+
+A `FaixaLona` era o último, e saiu com ela o `.faixa-fila` do `globals.css`
+(fila duplicada, `translateX(-50%)`, segunda cópia com `aria-hidden`). Antes
+dela já tinha saído a `MontraFundo`, com duas filas de fotografias do stock a
+deslizar por baixo do título — essa por o cliente ter dito directamente que não
+gostava nada dela.
+
+Vale registar o padrão, porque a tentação volta: **texto em movimento perpétuo
+dá actividade e não dá presença**, corta as palavras nas pontas, e obriga a uma
+anulação explícita em `prefers-reduced-motion` que é fácil de esquecer. Duas
+vezes neste projecto a resposta certa foi tirar o movimento, não afiná-lo.
 
 ### Os destaques são uma grelha, não um carrossel
 
@@ -343,7 +356,7 @@ já está em cima é ruído a fingir de galeria.
 Divergências reais entre o padrão e o código. Documentadas, não corrigidas — corrigir só com pedido explícito.
 
 1. **O botão "contorno" está replicado à mão** fora do `Botao.tsx`: no `Header`, no `StickyCard`, no `CatalogoClient` e no `DadosContacto`. A string de classes é a mesma, mas os paddings divergem (`px-5 py-2`, `px-5 py-2.5`, `px-6 py-3`, `px-6 py-3.5`). É a maior divergência entre o componente e o uso real.
-2. **`BarraPesquisa` duplica o `SelectField`** — tem um componente `Campo` local com a mesma receita, em vez de importar. Herdado do `HeroSearch`, que substituiu.
+2. **`PesquisaRapida` duplica o `SelectField`** — tem um componente `Campo` local com a mesma receita, em vez de importar. Herdado do `HeroSearch`, que substituiu.
 3. **O badge "Reservado" tem dois tratamentos.** `BadgeEstado` usa `.laranja-fill`; o `StickyCard` usa `bg-laranja` chapado.
 4. **O `CarCard` tem um carrossel de fotografias lá dentro** — setas, pontos e arrasto. Não é o carrossel que saiu da home: é a forma de ver as fotografias de uma viatura sem abrir a ficha, e em desktop as setas só aparecem em hover. Com uma fotografia só, que é o caso de seis das sete viaturas, não aparece nada.
 

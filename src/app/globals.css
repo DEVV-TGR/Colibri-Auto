@@ -19,7 +19,9 @@
   --line: oklch(0.89 0.012 60);
 
   /* a lavagem laranja pálida. Serve para uma secção respirar cor sem ser uma
-     banda cheia — o meio-termo entre o papel e a faixa laranja. */
+     banda cheia. Era o meio-termo entre o papel e a faixa laranja de margem a
+     margem; essa faixa deixou de existir (ver `Promessa.tsx`), e hoje é o tom
+     mais forte de laranja em área que o site tem. */
   --areia: oklch(0.955 0.035 68);
 
   /* o antracite do logótipo, agora **fundo**: rodapé e faixas escuras. É o
@@ -275,6 +277,22 @@ body {
   position: absolute;
   inset: 0;
   background:
+    /* A costura com a `Promessa`, que vem logo a seguir.
+
+       As duas secções são escuras mas não do mesmo escuro: esta é uma
+       fotografia por baixo de um véu quase preto, e a de baixo é o `--escuro`
+       chapado, que é mais claro e mais quente. Encostadas, via-se um degrau a
+       meio de um bloco que devia ler-se como contínuo.
+
+       **Vai em primeiro lugar na lista, e isso é o que faz a diferença.** No
+       `background` a primeira camada é a de cima; posta em último ficava por
+       baixo dos dois véus, que a escureciam, e o degrau continuava lá — só que
+       invertido. Em cima, os últimos 12% da abertura chegam à cor exacta da
+       secção seguinte.
+
+       Se a `Promessa` deixar de ser `--escuro`, é esta paragem que muda com
+       ela. */
+    linear-gradient(180deg, transparent 88%, var(--escuro) 100%),
     linear-gradient(
       95deg,
       rgb(18 16 15 / var(--veu-abertura)) 0%,
@@ -378,33 +396,6 @@ body {
   color: var(--background);
 }
 
-/* a faixa da lona — o marquee do lema, na home.
-
-   A fila é o conteúdo **duplicado**, e o deslocamento é de exactamente uma
-   cópia: quando a primeira acaba de sair, a segunda está no sítio onde a
-   primeira começou, e o ciclo recomeça sem salto. As passagens estão
-   encostadas e não há goteira entre elas, portanto `-50%` chega — sem
-   correcções.
-
-   Houve aqui um segundo marquee, a `MontraFundo`, com duas filas de
-   fotografias do stock a deslizar por baixo do título. Saiu: dava actividade
-   e não dava presença, e o cliente foi directo ao dizer que não gostava nada
-   dela. O que ficou no lugar é a fotografia da lona a ocupar meio ecrã. */
-.faixa-fila {
-  display: flex;
-  width: max-content;
-  animation: faixa 38s linear infinite;
-}
-
-@keyframes faixa {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 /* resposta ao premir — botões e controlos.
    usa a propriedade `scale` nativa (não `transform`) de propósito: metade dos
    controlos estão centrados com -translate-y-1/2, e um transform sobreporia
@@ -493,17 +484,4 @@ body {
   }
 
   
-
-/*
-    A faixa precisa de `animation: none` e não do `0.01ms` da regra acima.
-
-    Acelerar uma animação para 0.01ms fá-la saltar para o **fim** — e o fim
-    desta é `translateX(-50%)`, ou seja, a fila deslocada de uma cópia inteira.
-    Quem pede movimento reduzido via a faixa a começar a meio de uma palavra.
-    Anulada, fica no princípio e lê-se como o que é: uma banda com o lema.
-  */
-  .faixa-fila {
-    animation: none !important;
-    transform: none !important;
-  }
 }

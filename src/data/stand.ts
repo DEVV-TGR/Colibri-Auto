@@ -66,7 +66,18 @@ export const stand = {
     { dias: "Domingo", diasSchema: ["Sunday"], periodos: [] },
   ],
   sobre: [
-    "A Colibri Auto é um stand de bairro, em Perafita, a dez minutos do Porto. Trabalhamos com viaturas usadas de utilização real — famílias, trabalho, quilómetros — escolhidas pelo estado em que estão e não pela etiqueta que têm. Todas saem daqui com garantia incluída no preço.",
+    /*
+      A oração «escolhidas pelo estado em que estão e não pela etiqueta que
+      têm» saiu daqui e subiu para título da `Promessa`, no primeiro ecrã. É a
+      melhor frase que o cliente escreveu sobre o stand e estava a passar
+      despercebida a meio de um parágrafo na secção da morada.
+
+      Fica registado em `docs/por-confirmar.md`: **isto é uma edição a texto do
+      cliente**, não uma correcção. Se ele quiser o parágrafo tal como o
+      escreveu, repõe-se — e nesse caso a `Promessa` passa a precisar de outro
+      título, senão a mesma frase aparece duas vezes na mesma página.
+    */
+    "A Colibri Auto é um stand de bairro, em Perafita, a dez minutos do Porto. Trabalhamos com viaturas usadas de utilização real — famílias, trabalho, quilómetros. Todas saem daqui com garantia incluída no preço.",
     "Compramos, vendemos e aceitamos retoma. Se já tem carro, avaliamo-lo e abatemos o valor no próximo; se precisar de financiamento, tratamos disso consigo. Sem letra pequena e sem pressa — o carro fica cá até ser o carro certo.",
   ],
 } as const;

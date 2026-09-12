@@ -8,10 +8,15 @@
 
 **CSS por defeito; `motion/react` só onde o CSS não chega.**
 
-A `FaixaLona` é o exemplo do lado certo desta regra: são `@keyframes` em
-`globals.css`, e por isso o componente fica **de servidor**. Uma versão em
-`motion` custaria JavaScript no cliente para fazer o que o compositor faz
-sozinho.
+A entrada da abertura (`.entrada-abertura`) é o exemplo do lado certo desta
+regra: são `@keyframes` em `globals.css`, e por isso a `Abertura` fica **de
+servidor**. Uma versão em `motion` custaria JavaScript no cliente para fazer o
+que o compositor faz sozinho — e, no caso do primeiro ecrã, acrescentaria três
+maneiras de o título não aparecer de todo (ver a secção da abertura mais
+abaixo).
+
+O marquee da antiga `FaixaLona` era o outro exemplo desta regra, e saiu com o
+componente.
 
 Mas obriga a uma anulação explícita em `prefers-reduced-motion`. A regra global
 do projecto acelera as animações para `0.01ms`, o que as faz **saltar para o
@@ -53,7 +58,27 @@ transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
 - **`once: true`** — obrigatório. Reanimar ao voltar a passar é irritante e faz o site parecer instável.
 - **`margin: "-80px"`** — dispara 80px antes de entrar em viewport, para o movimento acabar quando o olho chega.
 
-**Stagger de listas: `delay={i * 0.08}`** — em `TresAcoes`, `Incluido` e `Sugestoes`. A abertura da home usa um stagger editorial escrito à mão: `0 → 0.15 → 0.27 → 0.5 → 0.62`.
+**Stagger de listas: `delay={i * 0.08}`** — em `TresAcoes`, `Incluido` e `Sugestoes`.
+
+### A abertura da home é a excepção, e anima em CSS
+
+O primeiro ecrã **não** usa o `Reveal` nem o `whileInView`. Usa a classe
+`.entrada-abertura` do `globals.css`, com o mesmo easing e um escalonamento
+feito com `animation-delay` inline: `0 → 0.09 → 0.2 → 0.3 → 0.38`.
+
+A razão é um defeito medido, não uma preferência. A versão anterior punha as
+linhas do título dentro de uma máscara `overflow-hidden` com
+`initial={{ y: "110%" }}`, e só as trazia quando o `whileInView` disparasse —
+o que dá três maneiras de o título não aparecer de todo: separador oculto (o
+`IntersectionObserver` não corre), hidratação lenta ou falhada (o estilo
+inicial fica aplicado), e render sem JavaScript. Estava a acontecer: num
+screenshot headless o primeiro ecrã saía com um buraco branco no lugar da
+frase.
+
+**A regra que daqui sai:** uma entrada nunca pode ser a única coisa que torna
+o conteúdo visível. Acima da dobra, animar em CSS — corre sempre, sem
+JavaScript e sem observer. O `Reveal` continua certo para tudo o que está
+abaixo da dobra, onde o pior caso é o conteúdo aparecer sem animação.
 
 O easing canónico é **exportado** de `Reveal.tsx` como `ENTRADA`, e importa-se de lá:
 

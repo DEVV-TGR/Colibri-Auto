@@ -1,7 +1,7 @@
 # 02 — Cor e matéria
 
 > **Aplica-se a** — toda a cor, superfície, borda, gradiente e estado de foco.
-> **Fonte de verdade** — `src/app/globals.css` (tokens em `:root`, materiais a partir de `.text-laranja-metal`).
+> **Fonte de verdade** — `src/app/globals.css` (tokens em `:root`, materiais a partir de `.laranja-fill`).
 > **Ler antes de** — escrever qualquer classe de cor, criar um card, um overlay ou um badge.
 
 ## De onde vem a cor
@@ -140,7 +140,7 @@ outro:
 
 | Tom | Onde entra |
 |---|---|
-| `laranja` | **Superfícies**: CTA, etiquetas de preço, `FaixaLona`, badge "Reservado", ponto activo do carrossel, borda activa/focada, `:focus-visible`. Nunca texto |
+| `laranja` | **Superfícies**: CTA, etiquetas de preço, badge "Reservado", ponto activo do carrossel, borda activa/focada, `:focus-visible`. Todas pequenas. Nunca texto |
 | `laranja-bright` | Fim do degradê da `.laranja-fill` e o seu hover |
 | `laranja-deep` | **Tudo o que é laranja em texto**: links, o `01` das secções, eyebrows, separador `·`, bullet `◆`, `▾` dos selects |
 
@@ -158,6 +158,24 @@ de uma palavra.
 
 ## Materiais
 
+### As duas superfícies escuras
+
+O tema é claro e fixo (regra 1), e isso continua a valer: não há `dark:`, não há tema alternável. **Uma secção escura não é dark mode** — o site tem duas, e são deliberadas:
+
+| Superfície | O quê |
+|---|---|
+| Rodapé | `bg-escuro` chapado |
+| Abertura da home | fotografia de ecrã inteiro com a classe `.veu-abertura` por cima |
+
+O texto sobre elas **não** usa os mesmos tokens, e a diferença tem uma razão medida:
+
+- **Sobre o rodapé**, que é uma cor chapada, vale o par do sistema: `--background` para o texto forte e `--escuro-muted` para o secundário (6,71:1).
+- **Sobre a abertura**, que é uma fotografia, o `--escuro-muted` **não passa**. O pixel mais claro por baixo da coluna de texto é branco puro — a janela de luz do render — e contra ele aquele cinzento dá 3,47:1 por mais que se carregue no véu. O secundário ali é `--background` esbatido a 80%, que dá 5,71:1 no mesmo sítio.
+
+A força do véu vive num só sítio, `--veu-abertura` em `globals.css`, e o valor (0,78) é medido e não escolhido: abaixo de 0,74 o laranja do título deixa de passar os 3:1 de texto grande.
+
+**A regra que daqui sai:** um token de contraste é válido contra o fundo para que foi medido. Sobre fotografia, medir outra vez.
+
 ### O laranja em superfície e em texto
 
 Duas utilities, o mesmo degradê de **três paragens**:
@@ -174,10 +192,12 @@ página escura fica com aspecto de rectângulo de aviso. O `bg-laranja` fica
 reservado a superfícies pequenas onde um gradiente não se leria — badges,
 pontos de paginação, contadores, o trilho dos sliders.
 
-**`.text-laranja-metal`** — o mesmo degradê a 100°, recortado pela forma das
-letras com `background-clip: text`. **Um uso em todo o projecto**: a palavra
-"sem letra pequena." na abertura da home (`home/Abertura.tsx`). Manter assim —
-a escassez é o que lhe dá peso.
+**`.text-laranja-metal` foi removido.** Era o mesmo degradê a 100°, recortado
+pela forma das letras com `background-clip: text`, e tinha um único uso: a
+linha «sem letra pequena.» na abertura da home. Saiu quando a abertura foi
+refeita, e a classe saiu do `globals.css` com ele — um degradê em texto é
+decoração sem significado, e o laranja chapado (`--laranja-deep`) diz o mesmo
+com 5,20:1 de contraste sobre branco. Não voltar a introduzir.
 
 > **Três paragens, e não cinco.** O sistema de origem tinha cinco, e passava
 > pelo creme a meio, porque estava a imitar **folha de ouro** — é assim que um
@@ -305,10 +325,17 @@ E a selecção de texto: `::selection` é `background: laranja; color: ink` — 
   cor da marca, e o vermelho está reservado a erro.
 - **Usar `text-laranja`.** Não passa contraste sobre papel. Para laranja em
   texto existe o `--laranja-deep`, sempre.
-- **Usar laranja em áreas grandes, com uma excepção.** A excepção é a
-  `FaixaLona`, e está justificada no próprio componente: ali a área laranja
-  **é** a identidade, está à porta do stand em seis metros de lona. Uma
-  segunda banda deixa de ser identidade e passa a ser um tema laranja.
+- **Usar laranja em áreas grandes.** Sem excepções — deixou de haver.
+
+  Houve uma: a `FaixaLona`, uma banda de margem a margem, justificada por ali
+  a área laranja **ser** a identidade (a lona de seis metros à porta do
+  stand). O que a derrubou não foi a cor, foi a função: as cinco palavras que
+  ela gritava são a soma dos títulos das secções 02 e 03, que vêm logo a
+  seguir e dizem o mesmo com calma. Uma banda sem trabalho não justifica uma
+  excepção a uma regra.
+
+  No lugar dela está a `Promessa`, escura, com o laranja em acento. O
+  raciocínio completo está em `Promessa.tsx`.
 - **Usar o `--muted` dentro de uma faixa escura.** É `--escuro-muted`; o outro
   dá 2,8:1 ali.
 - **Aumentar a croma dos laranjas.** Sai do sRGB, o browser corta, e a cor
@@ -319,5 +346,6 @@ E a selecção de texto: `::selection` é `background: laranja; color: ink` — 
   claro e fixo.
 - **Mexer num token sem correr `npm run check:contraste`.** Vários estão no
   limite por serem o valor mais forte que ainda passa.
-- **Espalhar `.text-laranja-metal`.** Um uso, em texto grande.
+- **Voltar a pôr degradês em texto** (`background-clip: text`). A classe que
+  fazia isto existiu e foi removida; ver acima.
 - **Sobrepor `:focus-visible`** por componente.
