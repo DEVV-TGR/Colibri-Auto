@@ -53,7 +53,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Stand de carros usados em Perafita, Matosinhos`,
+    default: `${SITE_NAME} — Carros usados em Perafita, Matosinhos`,
     template: `%s${SUFIXO_TITULO}`,
   },
   description:

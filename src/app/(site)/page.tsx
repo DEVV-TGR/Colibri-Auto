@@ -11,7 +11,7 @@ import { openGraphRota, seoDescricao } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 import { getViaturas } from "@/lib/viaturas";
 
-const TITULO = `${SITE_NAME} — Stand de carros usados em Perafita, Matosinhos`;
+const TITULO = `${SITE_NAME} — Carros usados em Perafita, Matosinhos`;
 const DESCRICAO = seoDescricao(
   "Stand de carros usados em Perafita, a dez minutos do Porto. Viaturas com garantia incluída no preço, financiamento e retoma. Avenida Maria Brito 3343, Matosinhos.",
 );
